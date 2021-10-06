@@ -3,6 +3,7 @@ body{
 } 
 .title_div{
     position: sticky;
+    top:0;
     box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
     background-color: #220083;
     display: flex;
