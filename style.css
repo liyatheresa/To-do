@@ -24,34 +24,34 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 50vw;
+    margin: 20px auto;
 
 }
 .list_items{
     overflow: auto;
     height: 80vh;
-    width: 50vw;
-    margin: 20px auto;
     border: 1px solid #CBCBCB;
     border-radius: .5rem;
+    width: inherit;
 }
 .input_area{
     display: flex;
-    justify-content: center;
-    width: 50vw;
+    width: inherit;
     padding: 0;
-    /* margin: 20 auto; */
+    margin-top: 10px;
 }
 #input_notes{
-    height: 5vh;
     margin-right: .7rem;
     border: 1px solid #CBCBCB;
     border-radius: .5rem;
-    min-width: 46vw;
+    flex-grow: 1;
+    padding-left: 20px;
 }
 .submission{
     background-color: #220083;
-    border-radius: 25px;
-    height: 39.8px;
+    border-radius: 20px;
+    height: 40px;
     width: 40px;
     border: .5px solid black;
 }
