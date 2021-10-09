@@ -68,4 +68,20 @@ body{
 }
 #printing_list li{
     border-bottom: 1px solid grey;
+    display: flex;
+    /* display: list-item; */
+    justify-content: space-between;
+}
+.edit_button{
+    border-radius: 17px;
+    height: 35px;
+    width: 35px;
+    background-color: #220083;
+    outline: none;
+    border: .5px solid black;
+}
+.edit_button img{
+    position: relative;
+    right: 2px;
+    top: 2px;
 }
