@@ -7,7 +7,7 @@ function list_additem() {
     window.alert("Enter any value");
     return;
   }
-  txt += "<li>"+ count+". "+ input.value +"<div>"+"<button class="+"edit_button"+"><img src="+"./images/icons8-edit-24.png"+"></button>"+"<button><img src="+"./images/icons8-trash-can-50.png"+"></button>"+"<input type="+"checkbox"+">"+"</div>"+"</li>";
+  txt += "<li>"+ count+". "+ input.value +"<div class="+"buttons"+">"+"<button class="+"edit_button"+"><img src="+"./images/icons8-edit-24.png"+"></button>"+"<button class="+"remove_button"+"><img src="+"./images/icons8-trash-can-50.png"+"></button>"+"<input type="+"checkbox"+" class="+"checkbox"+">"+"</div>"+"</li>";
   document.getElementById("printing_list").innerHTML = txt;
   input.value = "";
 }

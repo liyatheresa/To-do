@@ -34,6 +34,8 @@ body{
     border: 1px solid #CBCBCB;
     border-radius: .5rem;
     width: inherit;
+    margin: 0;
+    padding: 0;
 }
 .input_area{
     display: flex;
@@ -48,7 +50,6 @@ body{
     border-radius: .5rem;
     flex-grow: 1;
     padding: 10px 20px 10px 20px;
-    overflow: auto;
     font-family: inherit;
     outline: none;
     box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
@@ -66,11 +67,23 @@ body{
     top: 4px;
     right: 2px;
 }
+#printing_list{
+    margin: 0;
+    padding: 0;
+}
 #printing_list li{
     border-bottom: 1px solid grey;
     display: flex;
-    /* display: list-item; */
     justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: .75rem;
+    max-width: 500px;
+    word-wrap: break-word;
+}
+.buttons{
+    display: flex;
+    align-items: center;
 }
 .edit_button{
     border-radius: 17px;
@@ -79,9 +92,37 @@ body{
     background-color: #220083;
     outline: none;
     border: .5px solid black;
+    margin-right: 1rem;
+    box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
 }
 .edit_button img{
     position: relative;
     right: 2px;
     top: 2px;
+}
+.remove_button{
+    border-radius: 17px;
+    height: 35px;
+    width: 35px;
+    background-color: #FF0000;
+    outline: none;
+    border: .5px solid black;
+    margin-right: 1rem;
+    box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
+}
+.remove_button img{
+    height: 25px;
+    width: 25px;
+    position: relative;
+    right: 1px;
+    top: 2px;
+}
+.checkbox{
+    height: 35px;
+    width: 35px;
+    box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
+    outline: none;
+    margin: 0;
+    border-radius: 0rem;
+    border: 1px solid black;
 }
