@@ -119,18 +119,13 @@ body{
     top: 2px;
 }
 .checkbox{
-    height: 35px;
-    width: 35px;
+    /* height: 35px;
+    width: 35px; */
     box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
     outline: none;
-    margin: 0;
-    padding: 0px;
+    margin-right: 10px;
     border-radius: 0rem;
     border: 1px solid black;
-}
-.list_numbers{
-    padding-right: 10px;
-    white-space: nowrap;
 }
 .list_content{
     display: flex;

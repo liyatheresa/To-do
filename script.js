@@ -7,7 +7,9 @@ function list_additem() {
     window.alert("Enter any value");
     return;
   }
-  txt += "<li>"+"<div class="+"list_content"+">"+"<span class="+"list_numbers"+">"+ count+". "+"</span>"+"<span>"+ input.value +"</span>"+"</div>"+"<div class="+"buttons"+">"+"<button class="+"edit_button"+"><img src="+"./images/icons8-edit-24.png"+"></button>"+"<button class="+"remove_button"+"><img src="+"./images/icons8-trash-can-50.png"+"></button>"+"<input type="+"checkbox"+" class="+"checkbox"+">"+"</div>"+"</li>";
+  txt = "<li>"+"<div class="+"list_content"+">"+"<input type="+"checkbox"+" class="+"checkbox"+">"+
+  "<span>"+ input.value +"</span>"+"</div>"+"<div class="+"buttons"+">"+"<button class="+"edit_button"+"><img src="+"./images/icons8-edit-24.png"+"></button>"+
+  "<button class="+"remove_button"+"><img src="+"./images/icons8-trash-can-50.png"+"></button>"+"</div>"+"</li>" +txt;
   document.getElementById("printing_list").innerHTML = txt;
   input.value = "";
 }
