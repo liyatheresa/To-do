@@ -4,7 +4,8 @@ function list_additem() {
   count++;
   let input = document.getElementById("input_notes");
   if (input.value.trim() === "") {
-    window.alert("Enter any value");
+    document.getElementById("modal_parent").style.display= "flex";
+    document.getElementById("input_notes").blur();
     return;
   }
   txt = "<li>"+"<div class="+"list_content"+">"+"<input type="+"checkbox"+" class="+"checkbox"+">"+
@@ -21,3 +22,7 @@ window.addEventListener("load", function () {
     }
   });
 });
+function close_modal(){
+  document.getElementById("modal_parent").style.display= "none";
+  document.getElementById("input_notes").focus();
+}

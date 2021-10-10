@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    position: relative;
 } 
 .title_div{
     position: sticky;
@@ -119,9 +120,8 @@ body{
     top: 2px;
 }
 .checkbox{
-    /* height: 35px;
-    width: 35px; */
-    box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
+    height: 18px;
+    width: 18px;
     outline: none;
     margin-right: 10px;
     border-radius: 0rem;
@@ -130,7 +130,32 @@ body{
 .list_content{
     display: flex;
     margin: 0;
+    align-items: center;
 }
 .submission,.edit_button,.remove_button,.checkbox{
     cursor: pointer;
+}
+.modal_parent{
+    position: absolute;
+    display:none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #00000088;
+}
+#modal{
+    width: 300px;
+    height: 100px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+#modal button{
+    margin-left:auto;
+    display: block;
+    margin-top: auto;
 }
