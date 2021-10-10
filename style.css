@@ -78,8 +78,8 @@ body{
     align-items: center;
     margin: 0;
     padding: .75rem;
-    max-width: 500px;
-    word-wrap: break-word;
+    /* white-space:pre-wrap; */
+    word-break: break-word;
 }
 .buttons{
     display: flex;
@@ -92,7 +92,7 @@ body{
     background-color: #220083;
     outline: none;
     border: .5px solid black;
-    margin-right: 1rem;
+    margin: 0 1rem;
     box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
 }
 .edit_button img{
@@ -123,6 +123,15 @@ body{
     box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
     outline: none;
     margin: 0;
+    padding: 0px;
     border-radius: 0rem;
     border: 1px solid black;
+}
+.list_numbers{
+    padding-right: 10px;
+    min-width: 12px;
+}
+.list_content{
+    display: flex;
+    margin: 0;
 }
