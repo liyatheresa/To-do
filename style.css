@@ -124,6 +124,7 @@ body{
     width: 18px;
     outline: none;
     margin-right: 10px;
+    margin-left: 1rem;
     border-radius: 0rem;
     border: 1px solid black;
 }
