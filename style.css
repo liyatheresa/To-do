@@ -129,7 +129,7 @@ body{
 }
 .list_numbers{
     padding-right: 10px;
-    min-width: 12px;
+    white-space: nowrap;
 }
 .list_content{
     display: flex;
