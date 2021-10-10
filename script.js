@@ -13,6 +13,7 @@ function list_additem() {
 }
 window.addEventListener("load", function () {
   document.getElementById("input_notes").addEventListener("keydown", function (e) {
+    console.log(e);
     if (e.code === "Enter") {
       list_additem();
     }
