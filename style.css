@@ -135,3 +135,6 @@ body{
     display: flex;
     margin: 0;
 }
+.submission,.edit_button,.remove_button,.checkbox{
+    cursor: pointer;
+}
