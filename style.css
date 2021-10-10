@@ -60,6 +60,7 @@ body{
     height: 40px;
     width: 40px;
     border: .5px solid black;
+    box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
 }
 .submission img{
     position: relative;

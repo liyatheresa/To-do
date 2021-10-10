@@ -12,6 +12,7 @@ function list_additem() {
   input.value = "";
 }
 window.addEventListener("load", function () {
+  document.getElementById("input_notes").focus();
   document.getElementById("input_notes").addEventListener("keydown", function (e) {
     console.log(e);
     if (e.code === "Enter") {
