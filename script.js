@@ -1,5 +1,5 @@
 let txt = "";
-let count=0;
+let count=0,itemNumber=0;
 let list= [];
 
 function list_additem() {
@@ -17,17 +17,14 @@ function list_additem() {
     return;
   }
 
-  txt = "<li>"+"<div class="+"list_content"+">"+"<input type="+"checkbox"+" class="+"checkbox"+">"+
-  "<span>"+ input.value +"</span>"+"</div>"+"<div class="+"buttons"+">"+"<button class="+"edit_button"+"><img src="+"./images/icons8-edit-24.png"+"></button>"+
-  "<button class="+"remove_button"+"><img src="+"./images/icons8-trash-can-50.png"+"></button>"+"</div>"+"</li>" +txt;
-  document.getElementById("printing_list").innerHTML = txt;
-  input.value = "";
-
-console.log(list)
-
+    txt = "<li>"+"<div class="+"list_content"+">"+"<input type="+"checkbox"+" class="+"checkbox"+">"+
+    "<span>"+ list[itemNumber].description +"</span>"+"</div>"+"<div class="+"buttons"+">"+"<button class="+"edit_button"+"><img src="+"./images/icons8-edit-24.png"+"></button>"+
+    "<button class="+"remove_button"+"><img src="+"./images/icons8-trash-can-50.png"+"></button>"+"</div>"+"</li>" +txt;
+    document.getElementById("printing_list").innerHTML = txt;
+    input.value = "";
+    
+  itemNumber++;
 }
-
-console.log(list)
 
 window.addEventListener("load", function () {
   document.getElementById("input_notes").focus();
