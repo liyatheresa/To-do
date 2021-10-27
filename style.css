@@ -133,7 +133,7 @@ body{
     margin: 0;
     align-items: center;
 }
-.submission,.edit_button,.remove_button,.checkbox{
+.submission,.edit_button,.remove_button,.checkbox,.description{
     cursor: pointer;
 }
 .modal_parent{
@@ -159,4 +159,8 @@ body{
     margin-left:auto;
     display: block;
     margin-top: auto;
+}
+.checkboxChecked{
+     color:#999;
+     text-decoration-line: line-through;
 }
