@@ -67,13 +67,17 @@ body{
     width: 40px;
     border: .5px solid black;
     box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
+    background-image: url(./images/icons8-send-64.png);
+    background-size: auto 30px;
+    background-position: 40% 60%;
+    background-repeat: no-repeat;
 }
-.submission img{
+/* .submission img{
     position: relative;
     height: 30px;
     top: 4px;
     right: 2px;
-}
+} */
 #printing_list{
     margin: 0;
     padding: 0;
