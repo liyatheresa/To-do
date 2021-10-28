@@ -21,7 +21,7 @@ function list_additem() {
 
   let newItem = "<li><div class='list_content'>"+
                 "<input type='checkbox' class='checkbox' id='c" + list[itemNumber].id + "'>"+
-                "<span id = 'd" + list[itemNumber].id + "' class='descriptionAndDate'><span class='description'>" + list[itemNumber].description + "</span>"+
+                "<span class='descriptionAndDate'><span id = 'd" + list[itemNumber].id + "' class='description'>" + list[itemNumber].description + "</span>"+
                 "<div class='descriptionDate'>"+date+"</div></span>"+
                 "</div>"+
                 "<div class='buttons'>"+

@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    padding: 0;
     position: relative;
 } 
 .title_div{
@@ -26,8 +27,10 @@ body{
     flex-direction: column;
     align-items: center;
     width: 50vw;
-    margin: 20px auto;
-
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0;
 }
 .list_items{
     overflow-y: auto;
@@ -43,7 +46,7 @@ body{
     align-items: center;
     width: inherit;
     padding: 0;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 #input_notes{
     margin-right: .7rem;
@@ -163,7 +166,7 @@ body{
     display: block;
     margin-top: auto;
 }
-.checkboxChecked,.descriptionAndDate:hover{
+.checkboxChecked,.description:hover{
      color:#989898;
      text-decoration-line: line-through;
 }
