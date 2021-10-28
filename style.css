@@ -46,7 +46,9 @@ body{
     align-items: center;
     width: inherit;
     padding: 0;
-    margin-top: 20px;
+    /* margin-top: 20px; */
+    position: fixed;
+    bottom: 10px;
 }
 #input_notes{
     margin-right: .7rem;
