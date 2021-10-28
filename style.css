@@ -32,8 +32,8 @@ body{
 .list_items{
     overflow-y: auto;
     height: 80vh;
-    border: 1px solid #CBCBCB;
-    border-radius: .5rem;
+    /* border: 1px solid #CBCBCB; */
+    /* border-radius: .5rem; */
     width: inherit;
     margin: 0;
     padding: 0;
@@ -74,7 +74,7 @@ body{
     padding: 0;
 }
 #printing_list li{
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid rgb(212, 212, 212);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -120,8 +120,8 @@ body{
     top: 2px;
 }
 .checkbox{
-    height: 18px;
-    width: 18px;
+    min-height: 18px;
+    min-width: 18px;
     outline: none;
     margin-right: 10px;
     margin-left: 1rem;
@@ -161,6 +161,6 @@ body{
     margin-top: auto;
 }
 .checkboxChecked{
-     color:#999;
+     color:#989898;
      text-decoration-line: line-through;
 }
