@@ -160,7 +160,7 @@ body{
     display: block;
     margin-top: auto;
 }
-.checkboxChecked{
+.checkboxChecked,.description:hover{
      color:#989898;
      text-decoration-line: line-through;
 }
