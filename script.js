@@ -5,7 +5,7 @@ let list = [];
 //Function to add item to to-do list
 function list_additem() {
   let input = document.getElementById("input_notes");
-
+  let date=new Date(Date.now()).toLocaleDateString();
   list.push({
     id: count++,
     description: input.value,
@@ -19,7 +19,15 @@ function list_additem() {
     return;
   }
 
-  let newItem = "<li><div class='list_content'><input type='checkbox' class='checkbox' id='c" + list[itemNumber].id + "'><span id = 'd" + list[itemNumber].id + "' class='description'>" + list[itemNumber].description + "</span></div><div class='buttons'><button class='edit_button'><img src='./images/icons8-edit-24.png'></button><button class='remove_button'><img src='./images/icons8-trash-can-50.png'></button></div></li>";
+  let newItem = "<li><div class='list_content'>"+
+                "<input type='checkbox' class='checkbox' id='c" + list[itemNumber].id + "'>"+
+                "<span><span id = 'd" + list[itemNumber].id + "' class='description'>" + list[itemNumber].description + "</span>"+
+                "<div class='descriptionDate'>"+date+"</div></span>"+
+                "</div>"+
+                "<div class='buttons'>"+
+                "<button class='edit_button'><img src='./images/icons8-edit-24.png'></button>"+
+                "<button class='remove_button'><img src='./images/icons8-trash-can-50.png'></button>"+
+                "</div></li>";
 
   document.getElementById("printing_list").insertAdjacentHTML('afterbegin', newItem);
   input.value = "";
@@ -39,7 +47,7 @@ function list_additem() {
   }
 
   checkBox.addEventListener("change", toggleCheckedClass)
-  
+
   description.addEventListener("click", function () {
     checkBox.checked = checkBox.checked ? false : true;
     toggleCheckedClass();

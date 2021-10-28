@@ -133,7 +133,10 @@ body{
     margin: 0;
     align-items: center;
 }
-.submission,.edit_button,.remove_button,.checkbox,.description{
+.descriptionDate{
+    color: #989898;
+}
+.submission,.edit_button,.remove_button,.checkbox,.description,.descriptionDate{
     cursor: pointer;
 }
 .modal_parent{
