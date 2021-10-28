@@ -167,6 +167,9 @@ body{
     margin-top: auto;
 }
 .checkboxChecked,.description:hover{
-     color:#989898;
-     text-decoration-line: line-through;
+    color:#989898;
+    text-decoration-line: line-through;
+}
+.descriptionDate{
+    font-size:13px;
 }
