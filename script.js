@@ -4,7 +4,6 @@ let list = [];
 
 //Function to add item to to-do list
 function list_additem() {
-	console.log("vannu")
 	let input = document.getElementById("input_notes");
 	let date = new Date(Date.now()).toLocaleDateString();
 	list.push({
@@ -17,6 +16,7 @@ function list_additem() {
 	if (input.value.trim() === "") {
 		document.getElementById("modal_parent").style.display = "flex";
 		document.getElementById("input_notes").blur();
+		itemNumber++;
 		return;
 	}
 
