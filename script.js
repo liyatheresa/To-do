@@ -6,28 +6,28 @@ let list = [];
 function list_additem() {
 	let input = document.getElementById("input_notes");
 	let date = new Date(Date.now()).toLocaleDateString();
+	//modal display on empty input
+	if (input.value.trim() === "") {
+		document.getElementById("modal_parent").style.display = "flex";
+		document.getElementById("input_notes").blur();
+		return;
+	}
+	
 	list.push({
 		id: count++,
 		description: input.value,
 		taskCompleted: false
 	});
 
-	//modal display on empty input
-	if (input.value.trim() === "") {
-		document.getElementById("modal_parent").style.display = "flex";
-		document.getElementById("input_notes").blur();
-		itemNumber++;
-		return;
-	}
 
-	let newItem = "<li><div class='list_content'>" +
+	let newItem = "<li ><div class='list_content'>" +
 		"<input type='checkbox' class='checkbox' id='c" + list[itemNumber].id + "'>" +
 		"<span class='descriptionAndDate'><span id = 'd" + list[itemNumber].id + "' class='description'>" + list[itemNumber].description + "</span>" +
 		"<div class='descriptionDate'>" + date + "</div></span>" +
 		"</div>" +
 		"<div class='buttons'>" +
 		"<button class='edit_button'><img src='./images/icons8-edit-24.png'></button>" +
-		"<button class='remove_button'><img src='./images/icons8-trash-can-50.png'></button>" +
+		"<button id= 'remove_button' class='remove_button'><img src='./images/icons8-trash-can-50.png'></button>" +
 		"</div></li>";
 
 	document.getElementById("printing_list").insertAdjacentHTML('afterbegin', newItem);
