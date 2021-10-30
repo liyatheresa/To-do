@@ -26,9 +26,16 @@
         </form>
     </div>
     <div class= "modal_parent" id="modal_parent">
-        <div id="modal">
+        <div id="modal" class="modal">
             <div>Enter some text to continue</div>
             <button onClick="close_modal();">Close</button>
+        </div>
+    </div>
+    <div class= "modal_parent" id="removeModal">
+        <div class= "modal" id="popup">
+            <div>Confirm Deletion?</div>
+            <button id= 'confirm'>Confirm</button>
+            <button id= 'close' onClick="close_modal();">Close</button>
         </div>
     </div>
 </body>

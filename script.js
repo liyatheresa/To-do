@@ -57,8 +57,21 @@ function list_additem() {
 	//Remove button event
 	let removedItem= document.getElementById("r" + list[itemNumber].id);
 	let parent=document.getElementById("item" + list[itemNumber].id)
+	let confirmButton=document.getElementById('confirm');
+	let closeButton=document.getElementById('close');
+
 	removedItem.addEventListener("click",function (){
-		parent.remove();
+		document.getElementById("removeModal").style.display = "flex";
+		document.getElementById("input_notes").blur();
+		confirmButton.addEventListener("click",function (){
+			document.getElementById("removeModal").style.display = "none";
+			document.getElementById("input_notes").focus();
+			parent.remove();
+		})
+		closeButton.addEventListener("click",function(){
+			document.getElementById("removeModal").style.display = "none";
+			document.getElementById("input_notes").focus();
+		})
 		document.getElementById("input_notes").focus();
 	})
 
