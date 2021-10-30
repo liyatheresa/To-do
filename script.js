@@ -20,14 +20,14 @@ function list_additem() {
 	});
 
 
-	let newItem = "<li ><div class='list_content'>" +
+	let newItem = "<li id='item" + list[itemNumber].id + "' ><div class='list_content'>" +
 		"<input type='checkbox' class='checkbox' id='c" + list[itemNumber].id + "'>" +
 		"<span class='descriptionAndDate'><span id = 'd" + list[itemNumber].id + "' class='description'>" + list[itemNumber].description + "</span>" +
 		"<div class='descriptionDate'>" + date + "</div></span>" +
 		"</div>" +
 		"<div class='buttons'>" +
 		"<button class='edit_button'><img src='./images/icons8-edit-24.png'></button>" +
-		"<button id= 'remove_button' class='remove_button'><img src='./images/icons8-trash-can-50.png'></button>" +
+		"<button id='r" + list[itemNumber].id + "' class='remove_button'><img src='./images/icons8-trash-can-50.png'></button>" +
 		"</div></li>";
 
 	document.getElementById("printing_list").insertAdjacentHTML('afterbegin', newItem);
@@ -53,6 +53,15 @@ function list_additem() {
 		checkBox.checked = checkBox.checked ? false : true;
 		toggleCheckedClass();
 	})
+
+	//Remove button event
+	let removedItem= document.getElementById("r" + list[itemNumber].id);
+	let parent=document.getElementById("item" + list[itemNumber].id)
+	removedItem.addEventListener("click",function (){
+		parent.remove();
+		document.getElementById("input_notes").focus();
+	})
+
 
 	itemNumber++;
 }
