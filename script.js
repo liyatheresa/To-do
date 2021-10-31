@@ -61,8 +61,8 @@ function list_additem() {
 	let closeButton=document.getElementById('close');
 
 	removedItem.addEventListener("click",function (){
-		document.getElementById("removeModal").style.display = "flex";
 		document.getElementById("input_notes").blur();
+		document.getElementById("removeModal").style.display = "flex";
 		confirmButton.addEventListener("click",function (){
 			document.getElementById("removeModal").style.display = "none";
 			document.getElementById("input_notes").focus();
@@ -72,7 +72,6 @@ function list_additem() {
 			document.getElementById("removeModal").style.display = "none";
 			document.getElementById("input_notes").focus();
 		})
-		document.getElementById("input_notes").focus();
 	})
 
 
