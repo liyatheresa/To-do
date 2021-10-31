@@ -6,13 +6,13 @@ let list = [];
 function list_additem() {
 	let input = document.getElementById("input_notes");
 	let date = new Date(Date.now()).toLocaleDateString();
-	let modalParent= document.getElementById('modal_parent')
+	let emptyModalParent= document.getElementById('emptyModalParent')
 
 	//modal display on empty input
 	if (input.value.trim() === "") {
-		document.getElementById("modal_parent").classList.add("modal_parent");
+		emptyModalParent.classList.add("modal_parent");
 		document.getElementById("input_notes").blur();
-		modalParent.addEventListener("click",close_modal);
+		emptyModalParent.addEventListener("click",close_modal);
 		return;
 	}
 	
@@ -87,7 +87,6 @@ function list_additem() {
 		
 	})
 
-
 	itemNumber++;
 }
 
@@ -103,7 +102,7 @@ window.addEventListener("load", function (e) {
 
 // function to close modal
 function close_modal() {
-	document.getElementById("modal_parent").classList.remove("modal_parent");
+	document.getElementById("emptyModalParent").classList.remove("modal_parent");
 	document.getElementById("input_notes").focus();
 }
 
