@@ -42,12 +42,10 @@ function list_additem() {
 
 	//checkbox functionalities
 	function toggleCheckedClass() {
-		if (checkBox.checked) {
+		if (checkBox.checked)
 			description.classList.add("checkboxChecked");
-		}
-		else {
+		else 
 			description.classList.remove("checkboxChecked");
-		}
 		list[parseInt(checkBox.id.replace("c", ""))].taskCompleted = checkBox.checked;
 	}
 
