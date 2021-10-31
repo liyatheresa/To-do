@@ -148,9 +148,12 @@ body{
 .submission,.edit_button,.remove_button,.checkbox,.description,.descriptionDate{
     cursor: pointer;
 }
+.modalClose{
+    display:none;
+}
 .modal_parent{
     position: absolute;
-    display:none;
+    display:flex;
     justify-content: center;
     align-items: center;
     top: 0;

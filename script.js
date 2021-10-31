@@ -6,10 +6,13 @@ let list = [];
 function list_additem() {
 	let input = document.getElementById("input_notes");
 	let date = new Date(Date.now()).toLocaleDateString();
+	let modalParent= document.getElementById('modal_parent')
+
 	//modal display on empty input
 	if (input.value.trim() === "") {
-		document.getElementById("modal_parent").style.display = "flex";
+		document.getElementById("modal_parent").classList.add("modal_parent");
 		document.getElementById("input_notes").blur();
+		modalParent.addEventListener("click",close_modal);
 		return;
 	}
 	
@@ -59,19 +62,29 @@ function list_additem() {
 	let parent=document.getElementById("item" + list[itemNumber].id)
 	let confirmButton=document.getElementById('confirm');
 	let closeButton=document.getElementById('close');
+	let removeModalParent= document.getElementById('removeModal')
+
 
 	removedItem.addEventListener("click",function (){
 		document.getElementById("input_notes").blur();
-		document.getElementById("removeModal").style.display = "flex";
+		removeModalParent.classList.add("modal_parent");
+
+		removeModalParent.addEventListener("click",function (){
+			removeModalParent.classList.remove("modal_parent");
+			document.getElementById("input_notes").focus();
+		});
+
 		confirmButton.addEventListener("click",function (){
-			document.getElementById("removeModal").style.display = "none";
+			removeModalParent.classList.remove("modal_parent");
 			document.getElementById("input_notes").focus();
 			parent.remove();
 		})
+		
 		closeButton.addEventListener("click",function(){
-			document.getElementById("removeModal").style.display = "none";
+			removeModalParent.classList.remove("modal_parent");
 			document.getElementById("input_notes").focus();
 		})
+		
 	})
 
 
@@ -90,7 +103,7 @@ window.addEventListener("load", function (e) {
 
 // function to close modal
 function close_modal() {
-	document.getElementById("modal_parent").style.display = "none";
+	document.getElementById("modal_parent").classList.remove("modal_parent");
 	document.getElementById("input_notes").focus();
 }
 
