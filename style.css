@@ -106,10 +106,15 @@ body{
     margin: 0 1rem;
     box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
 }
-.edit_button img{
+.editButtonImage{
     position: relative;
     right: 2px;
     top: 2px;
+}
+.saveButtonImage{
+    position: relative;
+    right: 3px;
+    max-width: 29px;
 }
 .remove_button{
     border-radius: 17px;
@@ -184,7 +189,7 @@ body{
     min-height: 35px;
     min-width: 70px;
 }
-.checkboxChecked,.description:hover{
+.checkboxChecked,.description:not([contentEditable="true"]):hover{
     color:#989898;
     text-decoration-line: line-through;
 }
