@@ -71,7 +71,7 @@ function list_additem() {
 	let editimage = document.getElementById("editimage" + list[count].id)
 	function editContent(e) {
 		e.stopPropagation();
-		console.log(list);
+		console.log(list)
 		if (list[e.target.id.replace("editimage", "").replace("e", "")].editMode === false) {
 			list[e.target.id.replace("editimage", "").replace("e", "")].editMode = true;
 			description.contentEditable = true;
@@ -81,6 +81,7 @@ function list_additem() {
 			editimage.setAttribute("src", './images/save.png')
 		}
 		else {
+			list[e.target.id.replace("editimage", "").replace("e", "")].description = document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).innerText;
 			list[e.target.id.replace("editimage", "").replace("e", "")].editMode = false;
 			description.contentEditable = false;
 			description.classList.add("description");
