@@ -1,6 +1,5 @@
 let count = 0;
 let list = [];
-let editMode = false;
 
 //Function to add item to to-do list
 function list_additem() {
@@ -12,7 +11,7 @@ function list_additem() {
 	if (input.value.trim() === "") {
 		emptyModalParent.classList.add("modal_parent");
 		document.getElementById("input_notes").blur();
-		document.getElementById('modal').addEventListener("click",(e)=>{e.stopPropagation();})
+		document.getElementById('modal').addEventListener("click", (e) => { e.stopPropagation(); })
 		emptyModalParent.addEventListener("click", close_modal);
 		return;
 	}
@@ -20,7 +19,8 @@ function list_additem() {
 	list.push({
 		id: count,
 		description: input.value,
-		taskCompleted: false
+		taskCompleted: false,
+		editMode: false
 	});
 
 
@@ -42,6 +42,7 @@ function list_additem() {
 	let description = document.getElementById("d" + list[count].id)
 
 	//checkbox functionalities and marking it as complete in list
+
 	function toggleCheckedClass() {
 		if (checkBox.checked)
 			description.classList.add("checkboxChecked");
@@ -50,23 +51,29 @@ function list_additem() {
 		list[parseInt(checkBox.id.replace("c", ""))].taskCompleted = checkBox.checked;
 	}
 
-	if(editMode === false) {
-		checkBox.addEventListener("change", toggleCheckedClass)
+	checkBox.addEventListener("change", () => {
+		if (list[checkBox.id.replace("c", "")].editMode === false) {
+			toggleCheckedClass();
+		}
+	})
 
-		description.addEventListener("click", function () {
+	description.addEventListener("click", function () {
+		if (list[description.id.replace("d", "")].editMode === false) {
 			checkBox.checked = checkBox.checked ? false : true;
 			toggleCheckedClass();
-		})
-	}
+		}
+	})
 
-	
+
+
 	//Edit button functionalities
 	let editItem = document.getElementById("e" + list[count].id);
 	let editimage = document.getElementById("editimage" + list[count].id)
 	function editContent(e) {
 		e.stopPropagation();
-		if (editMode === false) {
-			editMode = true;
+		console.log(list);
+		if (list[e.target.id.replace("editimage", "").replace("e", "")].editMode === false) {
+			list[e.target.id.replace("editimage", "").replace("e", "")].editMode = true;
 			description.contentEditable = true;
 			description.classList.remove("description");
 			editimage.classList.add("saveButtonImage");
@@ -74,14 +81,14 @@ function list_additem() {
 			editimage.setAttribute("src", './images/save.png')
 		}
 		else {
-			editMode = false;
+			list[e.target.id.replace("editimage", "").replace("e", "")].editMode = false;
 			description.contentEditable = false;
 			description.classList.add("description");
 			editimage.classList.remove("saveButtonImage");
 			editimage.classList.add("editButtonImage");
 			editimage.setAttribute("src", './images/edit.png')
 		}
-		
+
 	}
 	editItem.addEventListener("click", editContent)
 	editimage.addEventListener("click", editContent)
@@ -98,7 +105,7 @@ function list_additem() {
 	}
 	removedItem.addEventListener("click", showDeletionModal);
 	removeimage.addEventListener("click", showDeletionModal);
-	
+
 	count++;
 }
 
@@ -121,7 +128,7 @@ window.addEventListener("load", function (e) {
 	let closeButton = document.getElementById('close');
 	let removeModalParent = document.getElementById('removeModal')
 	let confirmButton = document.getElementById('confirm');
-	document.getElementById('popup').addEventListener("click",(e)=>{e.stopPropagation();})
+	document.getElementById('popup').addEventListener("click", (e) => { e.stopPropagation(); })
 	confirmButton.addEventListener("click", deleteItem);
 
 	closeButton.addEventListener("click", function () {
