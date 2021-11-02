@@ -75,16 +75,18 @@ function list_additem() {
 		if (list[e.target.id.replace("editimage", "").replace("e", "")].editMode === false) {
 			list[e.target.id.replace("editimage", "").replace("e", "")].editMode = true;
 			description.contentEditable = true;
-			description.classList.remove("description");
+			document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).setAttribute("disabled", "disabled");
 			editimage.classList.add("saveButtonImage");
 			editimage.classList.remove("editButtonImage");
 			editimage.setAttribute("src", './images/save.png')
+			document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).focus();
+
 		}
 		else {
 			list[e.target.id.replace("editimage", "").replace("e", "")].description = document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).innerText;
 			list[e.target.id.replace("editimage", "").replace("e", "")].editMode = false;
+			document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).removeAttribute("disabled");
 			description.contentEditable = false;
-			description.classList.add("description");
 			editimage.classList.remove("saveButtonImage");
 			editimage.classList.add("editButtonImage");
 			editimage.setAttribute("src", './images/edit.png')
