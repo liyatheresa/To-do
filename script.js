@@ -73,6 +73,10 @@ function list_additem() {
 		e.stopPropagation();
 		console.log(list)
 		if (list[e.target.id.replace("editimage", "").replace("e", "")].editMode === false) {
+			if(document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).checked === true){
+				document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).checked = false;
+				document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).classList.remove("checkboxChecked");
+			}
 			list[e.target.id.replace("editimage", "").replace("e", "")].editMode = true;
 			description.contentEditable = true;
 			document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).setAttribute("disabled", "disabled");
