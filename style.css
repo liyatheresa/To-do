@@ -146,6 +146,7 @@ body {
 }
 .descriptionDate {
   color: #989898;
+  font-size: 13px;
 }
 .submission,
 .edit_button,
@@ -235,9 +236,7 @@ body {
   color: #989898;
   text-decoration-line: line-through;
 }
-.descriptionDate {
-  font-size: 13px;
-}
+
 .description[contentEditable="true"] {
   display: block;
   min-width: 30vw;
