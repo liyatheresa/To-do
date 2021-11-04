@@ -83,12 +83,12 @@ function list_additem() {
 			editimage.classList.remove("editButtonImage");
 			editimage.setAttribute("src", './images/save.png')
 			document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).focus();
-
 		}
 		else {
-			if (document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).checked = true) {
+			if (document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).checked === true) {
 				document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).classList.add("checkboxChecked");
 			}
+			document.getElementById("input_notes").focus();
 			list[e.target.id.replace("editimage", "").replace("e", "")].description = document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).innerText;
 			list[e.target.id.replace("editimage", "").replace("e", "")].editMode = false;
 			document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).removeAttribute("disabled");

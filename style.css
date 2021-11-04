@@ -244,7 +244,7 @@ body {
   outline: none;
   padding-left: 5px;
   padding-right: 5px;
-  border: 2px solid #005aad;
-  box-sizing: border-box;
+  /* border: 2px solid #005aad; */
+    box-shadow: 0 0 0 1px #005aad;
   cursor: text;
 }
