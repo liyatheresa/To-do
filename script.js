@@ -9,7 +9,7 @@ function list_additem() {
 
 	//modal display on empty input
 	if (input.value.trim() === "") {
-		emptyModalParent.classList.add("modal_parent");
+		emptyModalParent.classList.add("emptyModalParent");
 		document.getElementById("input_notes").blur();
 		document.getElementById('modal').addEventListener("click", (e) => { e.stopPropagation(); })
 		emptyModalParent.addEventListener("click", close_modal);
@@ -73,8 +73,7 @@ function list_additem() {
 		e.stopPropagation();
 		console.log(list)
 		if (list[e.target.id.replace("editimage", "").replace("e", "")].editMode === false) {
-			if(document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).checked === true){
-				document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).checked = false;
+			if (document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).checked === true) {
 				document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).classList.remove("checkboxChecked");
 			}
 			list[e.target.id.replace("editimage", "").replace("e", "")].editMode = true;
@@ -87,6 +86,9 @@ function list_additem() {
 
 		}
 		else {
+			if (document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).checked = true) {
+				document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).classList.add("checkboxChecked");
+			}
 			list[e.target.id.replace("editimage", "").replace("e", "")].description = document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).innerText;
 			list[e.target.id.replace("editimage", "").replace("e", "")].editMode = false;
 			document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).removeAttribute("disabled");
@@ -106,7 +108,7 @@ function list_additem() {
 	function showDeletionModal(e) {
 		e.stopPropagation();
 		document.getElementById("input_notes").blur();
-		document.getElementById('removeModal').classList.add("modal_parent");
+		document.getElementById('removeModal').classList.add("emptyModalParent");
 		let id = e.target.id.replace("removeimage", "").replace("r", "");
 		document.getElementById('confirm').setAttribute("data-id", id)
 	}
@@ -119,7 +121,7 @@ function list_additem() {
 function deleteItem(e) {
 	console.log(e.target.dataset.id);
 	document.getElementById("item" + e.target.dataset.id).remove();
-	document.getElementById('removeModal').classList.remove("modal_parent");
+	document.getElementById('removeModal').classList.remove("emptyModalParent");
 	document.getElementById("input_notes").focus();
 	list = list.filter(object => object.id !== parseInt(e.target.dataset.id));
 }
@@ -139,12 +141,12 @@ window.addEventListener("load", function (e) {
 	confirmButton.addEventListener("click", deleteItem);
 
 	closeButton.addEventListener("click", function () {
-		removeModalParent.classList.remove("modal_parent");
+		removeModalParent.classList.remove("emptyModalParent");
 		document.getElementById("input_notes").focus();
 	})
 
 	removeModalParent.addEventListener("click", function (e) {
-		removeModalParent.classList.remove("modal_parent");
+		removeModalParent.classList.remove("emptyModalParent");
 		document.getElementById("input_notes").focus();
 	});
 
@@ -153,7 +155,7 @@ window.addEventListener("load", function (e) {
 
 // function to close modal
 function close_modal(e) {
-	document.getElementById("emptyModalParent").classList.remove("modal_parent");
+	document.getElementById("emptyModalParent").classList.remove("emptyModalParent");
 	document.getElementById("input_notes").focus();
 }
 

@@ -27,16 +27,23 @@
     </div>
     <div class= 'modalClose' id="emptyModalParent">
         <div class= "modal" id="modal">
-            <div>Nothing Entered</div>
-            <div>Enter a description to add to the task list</div>
-            <button onClick="close_modal();">Okay</button>
+            <div class=emptyModalContent>
+                <div class="headingInsideModal">Nothing Entered</div>
+                <div class='contentInsideModal'>Enter a description to add to the task list</div>
+            </div>
+            <button class='emptyModalButton normalButton' onClick="close_modal();">Okay</button>
         </div>
     </div>
     <div class= 'modalClose' id="removeModal">
         <div class= "modal" id="popup">
-            <div>Confirm Deletion?</div>
-            <button id= 'confirm'>Confirm</button>
-            <button id= 'close'>Close</button>
+            <div>
+                <div class="headingInsideModal">Confirm Deletion?</div>
+                <div class='contentInsideModal'>Are you sure to permenently remove the selected item?</div>
+            </div>
+            <div class='removeModalButtons'>
+                <button class='normalButton' id= 'close'>Cancel</button>
+                <button class='dangerButton' id= 'confirm'>Delete</button>
+            </div>
         </div>
     </div>
 </body>
