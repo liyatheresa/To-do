@@ -11,6 +11,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 .title_div img {
   height: 35px;
@@ -34,7 +35,7 @@ body {
 }
 .list_items {
   overflow-y: auto;
-  height: 80vh;
+  height: calc(100vh - 135px);
   /* border: 1px solid #CBCBCB; */
   /* border-radius: .5rem; */
   width: inherit;
@@ -147,6 +148,7 @@ body {
 .descriptionDate {
   color: #989898;
   font-size: 13px;
+  margin-top: .25rem;
 }
 .submission,
 .edit_button,
