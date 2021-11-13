@@ -49,6 +49,7 @@ function list_additem() {
 		else
 			description.classList.remove("checkboxChecked");
 		list[parseInt(checkBox.id.replace("c", ""))].taskCompleted = checkBox.checked;
+		storeLocal();
 	}
 
 	checkBox.addEventListener("change", () => {
