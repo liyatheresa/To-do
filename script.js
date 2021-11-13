@@ -2,32 +2,38 @@ let count = 0;
 let list = [];
 
 //Function to add item to to-do list
-function list_additem() {
-	let input = document.getElementById("input_notes");
-	let date = new Date(Date.now()).toLocaleDateString();
-	let emptyModalParent = document.getElementById('emptyModalParent')
+function list_additem(listItem) {
+	if (listItem === undefined) {
+		let input = document.getElementById("input_notes");
+		let date = new Date(Date.now()).toLocaleDateString();
+		let emptyModalParent = document.getElementById('emptyModalParent')
 
-	//modal display on empty input
-	if (input.value.trim() === "") {
-		emptyModalParent.classList.add("emptyModalParent");
-		document.getElementById("input_notes").blur();
-		document.getElementById('modal').addEventListener("click", (e) => { e.stopPropagation(); })
-		emptyModalParent.addEventListener("click", close_modal);
-		return;
+		//modal display on empty input
+		if (input.value.trim() === "") {
+			emptyModalParent.classList.add("emptyModalParent");
+			document.getElementById("input_notes").blur();
+			document.getElementById('modal').addEventListener("click", (e) => { e.stopPropagation(); })
+			emptyModalParent.addEventListener("click", close_modal);
+			return;
+		}
+
+		list.push({
+			id: count,
+			description: input.value.trim(),
+			taskCompleted: false,
+			date: date,
+			editMode: false
+		});
+		input.value = "";
+	}
+	else {
+		list.push({ ...listItem, editMode: false });
 	}
 
-	list.push({
-		id: count,
-		description: input.value.trim(),
-		taskCompleted: false,
-		editMode: false
-	});
-
-
 	let newItem = "<li id='item" + list[count].id + "' ><div class='list_content'>" +
-		"<input type='checkbox' class='checkbox' id='c" + list[count].id + "'>" +
-		"<span class='descriptionAndDate'><span id = 'd" + list[count].id + "' class='description'>" + list[count].description + "</span>" +
-		"<div class='descriptionDate'>" + date + "</div></span>" +
+		"<input type='checkbox' class='checkbox' id='c" + list[count].id + "'" + (list[count].taskCompleted ? "checked" : "") + ">" +
+		"<span class='descriptionAndDate'><span id = 'd" + list[count].id + "' class='description " + (list[count].taskCompleted ? "checkboxChecked" : "") + "'>" + list[count].description + "</span>" +
+		"<div class='descriptionDate'>" + list[count].date + "</div></span>" +
 		"</div>" +
 		"<div class='buttons'>" +
 		"<button id='e" + list[count].id + "' class='edit_button'><img class='editButtonImage' id='editimage" + list[count].id + "' src='./images/edit.png'></button>" +
@@ -35,7 +41,6 @@ function list_additem() {
 		"</div></li>";
 
 	document.getElementById("printing_list").insertAdjacentHTML('afterbegin', newItem);
-	input.value = "";
 
 
 	let checkBox = document.getElementById("c" + list[count].id)
@@ -84,11 +89,11 @@ function list_additem() {
 			editimage.classList.remove("editButtonImage");
 			editimage.setAttribute("src", './images/save.png')
 			document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).focus();
-			let placeOfEdit= document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", ""))
+			let placeOfEdit = document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", ""))
 			function placeCaretAtEnd(el) {
 				el.focus();
 				if (typeof window.getSelection != "undefined"
-						&& typeof document.createRange != "undefined") {
+					&& typeof document.createRange != "undefined") {
 					var range = document.createRange();
 					range.selectNodeContents(el);
 					range.collapse(false);
@@ -102,8 +107,8 @@ function list_additem() {
 					textRange.select();
 				}
 			}
-			
-			placeCaretAtEnd( placeOfEdit ); 
+
+			placeCaretAtEnd(placeOfEdit);
 		}
 		else {
 			if (document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).checked === true) {
@@ -174,7 +179,12 @@ window.addEventListener("load", function (e) {
 		document.getElementById("input_notes").focus();
 	});
 
-
+	let listReceived = JSON.parse(localStorage.getItem("listSaved"));
+	if (listReceived) {
+		for (let i = 0; i < listReceived.length; i++) {
+			list_additem(listReceived[i]);
+		}
+	}
 });
 
 // function to close modal
@@ -182,10 +192,10 @@ function close_modal(e) {
 	document.getElementById("emptyModalParent").classList.remove("emptyModalParent");
 	document.getElementById("input_notes").focus();
 }
-function storeLocal(){
+function storeLocal() {
 	let arrayToSave = list.map(item => {
-		return {id: item.id, description: item.description, taskCompleted: item.taskCompleted};
+		return { id: item.id, description: item.description, taskCompleted: item.taskCompleted, date: item.date };
 	})
-	let stringToSave= JSON.stringify(arrayToSave);
-	localStorage.setItem("list",stringToSave);
+	let stringToSave = JSON.stringify(arrayToSave);
+	localStorage.setItem("listSaved", stringToSave);
 }
