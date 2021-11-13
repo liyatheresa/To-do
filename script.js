@@ -18,7 +18,7 @@ function list_additem() {
 
 	list.push({
 		id: count,
-		description: input.value,
+		description: input.value.trim(),
 		taskCompleted: false,
 		editMode: false
 	});
