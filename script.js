@@ -116,6 +116,7 @@ function list_additem() {
 			editimage.classList.remove("saveButtonImage");
 			editimage.classList.add("editButtonImage");
 			editimage.setAttribute("src", './images/edit.png')
+			storeLocal();
 		}
 
 	}
@@ -135,6 +136,7 @@ function list_additem() {
 	removedItem.addEventListener("click", showDeletionModal);
 	removeimage.addEventListener("click", showDeletionModal);
 
+	storeLocal();
 	count++;
 }
 
@@ -144,6 +146,7 @@ function deleteItem(e) {
 	document.getElementById('removeModal').classList.remove("emptyModalParent");
 	document.getElementById("input_notes").focus();
 	list = list.filter(object => object.id !== parseInt(e.target.dataset.id));
+	storeLocal();
 }
 
 //focus on load and submission of input on enter And adding event to modal button and parent
@@ -178,4 +181,10 @@ function close_modal(e) {
 	document.getElementById("emptyModalParent").classList.remove("emptyModalParent");
 	document.getElementById("input_notes").focus();
 }
-
+function storeLocal(){
+	let arrayToSave = list.map(item => {
+		return {id: item.id, description: item.description, taskCompleted: item.taskCompleted};
+	})
+	let stringToSave= JSON.stringify(arrayToSave);
+	localStorage.setItem("list",stringToSave);
+}
