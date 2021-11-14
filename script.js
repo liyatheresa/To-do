@@ -3,7 +3,7 @@ let list = [];
 
 //Function to add item to to-do list
 function list_additem(listItem) {
-	if (listItem === undefined) {
+	if (listItem === undefined || listItem.length === 0) {
 		let input = document.getElementById("input_notes");
 		let date = new Date(Date.now()).toLocaleDateString();
 		let emptyModalParent = document.getElementById('emptyModalParent')
@@ -31,7 +31,7 @@ function list_additem(listItem) {
 	}
 
 	let newItem = "<li id='item" + list[count].id + "' ><div class='list_content'>" +
-		"<input "+ (list[count].taskCompleted ? "checked" : "") + " type='checkbox' class='checkbox' id='c" + list[count].id + "'>" +
+		"<input " + (list[count].taskCompleted ? "checked" : "") + " type='checkbox' class='checkbox' id='c" + list[count].id + "'>" +
 		"<span class='descriptionAndDate'><span id = 'd" + list[count].id + "' class='description " + (list[count].taskCompleted ? "checkboxChecked" : "") + "'>" + list[count].description + "</span>" +
 		"<div class='descriptionDate'>" + list[count].date + "</div></span>" +
 		"</div>" +
@@ -46,27 +46,24 @@ function list_additem(listItem) {
 	let checkBox = document.getElementById("c" + list[count].id)
 	let description = document.getElementById("d" + list[count].id)
 
-	//checkbox functionalities and marking it as complete in list
 
-	function toggleCheckedClass() {
-		if (checkBox.checked)
-			description.classList.add("checkboxChecked");
-		else
-			description.classList.remove("checkboxChecked");
-		list[parseInt(checkBox.id.replace("c", ""))].taskCompleted = checkBox.checked;
-		storeLocal();
-	}
 
-	checkBox.addEventListener("change", () => {
-		if (list[checkBox.id.replace("c", "")].editMode === false) {
-			toggleCheckedClass();
+	checkBox.addEventListener("change", (e) => {
+		let targetId = e.target.id.replace("c", "")
+		if (list.find(element => {
+			return element.id.toString() === targetId
+		}).editMode === false) {
+			toggleCheckedClass(targetId);
 		}
 	})
 
-	description.addEventListener("click", function () {
-		if (list[description.id.replace("d", "")].editMode === false) {
+	description.addEventListener("click", function (e) {
+		let targetId = e.target.id.replace("d", "")
+		if (list.find(element => {
+			return element.id.toString() === targetId
+		}).editMode === false) {
 			checkBox.checked = checkBox.checked ? false : true;
-			toggleCheckedClass();
+			toggleCheckedClass(targetId);
 		}
 	})
 
@@ -77,12 +74,11 @@ function list_additem(listItem) {
 	let editimage = document.getElementById("editimage" + list[count].id)
 	function editContent(e) {
 		e.stopPropagation();
-		console.log(list)
-		if (list[e.target.id.replace("editimage", "").replace("e", "")].editMode === false) {
+		if (list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("e", "")).editMode === false) {
 			if (document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).checked === true) {
 				document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).classList.remove("checkboxChecked");
 			}
-			list[e.target.id.replace("editimage", "").replace("e", "")].editMode = true;
+			list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("e", "")).editMode = true;
 			description.contentEditable = true;
 			document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).setAttribute("disabled", "disabled");
 			editimage.classList.add("saveButtonImage");
@@ -109,14 +105,21 @@ function list_additem(listItem) {
 			}
 
 			placeCaretAtEnd(placeOfEdit);
+
+			// description.addEventListener("keydown",(e)=>{
+			// 	if (e.code=== "Enter"){
+			// 		editItem.click();
+			// 		console.log(e.code);
+			// 	}
+			// })
 		}
 		else {
 			if (document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).checked === true) {
 				document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).classList.add("checkboxChecked");
 			}
 			document.getElementById("input_notes").focus();
-			list[e.target.id.replace("editimage", "").replace("e", "")].description = document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).innerText;
-			list[e.target.id.replace("editimage", "").replace("e", "")].editMode = false;
+			list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("e", "")).description = document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).innerText;
+			list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("e", "")).editMode = false;
 			document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).removeAttribute("disabled");
 			description.contentEditable = false;
 			editimage.classList.remove("saveButtonImage");
@@ -147,7 +150,6 @@ function list_additem(listItem) {
 }
 
 function deleteItem(e) {
-	console.log(e.target.dataset.id);
 	document.getElementById("item" + e.target.dataset.id).remove();
 	document.getElementById('removeModal').classList.remove("emptyModalParent");
 	document.getElementById("input_notes").focus();
@@ -198,4 +200,18 @@ function storeLocal() {
 	})
 	let stringToSave = JSON.stringify(arrayToSave);
 	localStorage.setItem("listSaved", stringToSave);
+}
+//checkbox functionalities and marking it as complete in list
+
+function toggleCheckedClass(targetId) {
+	let checkBox = document.getElementById("c" + targetId)
+	let description = document.getElementById("d" + targetId)
+	if (checkBox.checked)
+		description.classList.add("checkboxChecked");
+	else
+		description.classList.remove("checkboxChecked");
+	list.find(element => {
+		return element.id.toString() === targetId
+	}).taskCompleted = checkBox.checked;
+	storeLocal();
 }
