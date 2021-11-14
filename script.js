@@ -31,7 +31,7 @@ function list_additem(listItem) {
 	}
 
 	let newItem = "<li id='item" + list[count].id + "' ><div class='list_content'>" +
-		"<input type='checkbox' class='checkbox' id='c" + list[count].id + "'" + (list[count].taskCompleted ? "checked" : "") + ">" +
+		"<input "+ (list[count].taskCompleted ? "checked" : "") + " type='checkbox' class='checkbox' id='c" + list[count].id + "'>" +
 		"<span class='descriptionAndDate'><span id = 'd" + list[count].id + "' class='description " + (list[count].taskCompleted ? "checkboxChecked" : "") + "'>" + list[count].description + "</span>" +
 		"<div class='descriptionDate'>" + list[count].date + "</div></span>" +
 		"</div>" +
