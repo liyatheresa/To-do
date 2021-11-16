@@ -1,9 +1,8 @@
-let count = 0;
+import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js';
 let list = [];
-
 //Function to add item to to-do list
 function list_additem(listItem) {
-	if (listItem === undefined || listItem.length === 0) {
+	if (listItem === undefined) {
 		let input = document.getElementById("input_notes");
 		let date = new Date(Date.now()).toLocaleDateString();
 		let emptyModalParent = document.getElementById('emptyModalParent')
@@ -18,7 +17,7 @@ function list_additem(listItem) {
 		}
 
 		list.push({
-			id: count,
+			id: nanoid(),
 			description: input.value.trim(),
 			taskCompleted: false,
 			date: date,
@@ -30,26 +29,26 @@ function list_additem(listItem) {
 		list.push({ ...listItem, editMode: false });
 	}
 
-	let newItem = "<li id='item" + list[count].id + "' ><div class='list_content'>" +
-		"<input " + (list[count].taskCompleted ? "checked" : "") + " type='checkbox' class='checkbox' id='c" + list[count].id + "'>" +
-		"<span class='descriptionAndDate'><span id = 'd" + list[count].id + "' class='description " + (list[count].taskCompleted ? "checkboxChecked" : "") + "'>" + list[count].description + "</span>" +
-		"<div class='descriptionDate'>" + list[count].date + "</div></span>" +
+	let newItem = "<li id='item" + list[list.length - 1].id + "' ><div class='list_content'>" +
+		"<input " + (list[list.length - 1].taskCompleted ? "checked" : "") + " type='checkbox' class='checkbox' id='check-" + list[list.length - 1].id + "'>" +
+		"<span class='descriptionAndDate'><span id = 'desc-" + list[list.length - 1].id + "' class='description " + (list[list.length - 1].taskCompleted ? "checkboxChecked" : "") + "'>" + list[list.length - 1].description + "</span>" +
+		"<div class='descriptionDate'>" + list[list.length - 1].date + "</div></span>" +
 		"</div>" +
 		"<div class='buttons'>" +
-		"<button id='e" + list[count].id + "' class='edit_button'><img class='editButtonImage' id='editimage" + list[count].id + "' src='./images/edit.png'></button>" +
-		"<button id='r" + list[count].id + "' class='remove_button'><img id='removeimage" + list[count].id + "' src='./images/icons8-trash-can-50.png'></button>" +
+		"<button id='edit-" + list[list.length - 1].id + "' class='edit_button'><img class='editButtonImage' id='editimage" + list[list.length - 1].id + "' src='./images/edit.png'></button>" +
+		"<button id='remove-" + list[list.length - 1].id + "' class='remove_button'><img id='removeimage" + list[list.length - 1].id + "' src='./images/icons8-trash-can-50.png'></button>" +
 		"</div></li>";
 
 	document.getElementById("printing_list").insertAdjacentHTML('afterbegin', newItem);
 
 
-	let checkBox = document.getElementById("c" + list[count].id)
-	let description = document.getElementById("d" + list[count].id)
+	let checkBox = document.getElementById("check-" + list[list.length - 1].id)
+	let description = document.getElementById("desc-" + list[list.length - 1].id)
 
 
-
+	//cross-out on clicking description or checkbox
 	checkBox.addEventListener("change", (e) => {
-		let targetId = e.target.id.replace("c", "")
+		let targetId = e.target.id.replace("check-", "")
 		if (list.find(element => {
 			return element.id.toString() === targetId
 		}).editMode === false) {
@@ -58,7 +57,7 @@ function list_additem(listItem) {
 	})
 
 	description.addEventListener("click", function (e) {
-		let targetId = e.target.id.replace("d", "")
+		let targetId = e.target.id.replace("desc-", "")
 		if (list.find(element => {
 			return element.id.toString() === targetId
 		}).editMode === false) {
@@ -70,22 +69,22 @@ function list_additem(listItem) {
 
 
 	//Edit button functionalities
-	let editItem = document.getElementById("e" + list[count].id);
-	let editimage = document.getElementById("editimage" + list[count].id)
+	let editItem = document.getElementById("edit-" + list[list.length - 1].id);
+	let editimage = document.getElementById("editimage" + list[list.length - 1].id)
 	function editContent(e) {
 		e.stopPropagation();
-		if (list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("e", "")).editMode === false) {
-			if (document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).checked === true) {
-				document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).classList.remove("checkboxChecked");
+		if (list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("edit-", "")).editMode === false) {
+			if (document.getElementById('check-' + e.target.id.replace("editimage", "").replace("edit-", "")).checked === true) {
+				document.getElementById('desc-' + e.target.id.replace("editimage", "").replace("edit-", "")).classList.remove("checkboxChecked");
 			}
-			list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("e", "")).editMode = true;
-			description.contentEditable = true;
-			document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).setAttribute("disabled", "disabled");
+			list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("edit-", "")).editMode = true;
+			document.getElementById('desc-' + e.target.id.replace("editimage", "").replace("edit-", "")).contentEditable = true;
+			document.getElementById('check-' + e.target.id.replace("editimage", "").replace("edit-", "")).setAttribute("disabled", "disabled");
 			editimage.classList.add("saveButtonImage");
 			editimage.classList.remove("editButtonImage");
 			editimage.setAttribute("src", './images/save.png')
-			document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).focus();
-			let placeOfEdit = document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", ""))
+			document.getElementById('desc-' + e.target.id.replace("editimage", "").replace("edit-", "")).focus();
+			let placeOfEdit = document.getElementById('desc-' + e.target.id.replace("editimage", "").replace("edit-", ""))
 			function placeCaretAtEnd(el) {
 				el.focus();
 				if (typeof window.getSelection != "undefined"
@@ -114,14 +113,14 @@ function list_additem(listItem) {
 			// })
 		}
 		else {
-			if (document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).checked === true) {
-				document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).classList.add("checkboxChecked");
+			if (document.getElementById('check-' + e.target.id.replace("editimage", "").replace("edit-", "")).checked === true) {
+				document.getElementById('desc-' + e.target.id.replace("editimage", "").replace("edit-", "")).classList.add("checkboxChecked");
 			}
 			document.getElementById("input_notes").focus();
-			list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("e", "")).description = document.getElementById('d' + e.target.id.replace("editimage", "").replace("e", "")).innerText;
-			list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("e", "")).editMode = false;
-			document.getElementById('c' + e.target.id.replace("editimage", "").replace("e", "")).removeAttribute("disabled");
-			description.contentEditable = false;
+			list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("edit-", "")).description = document.getElementById('desc-' + e.target.id.replace("editimage", "").replace("edit-", "")).innerText;
+			list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("edit-", "")).editMode = false;
+			document.getElementById('check-' + e.target.id.replace("editimage", "").replace("edit-", "")).removeAttribute("disabled");
+			document.getElementById('desc-' + e.target.id.replace("editimage", "").replace("edit-", "")).contentEditable = false;
 			editimage.classList.remove("saveButtonImage");
 			editimage.classList.add("editButtonImage");
 			editimage.setAttribute("src", './images/edit.png')
@@ -133,27 +132,26 @@ function list_additem(listItem) {
 	editimage.addEventListener("click", editContent)
 
 	//Remove button event
-	let removedItem = document.getElementById("r" + list[count].id);
-	let removeimage = document.getElementById("removeimage" + list[count].id);
+	let removedItem = document.getElementById("remove-" + list[list.length - 1].id);
+	let removeimage = document.getElementById("removeimage" + list[list.length - 1].id);
 	function showDeletionModal(e) {
 		e.stopPropagation();
 		document.getElementById("input_notes").blur();
 		document.getElementById('removeModal').classList.add("emptyModalParent");
-		let id = e.target.id.replace("removeimage", "").replace("r", "");
+		let id = e.target.id.replace("removeimage", "").replace("remove-", "");
 		document.getElementById('confirm').setAttribute("data-id", id)
 	}
 	removedItem.addEventListener("click", showDeletionModal);
 	removeimage.addEventListener("click", showDeletionModal);
 
 	storeLocal();
-	count++;
 }
 
 function deleteItem(e) {
 	document.getElementById("item" + e.target.dataset.id).remove();
 	document.getElementById('removeModal').classList.remove("emptyModalParent");
 	document.getElementById("input_notes").focus();
-	list = list.filter(object => object.id !== parseInt(e.target.dataset.id));
+	list = list.filter(object => object.id !== e.target.dataset.id);
 	storeLocal();
 }
 
@@ -181,6 +179,7 @@ window.addEventListener("load", function (e) {
 		document.getElementById("input_notes").focus();
 	});
 
+	//getting the list from local storage 
 	let listReceived = JSON.parse(localStorage.getItem("listSaved"));
 	if (listReceived) {
 		for (let i = 0; i < listReceived.length; i++) {
@@ -190,7 +189,7 @@ window.addEventListener("load", function (e) {
 });
 
 // function to close modal
-function close_modal(e) {
+function close_modal() {
 	document.getElementById("emptyModalParent").classList.remove("emptyModalParent");
 	document.getElementById("input_notes").focus();
 }
@@ -204,8 +203,8 @@ function storeLocal() {
 //checkbox functionalities and marking it as complete in list
 
 function toggleCheckedClass(targetId) {
-	let checkBox = document.getElementById("c" + targetId)
-	let description = document.getElementById("d" + targetId)
+	let checkBox = document.getElementById("check-" + targetId)
+	let description = document.getElementById("desc-" + targetId)
 	if (checkBox.checked)
 		description.classList.add("checkboxChecked");
 	else
