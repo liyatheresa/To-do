@@ -1,5 +1,6 @@
 import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js';
 let list = [];
+
 //Function to add item to to-do list
 function list_additem(listItem) {
 	if (listItem === undefined) {
@@ -73,18 +74,19 @@ function list_additem(listItem) {
 	let editimage = document.getElementById("editimage" + list[list.length - 1].id)
 	function editContent(e) {
 		e.stopPropagation();
-		if (list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("edit-", "")).editMode === false) {
-			if (document.getElementById('check-' + e.target.id.replace("editimage", "").replace("edit-", "")).checked === true) {
-				document.getElementById('desc-' + e.target.id.replace("editimage", "").replace("edit-", "")).classList.remove("checkboxChecked");
+		let targetElem = e.target.id.replace("editimage", "").replace("edit-", "").replace("description", "").replace("desc-", "")
+		if (list.find(elem => elem.id.toString() === targetElem).editMode === false) {
+			if (document.getElementById('check-' + targetElem).checked === true) {
+				document.getElementById('desc-' + targetElem).classList.remove("checkboxChecked");
 			}
-			list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("edit-", "")).editMode = true;
-			document.getElementById('desc-' + e.target.id.replace("editimage", "").replace("edit-", "")).contentEditable = true;
-			document.getElementById('check-' + e.target.id.replace("editimage", "").replace("edit-", "")).setAttribute("disabled", "disabled");
+			list.find(elem => elem.id.toString() === targetElem).editMode = true;
+			document.getElementById('desc-' + targetElem).contentEditable = true;
+			document.getElementById('check-' + targetElem).setAttribute("disabled", "disabled");
 			editimage.classList.add("saveButtonImage");
 			editimage.classList.remove("editButtonImage");
 			editimage.setAttribute("src", './images/save.png')
-			document.getElementById('desc-' + e.target.id.replace("editimage", "").replace("edit-", "")).focus();
-			let placeOfEdit = document.getElementById('desc-' + e.target.id.replace("editimage", "").replace("edit-", ""))
+			document.getElementById('desc-' + targetElem).focus();
+			let placeOfEdit = document.getElementById('desc-' + targetElem)
 			function placeCaretAtEnd(el) {
 				el.focus();
 				if (typeof window.getSelection != "undefined"
@@ -105,22 +107,17 @@ function list_additem(listItem) {
 
 			placeCaretAtEnd(placeOfEdit);
 
-			// description.addEventListener("keydown",(e)=>{
-			// 	if (e.code=== "Enter"){
-			// 		editItem.click();
-			// 		console.log(e.code);
-			// 	}
-			// })
+
 		}
 		else {
-			if (document.getElementById('check-' + e.target.id.replace("editimage", "").replace("edit-", "")).checked === true) {
-				document.getElementById('desc-' + e.target.id.replace("editimage", "").replace("edit-", "")).classList.add("checkboxChecked");
+			if (document.getElementById('check-' + targetElem).checked === true) {
+				document.getElementById('desc-' + targetElem).classList.add("checkboxChecked");
 			}
-			document.getElementById("input_notes").focus();
-			list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("edit-", "")).description = document.getElementById('desc-' + e.target.id.replace("editimage", "").replace("edit-", "")).innerText;
-			list.find(elem => elem.id.toString() === e.target.id.replace("editimage", "").replace("edit-", "")).editMode = false;
-			document.getElementById('check-' + e.target.id.replace("editimage", "").replace("edit-", "")).removeAttribute("disabled");
-			document.getElementById('desc-' + e.target.id.replace("editimage", "").replace("edit-", "")).contentEditable = false;
+			if (!e.target.id.startsWith("desc")) { document.getElementById("input_notes").focus(); }
+			list.find(elem => elem.id.toString() === targetElem).description = document.getElementById('desc-' + targetElem).innerText;
+			list.find(elem => elem.id.toString() === targetElem).editMode = false;
+			document.getElementById('check-' + targetElem).removeAttribute("disabled");
+			document.getElementById('desc-' + targetElem).contentEditable = false;
 			editimage.classList.remove("saveButtonImage");
 			editimage.classList.add("editButtonImage");
 			editimage.setAttribute("src", './images/edit.png')
@@ -130,6 +127,11 @@ function list_additem(listItem) {
 	}
 	editItem.addEventListener("click", editContent)
 	editimage.addEventListener("click", editContent)
+	description.addEventListener("keydown", (e) => {
+		if (e.code === "Enter") {
+			editContent(e);
+		}
+	})
 
 	//Remove button event
 	let removedItem = document.getElementById("remove-" + list[list.length - 1].id);
@@ -145,7 +147,9 @@ function list_additem(listItem) {
 	removeimage.addEventListener("click", showDeletionModal);
 
 	storeLocal();
-}
+} //end of additem function
+
+
 
 function deleteItem(e) {
 	document.getElementById("item" + e.target.dataset.id).remove();
@@ -193,6 +197,7 @@ function close_modal() {
 	document.getElementById("emptyModalParent").classList.remove("emptyModalParent");
 	document.getElementById("input_notes").focus();
 }
+window.close_modal = close_modal;
 function storeLocal() {
 	let arrayToSave = list.map(item => {
 		return { id: item.id, description: item.description, taskCompleted: item.taskCompleted, date: item.date };
