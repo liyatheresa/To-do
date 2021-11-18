@@ -190,6 +190,8 @@ window.addEventListener("load", function (e) {
 			list_additem(listReceived[i]);
 		}
 	}
+
+
 });
 
 // function to close modal

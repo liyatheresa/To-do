@@ -240,8 +240,8 @@ body {
 }
 
 .description[contentEditable="true"] {
-  display: block;
-  max-width: 30vw;
+  display: flex;
+  /* max-width: 30vw; */
   /* max-height: 1.5rem; */
   /* overflow-x: scroll; */
   outline: none;
