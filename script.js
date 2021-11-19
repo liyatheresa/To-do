@@ -29,7 +29,9 @@ function list_additem(listItem) {
 	else {
 		list.push({ ...listItem, editMode: false });
 	}
-
+	if (list.length != 0) {
+		document.getElementById("emptyImage").remove();
+	}
 	let newItem = "<li id='item" + list[list.length - 1].id + "' ><div class='list_content'>" +
 		"<input " + (list[list.length - 1].taskCompleted ? "checked" : "") + " type='checkbox' class='checkbox' id='check-" + list[list.length - 1].id + "'>" +
 		"<span class='descriptionAndDate'><span id = 'desc-" + list[list.length - 1].id + "' class='description " + (list[list.length - 1].taskCompleted ? "checkboxChecked" : "") + "'>" + list[list.length - 1].description + "</span>" +
@@ -159,6 +161,10 @@ function deleteItem(e) {
 	_("input_notes").focus();
 	list = list.filter(object => object.id !== e.target.dataset.id);
 	storeLocal();
+	if (list.length === 0) {
+		let emptyImage = "<img id='emptyImage' src='./images/clipboard.svg'>";
+		_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
+	}
 }
 
 //focus on load and submission of input on enter And adding event to modal button and parent
@@ -191,6 +197,11 @@ window.addEventListener("load", function (e) {
 		for (let i = 0; i < listReceived.length; i++) {
 			list_additem(listReceived[i]);
 		}
+	}
+
+	if (listReceived.length === 0) {
+		let emptyImage = "<img id='emptyImage' src='./images/clipboard.svg'>";
+		_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
 	}
 
 	//error message on closing tab while editing

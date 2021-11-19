@@ -41,6 +41,15 @@ body {
   width: inherit;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.list_items img{
+  max-height: 8rem;
+  max-width: 8rem;
+  color: #00488A;
 }
 .input_area {
   display: flex;
@@ -158,7 +167,7 @@ body {
 .descriptionDate {
   cursor: pointer;
 }
-.modalClose {
+.modalClose, .noshow{
   display: none;
 }
 .emptyModalParent {
