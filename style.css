@@ -241,7 +241,7 @@ body {
 
 .description[contentEditable="true"] {
   display: flex;
-  /* max-width: 30vw; */
+  min-width: 20px;
   /* max-height: 1.5rem; */
   /* overflow-x: scroll; */
   outline: none;

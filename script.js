@@ -107,13 +107,11 @@ function list_additem(listItem) {
 
 			placeCaretAtEnd(placeOfEdit);
 
-
 		}
 		else {
 			if (document.getElementById('check-' + targetElem).checked === true) {
 				document.getElementById('desc-' + targetElem).classList.add("checkboxChecked");
 			}
-			if (!e.target.id.startsWith("desc")) { document.getElementById("input_notes").focus(); }
 			list.find(elem => elem.id.toString() === targetElem).description = document.getElementById('desc-' + targetElem).innerText;
 			list.find(elem => elem.id.toString() === targetElem).editMode = false;
 			document.getElementById('check-' + targetElem).removeAttribute("disabled");
@@ -122,12 +120,15 @@ function list_additem(listItem) {
 			editimage.classList.add("editButtonImage");
 			editimage.setAttribute("src", './images/edit.png')
 			storeLocal();
+			setTimeout(() => { document.getElementById("input_notes").focus() }, 200)
 		}
 
 	}
 	editItem.addEventListener("click", editContent)
 	editimage.addEventListener("click", editContent)
+	description.addEventListener("dblclick", editContent)
 	description.addEventListener("keydown", (e) => {
+		e.stopImmediatePropagation();
 		if (e.code === "Enter") {
 			editContent(e);
 		}
@@ -147,6 +148,7 @@ function list_additem(listItem) {
 	removeimage.addEventListener("click", showDeletionModal);
 
 	storeLocal();
+
 } //end of additem function
 
 
@@ -158,6 +160,11 @@ function deleteItem(e) {
 	list = list.filter(object => object.id !== e.target.dataset.id);
 	storeLocal();
 }
+
+//required for tab close while editing
+document.getElementById("input_area").onsubmit = setFormSubmitting;
+var formSubmitting = false;
+function setFormSubmitting() { formSubmitting = true; }
 
 //focus on load and submission of input on enter And adding event to modal button and parent
 window.addEventListener("load", function (e) {
@@ -191,8 +198,19 @@ window.addEventListener("load", function (e) {
 		}
 	}
 
+	//error message on closing tab while editing
+	window.addEventListener("beforeunload", function (e) {
+		if (formSubmitting) {
+			return undefined;
+		}
+		var confirmationMessage = 'It looks like you have been editing something. '
+			+ 'If you leave before saving, your changes will be lost.';
 
-});
+		(e || window.event).returnValue = confirmationMessage;
+		return confirmationMessage;
+	});
+
+});//end of event on load
 
 // function to close modal
 function close_modal() {
