@@ -4,15 +4,15 @@ let list = [];
 //Function to add item to to-do list
 function list_additem(listItem) {
 	if (listItem === undefined) {
-		let input = document.getElementById("input_notes");
+		let input = _("input_notes");
 		let date = new Date(Date.now()).toLocaleDateString();
-		let emptyModalParent = document.getElementById('emptyModalParent')
+		let emptyModalParent = _('emptyModalParent')
 
 		//modal display on empty input
 		if (input.value.trim() === "") {
 			emptyModalParent.classList.add("emptyModalParent");
-			document.getElementById("input_notes").blur();
-			document.getElementById('modal').addEventListener("click", (e) => { e.stopPropagation(); })
+			_("input_notes").blur();
+			_('modal').addEventListener("click", (e) => { e.stopPropagation(); })
 			emptyModalParent.addEventListener("click", close_modal);
 			return;
 		}
@@ -40,11 +40,11 @@ function list_additem(listItem) {
 		"<button id='remove-" + list[list.length - 1].id + "' class='remove_button'><img id='removeimage" + list[list.length - 1].id + "' src='./images/icons8-trash-can-50.png'></button>" +
 		"</div></li>";
 
-	document.getElementById("printing_list").insertAdjacentHTML('afterbegin', newItem);
+	_("printing_list").insertAdjacentHTML('afterbegin', newItem);
 
 
-	let checkBox = document.getElementById("check-" + list[list.length - 1].id)
-	let description = document.getElementById("desc-" + list[list.length - 1].id)
+	let checkBox = _("check-" + list[list.length - 1].id)
+	let description = _("desc-" + list[list.length - 1].id)
 
 
 	//cross-out on clicking description or checkbox
@@ -70,23 +70,23 @@ function list_additem(listItem) {
 
 
 	//Edit button functionalities
-	let editItem = document.getElementById("edit-" + list[list.length - 1].id);
-	let editimage = document.getElementById("editimage" + list[list.length - 1].id)
+	let editItem = _("edit-" + list[list.length - 1].id);
+	let editimage = _("editimage" + list[list.length - 1].id)
 	function editContent(e) {
 		e.stopPropagation();
 		let targetElem = e.target.id.replace("editimage", "").replace("edit-", "").replace("description", "").replace("desc-", "")
 		if (list.find(elem => elem.id.toString() === targetElem).editMode === false) {
-			if (document.getElementById('check-' + targetElem).checked === true) {
-				document.getElementById('desc-' + targetElem).classList.remove("checkboxChecked");
+			if (_('check-' + targetElem).checked === true) {
+				_('desc-' + targetElem).classList.remove("checkboxChecked");
 			}
 			list.find(elem => elem.id.toString() === targetElem).editMode = true;
-			document.getElementById('desc-' + targetElem).contentEditable = true;
-			document.getElementById('check-' + targetElem).setAttribute("disabled", "disabled");
+			_('desc-' + targetElem).contentEditable = true;
+			_('check-' + targetElem).setAttribute("disabled", "disabled");
 			editimage.classList.add("saveButtonImage");
 			editimage.classList.remove("editButtonImage");
 			editimage.setAttribute("src", './images/save.png')
-			document.getElementById('desc-' + targetElem).focus();
-			let placeOfEdit = document.getElementById('desc-' + targetElem)
+			_('desc-' + targetElem).focus();
+			let placeOfEdit = _('desc-' + targetElem)
 			function placeCaretAtEnd(el) {
 				el.focus();
 				if (typeof window.getSelection != "undefined"
@@ -109,18 +109,18 @@ function list_additem(listItem) {
 
 		}
 		else {
-			if (document.getElementById('check-' + targetElem).checked === true) {
-				document.getElementById('desc-' + targetElem).classList.add("checkboxChecked");
+			if (_('check-' + targetElem).checked === true) {
+				_('desc-' + targetElem).classList.add("checkboxChecked");
 			}
-			list.find(elem => elem.id.toString() === targetElem).description = document.getElementById('desc-' + targetElem).innerText;
+			list.find(elem => elem.id.toString() === targetElem).description = _('desc-' + targetElem).innerText;
 			list.find(elem => elem.id.toString() === targetElem).editMode = false;
-			document.getElementById('check-' + targetElem).removeAttribute("disabled");
-			document.getElementById('desc-' + targetElem).contentEditable = false;
+			_('check-' + targetElem).removeAttribute("disabled");
+			_('desc-' + targetElem).contentEditable = false;
 			editimage.classList.remove("saveButtonImage");
 			editimage.classList.add("editButtonImage");
 			editimage.setAttribute("src", './images/edit.png')
 			storeLocal();
-			setTimeout(() => { document.getElementById("input_notes").focus() }, 200)
+			setTimeout(() => { _("input_notes").focus() }, 200)
 		}
 
 	}
@@ -135,14 +135,14 @@ function list_additem(listItem) {
 	})
 
 	//Remove button event
-	let removedItem = document.getElementById("remove-" + list[list.length - 1].id);
-	let removeimage = document.getElementById("removeimage" + list[list.length - 1].id);
+	let removedItem = _("remove-" + list[list.length - 1].id);
+	let removeimage = _("removeimage" + list[list.length - 1].id);
 	function showDeletionModal(e) {
 		e.stopPropagation();
-		document.getElementById("input_notes").blur();
-		document.getElementById('removeModal').classList.add("emptyModalParent");
+		_("input_notes").blur();
+		_('removeModal').classList.add("emptyModalParent");
 		let id = e.target.id.replace("removeimage", "").replace("remove-", "");
-		document.getElementById('confirm').setAttribute("data-id", id)
+		_('confirm').setAttribute("data-id", id)
 	}
 	removedItem.addEventListener("click", showDeletionModal);
 	removeimage.addEventListener("click", showDeletionModal);
@@ -154,40 +154,35 @@ function list_additem(listItem) {
 
 
 function deleteItem(e) {
-	document.getElementById("item" + e.target.dataset.id).remove();
-	document.getElementById('removeModal').classList.remove("emptyModalParent");
-	document.getElementById("input_notes").focus();
+	_("item" + e.target.dataset.id).remove();
+	_('removeModal').classList.remove("emptyModalParent");
+	_("input_notes").focus();
 	list = list.filter(object => object.id !== e.target.dataset.id);
 	storeLocal();
 }
 
-//required for tab close while editing
-document.getElementById("input_area").onsubmit = setFormSubmitting;
-var formSubmitting = false;
-function setFormSubmitting() { formSubmitting = true; }
-
 //focus on load and submission of input on enter And adding event to modal button and parent
 window.addEventListener("load", function (e) {
-	document.getElementById("input_area").addEventListener("submit", e => {
+	_("input_area").addEventListener("submit", e => {
 		e.preventDefault();
 		list_additem();
 	});
-	document.getElementById("input_notes").focus();
+	_("input_notes").focus();
 
-	let closeButton = document.getElementById('close');
-	let removeModalParent = document.getElementById('removeModal')
-	let confirmButton = document.getElementById('confirm');
-	document.getElementById('popup').addEventListener("click", (e) => { e.stopPropagation(); })
+	let closeButton = _('close');
+	let removeModalParent = _('removeModal')
+	let confirmButton = _('confirm');
+	_('popup').addEventListener("click", (e) => { e.stopPropagation(); })
 	confirmButton.addEventListener("click", deleteItem);
 
 	closeButton.addEventListener("click", function () {
 		removeModalParent.classList.remove("emptyModalParent");
-		document.getElementById("input_notes").focus();
+		_("input_notes").focus();
 	})
 
 	removeModalParent.addEventListener("click", function (e) {
 		removeModalParent.classList.remove("emptyModalParent");
-		document.getElementById("input_notes").focus();
+		_("input_notes").focus();
 	});
 
 	//getting the list from local storage 
@@ -199,23 +194,18 @@ window.addEventListener("load", function (e) {
 	}
 
 	//error message on closing tab while editing
-	window.addEventListener("beforeunload", function (e) {
-		if (formSubmitting) {
-			return undefined;
+	window.onbeforeunload = () => {
+		let confirmationMessage = 'Are you sure you want to leave?';
+		if ((_("input_notes").value.trim() !== "") || list.some((el) => { return el.editMode })) {
+			return confirmationMessage;
 		}
-		var confirmationMessage = 'It looks like you have been editing something. '
-			+ 'If you leave before saving, your changes will be lost.';
-
-		(e || window.event).returnValue = confirmationMessage;
-		return confirmationMessage;
-	});
-
+	}
 });//end of event on load
 
 // function to close modal
 function close_modal() {
-	document.getElementById("emptyModalParent").classList.remove("emptyModalParent");
-	document.getElementById("input_notes").focus();
+	_("emptyModalParent").classList.remove("emptyModalParent");
+	_("input_notes").focus();
 }
 window.close_modal = close_modal;
 function storeLocal() {
@@ -228,8 +218,8 @@ function storeLocal() {
 //checkbox functionalities and marking it as complete in list
 
 function toggleCheckedClass(targetId) {
-	let checkBox = document.getElementById("check-" + targetId)
-	let description = document.getElementById("desc-" + targetId)
+	let checkBox = _("check-" + targetId)
+	let description = _("desc-" + targetId)
 	if (checkBox.checked)
 		description.classList.add("checkboxChecked");
 	else
@@ -238,4 +228,7 @@ function toggleCheckedClass(targetId) {
 		return element.id.toString() === targetId
 	}).taskCompleted = checkBox.checked;
 	storeLocal();
+}
+function _(id) {
+	return document.getElementById(id);
 }
