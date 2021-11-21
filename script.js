@@ -191,6 +191,9 @@ window.addEventListener("load", function (e) {
 
 	//getting the list from local storage 
 	let listReceived = JSON.parse(localStorage.getItem("listSaved"));
+	if (!listReceived) {
+		listReceived = [];
+	}
 	if (listReceived.length === 0) {
 		let emptyImage = "<figure id='emptyImage'><img src='./images/clipboard.svg'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
 		_("list_items").insertAdjacentHTML('afterbegin', emptyImage);

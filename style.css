@@ -58,7 +58,7 @@ body {
   box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
   background-image: url(./images/icons8-send-64.png);
   background-size: auto 30px;
-  background-position: 40% 60%;
+  background-position: 40px 60px;
   background-repeat: no-repeat;
 }
 .todo_list {
