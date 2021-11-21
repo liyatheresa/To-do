@@ -23,12 +23,47 @@ body {
   padding: 0.5rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+.searchArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: inherit;
+  padding: 0;
+  margin-top: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 50vw; 
+}
+#searchText{
+  border: 1px solid #cbcbcb;
+  border-radius: 0.5rem;
+  padding: 10px 20px 10px 20px;
+  font-family: inherit;
+  outline: none;
+  flex-grow: 1;
+  background-image: url(./images/search.png);
+  background-repeat: no-repeat;
+  background-position: 2% 60%;
+  text-indent: 20px;
+}
+.searchButton{
+  background-color: #220083;
+  border-radius: 20px;
+  height: 40px;
+  width: 40px;
+  border: 0.5px solid black;
+  box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
+  background-image: url(./images/icons8-send-64.png);
+  background-size: auto 30px;
+  background-position: 40% 60%;
+  background-repeat: no-repeat;
+}
 .todo_list {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 50vw;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-right: auto;
   margin-left: auto;
   padding: 0;
@@ -36,20 +71,18 @@ body {
 .list_items {
   overflow-y: auto;
   height: calc(100vh - 135px);
-  /* border: 1px solid #CBCBCB; */
-  /* border-radius: .5rem; */
   width: inherit;
   margin: 0;
   padding: 0;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; */
   align-items: center;
 }
-.list_items img{
+.list_items img {
   max-height: 8rem;
   max-width: 8rem;
-  color: #00488A;
+  color: #00488a;
 }
 .input_area {
   display: flex;
@@ -71,6 +104,7 @@ body {
   box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
 }
 .submission {
+  margin-left: 0.7rem;
   background-color: #220083;
   border-radius: 20px;
   height: 40px;
@@ -157,7 +191,7 @@ body {
 .descriptionDate {
   color: #989898;
   font-size: 13px;
-  margin-top: .25rem;
+  margin-top: 0.25rem;
 }
 .submission,
 .edit_button,
@@ -167,7 +201,8 @@ body {
 .descriptionDate {
   cursor: pointer;
 }
-.modalClose, .noshow{
+.modalClose,
+.noshow {
   display: none;
 }
 .emptyModalParent {
@@ -211,7 +246,7 @@ body {
   display: inline;
   top: 2.5rem;
   left: 14rem;
-    margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 .normalButton {
   background-color: white;
@@ -222,7 +257,7 @@ body {
   border: none;
   min-height: 35px;
   min-width: 70px;
-  border: 1px solid #C3C3C3;
+  border: 1px solid #c3c3c3;
   margin-right: 1rem;
 }
 .dangerButton {
@@ -257,6 +292,6 @@ body {
   padding-left: 5px;
   padding-right: 5px;
   /* border: 2px solid #005aad; */
-    box-shadow: 0 0 0 1px #005aad;
+  box-shadow: 0 0 0 1px #005aad;
   cursor: text;
 }

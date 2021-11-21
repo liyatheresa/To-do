@@ -29,9 +29,9 @@ function list_additem(listItem) {
 	else {
 		list.push({ ...listItem, editMode: false });
 	}
-	if (list.length != 0) {
-		document.getElementById("emptyImage").remove();
-	}
+	// if (list.length != 0) {
+	// 	document.getElementById("emptyImage").remove();
+	// }
 	let newItem = "<li id='item" + list[list.length - 1].id + "' ><div class='list_content'>" +
 		"<input " + (list[list.length - 1].taskCompleted ? "checked" : "") + " type='checkbox' class='checkbox' id='check-" + list[list.length - 1].id + "'>" +
 		"<span class='descriptionAndDate'><span id = 'desc-" + list[list.length - 1].id + "' class='description " + (list[list.length - 1].taskCompleted ? "checkboxChecked" : "") + "'>" + list[list.length - 1].description + "</span>" +
@@ -41,13 +41,10 @@ function list_additem(listItem) {
 		"<button id='edit-" + list[list.length - 1].id + "' class='edit_button'><img class='editButtonImage' id='editimage" + list[list.length - 1].id + "' src='./images/edit.png'></button>" +
 		"<button id='remove-" + list[list.length - 1].id + "' class='remove_button'><img id='removeimage" + list[list.length - 1].id + "' src='./images/icons8-trash-can-50.png'></button>" +
 		"</div></li>";
-
 	_("printing_list").insertAdjacentHTML('afterbegin', newItem);
-
 
 	let checkBox = _("check-" + list[list.length - 1].id)
 	let description = _("desc-" + list[list.length - 1].id)
-
 
 	//cross-out on clicking description or checkbox
 	checkBox.addEventListener("change", (e) => {
@@ -68,8 +65,6 @@ function list_additem(listItem) {
 			toggleCheckedClass(targetId);
 		}
 	})
-
-
 
 	//Edit button functionalities
 	let editItem = _("edit-" + list[list.length - 1].id);
@@ -108,7 +103,6 @@ function list_additem(listItem) {
 			}
 
 			placeCaretAtEnd(placeOfEdit);
-
 		}
 		else {
 			if (_('check-' + targetElem).checked === true) {
@@ -124,7 +118,6 @@ function list_additem(listItem) {
 			storeLocal();
 			setTimeout(() => { _("input_notes").focus() }, 200)
 		}
-
 	}
 	editItem.addEventListener("click", editContent)
 	editimage.addEventListener("click", editContent)
@@ -161,10 +154,10 @@ function deleteItem(e) {
 	_("input_notes").focus();
 	list = list.filter(object => object.id !== e.target.dataset.id);
 	storeLocal();
-	if (list.length === 0) {
-		let emptyImage = "<img id='emptyImage' src='./images/clipboard.svg'>";
-		_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
-	}
+	// if (list.length === 0) {
+	// 	let emptyImage = "<img id='emptyImage' src='./images/clipboard.svg'>";
+	// 	_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
+	// }
 }
 
 //focus on load and submission of input on enter And adding event to modal button and parent
@@ -193,15 +186,14 @@ window.addEventListener("load", function (e) {
 
 	//getting the list from local storage 
 	let listReceived = JSON.parse(localStorage.getItem("listSaved"));
+	// if (listReceived.length === 0) {
+	// 	let emptyImage = "<img id='emptyImage' src='./images/clipboard.svg'>";
+	// 	_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
+	// }
 	if (listReceived) {
 		for (let i = 0; i < listReceived.length; i++) {
 			list_additem(listReceived[i]);
 		}
-	}
-
-	if (listReceived.length === 0) {
-		let emptyImage = "<img id='emptyImage' src='./images/clipboard.svg'>";
-		_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
 	}
 
 	//error message on closing tab while editing
