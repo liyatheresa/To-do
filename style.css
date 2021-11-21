@@ -41,7 +41,7 @@ body {
   flex-grow: 1;
   background-image: url(./images/search.svg);
   background-repeat: no-repeat;
-  background-position: 2% 51%;
+  background-position: 8px 8px;
   background-size: 17px 18px;
   text-indent: 15px;
   box-shadow: 0px 0px 23px 10px rgba(0, 0, 0, 0.04);
