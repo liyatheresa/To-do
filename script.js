@@ -29,9 +29,13 @@ function list_additem(listItem) {
 	else {
 		list.push({ ...listItem, editMode: false });
 	}
-	// if (list.length != 0) {
-	// 	document.getElementById("emptyImage").remove();
-	// }
+	if (list.length === 1) {
+		let emptyImage = _("emptyImage");
+		if (emptyImage) {
+			emptyImage.remove();
+			_("list_items").classList.remove("addEmptyImage");
+		}
+	}
 	let newItem = "<li id='item" + list[list.length - 1].id + "' ><div class='list_content'>" +
 		"<input " + (list[list.length - 1].taskCompleted ? "checked" : "") + " type='checkbox' class='checkbox' id='check-" + list[list.length - 1].id + "'>" +
 		"<span class='descriptionAndDate'><span id = 'desc-" + list[list.length - 1].id + "' class='description " + (list[list.length - 1].taskCompleted ? "checkboxChecked" : "") + "'>" + list[list.length - 1].description + "</span>" +
@@ -154,10 +158,11 @@ function deleteItem(e) {
 	_("input_notes").focus();
 	list = list.filter(object => object.id !== e.target.dataset.id);
 	storeLocal();
-	// if (list.length === 0) {
-	// 	let emptyImage = "<img id='emptyImage' src='./images/clipboard.svg'>";
-	// 	_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
-	// }
+	if (list.length === 0) {
+		let emptyImage = "<figure id='emptyImage'><img src='./images/clipboard.svg'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
+		_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
+		_("list_items").classList.add("addEmptyImage");
+	}
 }
 
 //focus on load and submission of input on enter And adding event to modal button and parent
@@ -186,10 +191,11 @@ window.addEventListener("load", function (e) {
 
 	//getting the list from local storage 
 	let listReceived = JSON.parse(localStorage.getItem("listSaved"));
-	// if (listReceived.length === 0) {
-	// 	let emptyImage = "<img id='emptyImage' src='./images/clipboard.svg'>";
-	// 	_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
-	// }
+	if (listReceived.length === 0) {
+		let emptyImage = "<figure id='emptyImage'><img src='./images/clipboard.svg'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
+		_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
+		_("list_items").classList.add("addEmptyImage");
+	}
 	if (listReceived) {
 		for (let i = 0; i < listReceived.length; i++) {
 			list_additem(listReceived[i]);
@@ -232,6 +238,11 @@ function toggleCheckedClass(targetId) {
 	}).taskCompleted = checkBox.checked;
 	storeLocal();
 }
+// function listSearch{
+// 	let search = _("searchText");
+// 	let searchItem = search.value.trim();
+// 	// list.filter(item)
+// }
 function _(id) {
 	return document.getElementById(id);
 }
