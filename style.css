@@ -88,9 +88,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-#emptyImage img{
-  margin-left: 2rem;
+  align-items: center;
 }
 #emptyImage figcaption{
   color:#00488A;

@@ -34,6 +34,7 @@ function list_additem(listItem) {
 		if (emptyImage) {
 			emptyImage.remove();
 			_("list_items").classList.remove("addEmptyImage");
+			_("searchText").classList.remove("noshow");
 		}
 	}
 	let newItem = "<li id='item" + list[list.length - 1].id + "' ><div class='list_content'>" +
@@ -162,6 +163,7 @@ function deleteItem(e) {
 		let emptyImage = "<figure id='emptyImage'><img src='./images/clipboard.svg'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
 		_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
 		_("list_items").classList.add("addEmptyImage");
+		_("searchText").classList.add("noshow");
 	}
 }
 
@@ -198,6 +200,7 @@ window.addEventListener("load", function (e) {
 		let emptyImage = "<figure id='emptyImage'><img src='./images/clipboard.svg'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
 		_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
 		_("list_items").classList.add("addEmptyImage");
+		_("searchText").classList.add("noshow");
 	}
 	if (listReceived) {
 		for (let i = 0; i < listReceived.length; i++) {
