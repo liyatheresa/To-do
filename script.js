@@ -190,7 +190,7 @@ window.addEventListener("load", function (e) {
 		removeModalParent.classList.remove("emptyModalParent");
 		_("input_notes").focus();
 	});
-
+	_("searchText").classList.add("noshow");
 	//getting the list from local storage 
 	let listReceived = JSON.parse(localStorage.getItem("listSaved"));
 	if (!listReceived) {
@@ -200,10 +200,10 @@ window.addEventListener("load", function (e) {
 		let emptyImage = "<figure id='emptyImage'><img src='./images/clipboard.svg'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
 		_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
 		_("list_items").classList.add("addEmptyImage");
-		_("searchText").classList.add("noshow");
 	}
 	if (listReceived) {
 		for (let i = 0; i < listReceived.length; i++) {
+			_("searchText").classList.remove("noshow");
 			list_additem(listReceived[i]);
 		}
 	}
@@ -244,11 +244,32 @@ function toggleCheckedClass(targetId) {
 	}).taskCompleted = checkBox.checked;
 	storeLocal();
 }
-// function listSearch{
-// 	let search = _("searchText");
-// 	let searchItem = search.value.trim();
-// 	// list.filter(item)
-// }
+function searchResultPrint(searchResult) {
+	let result = "";
+	for (let i = 0; i < searchResult.length; i++) {
+		result = "<li><div class='list_content'>" +
+			"<input type='checkbox' class='checkbox'>" +
+			"<span class='descriptionAndDate'><span>" + searchResult[i].description + "</span>" +
+			"<div class='descriptionDate'>" + searchResult[i].date + "</div></span>" +
+			"</div>" +
+			"<div class='buttons'>" +
+			"<button class='edit_button'><img class='editButtonImage' src='./images/edit.png'></button>" +
+			"<button class='remove_button'><img src='./images/icons8-trash-can-50.png'></button>" +
+			"</div></li>" + result;
+	}
+	_("printing_list").insertAdjacentHTML('afterbegin', result);
+}
+let search = _("searchText");
+function listSearch() {
+	_("printing_list").innerHTML = "";
+	let searchItem = search.value;
+	let searchItemLowercase = searchItem.toLowerCase();
+	let searchResult = list.filter(item => {
+		return item.description.toLowerCase().indexOf(searchItemLowercase) > -1;
+	})
+	searchResultPrint(searchResult);
+}
+_("searchText").addEventListener("keyup", listSearch);
 function _(id) {
 	return document.getElementById(id);
 }

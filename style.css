@@ -73,7 +73,7 @@ body {
 }
 .list_items {
   overflow-y: auto;
-  height: calc(100vh - 135px);
+  height: calc(100vh - 185px);
   width: inherit;
   margin: 0;
   padding: 0;
