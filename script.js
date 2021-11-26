@@ -215,6 +215,7 @@ window.addEventListener("load", function (e) {
 			return confirmationMessage;
 		}
 	}
+	_("x").classList.add("noshow");
 });//end of event on load
 
 // function to close modal
@@ -247,6 +248,19 @@ function toggleCheckedClass(targetId) {
 //Search result printing
 function searchResultPrint(searchResult) {
 	let result = "";
+	if (searchResult.length === 0) {
+		let emptyS = "<figure id='emptySearch'><img src='./images/emptySearch.svg'><figcaption>No results found...</figcaption></figure>";
+		_("list_items").insertAdjacentHTML('afterbegin', emptyS);
+		_("list_items").classList.add("addEmptyImage");
+	}
+	else {
+		let emptySearch = _("emptySearch");
+		if (emptySearch) {
+			emptySearch.remove();
+			_("list_items").classList.remove("addEmptyImage");
+			_("searchText").classList.remove("noshow");
+		}
+	}
 	for (let eachObj = 0; eachObj < searchResult.length; eachObj++) {
 		let result = "<li id='item" + searchResult[eachObj].id + "' ><div class='list_content'>" +
 			"<input " + (searchResult[eachObj].taskCompleted ? "checked" : "") + " type='checkbox' class='checkbox' id='check-" + searchResult[eachObj].id + "'>" +
@@ -364,6 +378,8 @@ let search = _("searchText");
 function listSearch() {
 	_("printing_list").innerHTML = "";
 	let searchItem = search.value;
+	if (searchItem !== "")
+		_("x").classList.remove("noshow");
 	let searchItemLowercase = searchItem.toLowerCase();
 	let searchResult = list.filter(item => {
 		return item.description.toLowerCase().indexOf(searchItemLowercase) > -1;
@@ -371,7 +387,12 @@ function listSearch() {
 	searchResultPrint(searchResult);
 }
 _("searchText").addEventListener("keyup", listSearch);
-
+_("x").addEventListener("click", () => {
+	_("searchText").value = "";
+	listSearch();
+	_("x").classList.add("noshow");
+	_("input_notes").focus();
+});
 function _(id) {
 	return document.getElementById(id);
 }
