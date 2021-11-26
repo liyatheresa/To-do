@@ -244,21 +244,122 @@ function toggleCheckedClass(targetId) {
 	}).taskCompleted = checkBox.checked;
 	storeLocal();
 }
+//Search result printing
 function searchResultPrint(searchResult) {
 	let result = "";
-	for (let i = 0; i < searchResult.length; i++) {
-		result = "<li><div class='list_content'>" +
-			"<input type='checkbox' class='checkbox'>" +
-			"<span class='descriptionAndDate'><span>" + searchResult[i].description + "</span>" +
-			"<div class='descriptionDate'>" + searchResult[i].date + "</div></span>" +
+	for (let eachObj = 0; eachObj < searchResult.length; eachObj++) {
+		let result = "<li id='item" + searchResult[eachObj].id + "' ><div class='list_content'>" +
+			"<input " + (searchResult[eachObj].taskCompleted ? "checked" : "") + " type='checkbox' class='checkbox' id='check-" + searchResult[eachObj].id + "'>" +
+			"<span class='descriptionAndDate'><span id = 'desc-" + searchResult[eachObj].id + "' class='description " + (searchResult[eachObj].taskCompleted ? "checkboxChecked" : "") + "'>" + searchResult[eachObj].description + "</span>" +
+			"<div class='descriptionDate'>" + searchResult[eachObj].date + "</div></span>" +
 			"</div>" +
 			"<div class='buttons'>" +
-			"<button class='edit_button'><img class='editButtonImage' src='./images/edit.png'></button>" +
-			"<button class='remove_button'><img src='./images/icons8-trash-can-50.png'></button>" +
-			"</div></li>" + result;
+			"<button id='edit-" + searchResult[eachObj].id + "' class='edit_button'><img class='editButtonImage' id='editimage" + searchResult[eachObj].id + "' src='./images/edit.png'></button>" +
+			"<button id='remove-" + searchResult[eachObj].id + "' class='remove_button'><img id='removeimage" + searchResult[eachObj].id + "' src='./images/icons8-trash-can-50.png'></button>" +
+			"</div></li>";
+		_("printing_list").insertAdjacentHTML('afterbegin', result);
+
+		let checkBox = _("check-" + searchResult[eachObj].id)
+		let description = _("desc-" + searchResult[eachObj].id)
+
+		//cross-out on clicking description or checkbox
+		checkBox.addEventListener("change", (e) => {
+			let targetId = e.target.id.replace("check-", "")
+			if (list.find(element => {
+				return element.id.toString() === targetId
+			}).editMode === false) {
+				toggleCheckedClass(targetId);
+			}
+		})
+
+		description.addEventListener("click", function (e) {
+			let targetId = e.target.id.replace("desc-", "")
+			if (list.find(element => {
+				return element.id.toString() === targetId
+			}).editMode === false) {
+				checkBox.checked = checkBox.checked ? false : true;
+				toggleCheckedClass(targetId);
+			}
+		})
+
+		//Edit button functionalities
+		let editItem = _("edit-" + searchResult[eachObj].id);
+		let editimage = _("editimage" + searchResult[eachObj].id)
+		function editContent(e) {
+			e.stopPropagation();
+			let targetElem = e.target.id.replace("editimage", "").replace("edit-", "").replace("description", "").replace("desc-", "")
+			if (list.find(elem => elem.id.toString() === targetElem).editMode === false) {
+				if (_('check-' + targetElem).checked === true) {
+					_('desc-' + targetElem).classList.remove("checkboxChecked");
+				}
+				list.find(elem => elem.id.toString() === targetElem).editMode = true;
+				_('desc-' + targetElem).contentEditable = true;
+				_('check-' + targetElem).setAttribute("disabled", "disabled");
+				editimage.classList.add("saveButtonImage");
+				editimage.classList.remove("editButtonImage");
+				editimage.setAttribute("src", './images/save.png')
+				_('desc-' + targetElem).focus();
+				let placeOfEdit = _('desc-' + targetElem)
+				function placeCaretAtEnd(el) {
+					el.focus();
+					if (typeof window.getSelection != "undefined"
+						&& typeof document.createRange != "undefined") {
+						var range = document.createRange();
+						range.selectNodeContents(el);
+						range.collapse(false);
+						var sel = window.getSelection();
+						sel.removeAllRanges();
+						sel.addRange(range);
+					} else if (typeof document.body.createTextRange != "undefined") {
+						var textRange = document.body.createTextRange();
+						textRange.moveToElementText(el);
+						textRange.collapse(false);
+						textRange.select();
+					}
+				}
+
+				placeCaretAtEnd(placeOfEdit);
+			}
+			else {
+				if (_('check-' + targetElem).checked === true) {
+					_('desc-' + targetElem).classList.add("checkboxChecked");
+				}
+				list.find(elem => elem.id.toString() === targetElem).description = _('desc-' + targetElem).innerText;
+				list.find(elem => elem.id.toString() === targetElem).editMode = false;
+				_('check-' + targetElem).removeAttribute("disabled");
+				_('desc-' + targetElem).contentEditable = false;
+				editimage.classList.remove("saveButtonImage");
+				editimage.classList.add("editButtonImage");
+				editimage.setAttribute("src", './images/edit.png')
+				storeLocal();
+				setTimeout(() => { _("input_notes").focus() }, 200)
+			}
+		}
+		editItem.addEventListener("click", editContent)
+		editimage.addEventListener("click", editContent)
+		description.addEventListener("dblclick", editContent)
+		description.addEventListener("keydown", (e) => {
+			e.stopImmediatePropagation();
+			if (e.code === "Enter") {
+				editContent(e);
+			}
+		})
+
+		//Remove button event
+		let removedItem = _("remove-" + searchResult[eachObj].id);
+		let removeimage = _("removeimage" + searchResult[eachObj].id);
+		function showDeletionModal(e) {
+			e.stopPropagation();
+			_("input_notes").blur();
+			_('removeModal').classList.add("emptyModalParent");
+			let id = e.target.id.replace("removeimage", "").replace("remove-", "");
+			_('confirm').setAttribute("data-id", id)
+		}
+		removedItem.addEventListener("click", showDeletionModal);
+		removeimage.addEventListener("click", showDeletionModal);
 	}
-	_("printing_list").insertAdjacentHTML('afterbegin', result);
 }
+//search event
 let search = _("searchText");
 function listSearch() {
 	_("printing_list").innerHTML = "";
@@ -270,6 +371,7 @@ function listSearch() {
 	searchResultPrint(searchResult);
 }
 _("searchText").addEventListener("keyup", listSearch);
+
 function _(id) {
 	return document.getElementById(id);
 }
