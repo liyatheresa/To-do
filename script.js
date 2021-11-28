@@ -397,9 +397,8 @@ function listSearch() {
 _("searchText").addEventListener("keyup", listSearch);
 _("x").addEventListener("click", () => {
 	_("searchText").value = "";
-	_("printing_list").innerHTML = "";
+	listSearch();
 	_("x").classList.add("noshow");
-	_("input_notes").focus();
 });
 function _(id) {
 	return document.getElementById(id);

@@ -55,6 +55,7 @@ body {
 #x{
   position: relative;
   right: 30px;
+  cursor: pointer;
 }
 .searchButton{
   background-color: #220083;
