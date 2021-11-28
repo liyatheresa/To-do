@@ -398,6 +398,7 @@ _("searchText").addEventListener("keyup", listSearch);
 _("x").addEventListener("click", () => {
 	_("searchText").value = "";
 	listSearch();
+	search.focus();
 	_("x").classList.add("noshow");
 });
 function _(id) {
