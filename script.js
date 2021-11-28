@@ -377,9 +377,17 @@ function searchResultPrint(searchResult) {
 let search = _("searchText");
 function listSearch() {
 	_("printing_list").innerHTML = "";
+	let emptySearch = _("emptySearch");
+	if (emptySearch) {
+		emptySearch.remove();
+		_("list_items").classList.remove("addEmptyImage");
+		_("searchText").classList.remove("noshow");
+	}
 	let searchItem = search.value;
-	if (searchItem !== "")
+	if (searchItem)
 		_("x").classList.remove("noshow");
+	else
+		_("x").classList.add("noshow");
 	let searchItemLowercase = searchItem.toLowerCase();
 	let searchResult = list.filter(item => {
 		return item.description.toLowerCase().indexOf(searchItemLowercase) > -1;
@@ -389,7 +397,7 @@ function listSearch() {
 _("searchText").addEventListener("keyup", listSearch);
 _("x").addEventListener("click", () => {
 	_("searchText").value = "";
-	listSearch();
+	_("printing_list").innerHTML = "";
 	_("x").classList.add("noshow");
 	_("input_notes").focus();
 });
