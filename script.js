@@ -383,7 +383,7 @@ function listSearch() {
 		_("list_items").classList.remove("addEmptyImage");
 		_("searchText").classList.remove("noshow");
 	}
-	let searchItem = search.value;
+	let searchItem = search.value.trim();
 	if (searchItem)
 		_("x").classList.remove("noshow");
 	else
