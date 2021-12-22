@@ -306,3 +306,25 @@ body {
   box-shadow: 0 0 0 1px #005aad;
   cursor: text;
 }
+@media (max-width:700px){
+  .searchArea{
+    width: inherit;
+    margin:0px;
+  }
+  #searchText{
+    border:none;
+    padding: 13px 20px 13px 20px;
+    background-position: 12px 10px;
+    text-indent: 20px;
+  }
+  .todo_list{
+    align-items:stretch;
+    width: 100vw;
+  }
+  .list_content{
+    margin-left: 1rem;
+  }
+  .checkbox{
+    margin-right: 14px;
+  }
+}
