@@ -27,6 +27,7 @@ body {
   text-decoration: none;
 }
 .searchArea {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,21 +54,9 @@ body {
   color:#C3C3C3
 }
 #x{
-  position: relative;
+  position: absolute;
   right: 30px;
   cursor: pointer;
-}
-.searchButton{
-  background-color: #220083;
-  border-radius: 20px;
-  height: 40px;
-  width: 40px;
-  border: 0.5px solid black;
-  box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
-  background-image: url(./images/icons8-send-64.png);
-  background-size: auto 30px;
-  background-position: 40px 60px;
-  background-repeat: no-repeat;
 }
 .todo_list {
   display: flex;
