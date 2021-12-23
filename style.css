@@ -123,8 +123,8 @@ body {
   width: 40px;
   border: 0.5px solid black;
   box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
-  background-image: url(./images/icons8-send-64.png);
-  background-size: auto 30px;
+  background-image: url(./images/send.svg);
+  background-size: auto 27px;
   background-position: 40% 60%;
   background-repeat: no-repeat;
 }
@@ -327,6 +327,44 @@ body {
   .checkbox{
     margin-right: 14px;
   }
+  .floatButton{
+    position: fixed;
+    border-radius: 20px;
+    height: 40px;
+    width: 40px;
+    bottom:20px;
+    right:20px;
+    border: 0.5px solid black;
+    box-shadow: 0 3px 3px 0 rgb(139 139 139);
+    background-color: #220083;
+    color:#FFF;
+    text-align:center;
+    box-shadow: 2px 2px 3px #999;
+  }
+  .plus{
+    margin-top: 10px;
+  }
+  .input_area{
+    display:none;
+    bottom: 0px;
+  }
+  #input_notes{
+    margin:0px;
+    border-radius: 0px;
+  }
+  .submission{
+    position: absolute;
+    right: 0px;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    background-position: 40% 67%;
+    margin-right: 10px;
+    background-size: auto 20px;
+  }
+  .list_items{
+    height: calc(100vh - 105px);
+  }
 
   .modal{
     width: 300px;
@@ -351,4 +389,7 @@ body {
     min-width: 73px;
     border-radius: 13px;
   }
+}
+.flexDisplay{
+  display:flex;
 }

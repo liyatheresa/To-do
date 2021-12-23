@@ -401,6 +401,14 @@ _("x").addEventListener("click", () => {
 	search.focus();
 	_("x").classList.add("noshow");
 });
+function displayInputBar() {
+	_("floatButton").classList.add("noshow");
+	_("input_area").classList.add("flexDisplay");
+	_("input_notes").focus();
+}
+_("plus").addEventListener("click", displayInputBar)
+_("floatButton").addEventListener("click", displayInputBar)
+
 function _(id) {
 	return document.getElementById(id);
 }
