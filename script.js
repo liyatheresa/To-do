@@ -170,8 +170,10 @@ function deleteItem(e) {
 //focus on load and submission of input on enter And adding event to modal button and parent
 window.addEventListener("load", function (e) {
 	_("input_area").addEventListener("submit", e => {
+		_("input_notes").focus();
 		e.preventDefault();
 		list_additem();
+		_("floatDiv").classList.remove("floatDiv");
 		_("floatButton").classList.remove("noshow");
 		_("input_area").classList.remove("flexDisplay");
 	});
@@ -409,16 +411,14 @@ function displayInputBar() {
 	_("input_area").classList.add("flexDisplay");
 	_("input_notes").focus();
 }
-function displayFab(e) {
+function displayFab() {
 	_("floatDiv").classList.remove("floatDiv");
 	_("floatButton").classList.remove("noshow");
 	_("input_area").classList.remove("flexDisplay");
-	console.log("Hi");
 }
 _("plus").addEventListener("click", displayInputBar)
 _("floatButton").addEventListener("click", displayInputBar)
-_("input_notes").addEventListener("blur", displayFab);
-// _("floatDiv").addEventListener("click", displayFab);
+_("floatDiv").addEventListener("click", displayFab);
 function _(id) {
 	return document.getElementById(id);
 }
