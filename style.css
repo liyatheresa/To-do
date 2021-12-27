@@ -306,6 +306,16 @@ body {
   box-shadow: 0 0 0 1px #005aad;
   cursor: text;
 }
+.floatDiv{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  height: calc(100vh - 38px);
+  width: 100vw;
+  background-color: #00000088;
+}
 @media (max-width:700px){
   .searchArea{
     width: inherit;
@@ -371,7 +381,7 @@ body {
     height: 130px;
   }
   .emptyModalButton{
-    top: 40px;
+    top: 50px;
     left: 225px;
   }
   .emptyModalContent{

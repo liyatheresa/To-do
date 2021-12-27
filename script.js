@@ -172,6 +172,8 @@ window.addEventListener("load", function (e) {
 	_("input_area").addEventListener("submit", e => {
 		e.preventDefault();
 		list_additem();
+		_("floatButton").classList.remove("noshow");
+		_("input_area").classList.remove("flexDisplay");
 	});
 	_("input_notes").focus();
 
@@ -402,13 +404,21 @@ _("x").addEventListener("click", () => {
 	_("x").classList.add("noshow");
 });
 function displayInputBar() {
+	_("floatDiv").classList.add("floatDiv");
 	_("floatButton").classList.add("noshow");
 	_("input_area").classList.add("flexDisplay");
 	_("input_notes").focus();
 }
+function displayFab(e) {
+	_("floatDiv").classList.remove("floatDiv");
+	_("floatButton").classList.remove("noshow");
+	_("input_area").classList.remove("flexDisplay");
+	console.log("Hi");
+}
 _("plus").addEventListener("click", displayInputBar)
 _("floatButton").addEventListener("click", displayInputBar)
-
+_("input_notes").addEventListener("blur", displayFab);
+// _("floatDiv").addEventListener("click", displayFab);
 function _(id) {
 	return document.getElementById(id);
 }
