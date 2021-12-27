@@ -329,7 +329,7 @@ body {
   }
   .todo_list{
     align-items:stretch;
-    width: 100vw;
+    width: inherit;
   }
   .list_content{
     margin-left: 1rem;
