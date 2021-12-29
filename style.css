@@ -1,7 +1,12 @@
-body {
+*{
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+body {
   position: relative;
+  display: flex;
+  flex-direction: column
 }
 .title_div {
   position: sticky;
@@ -35,6 +40,7 @@ body {
   padding: 0;
   margin: 20px auto 12px auto;
   width: 50vw; 
+  background-color: #FFF;
 }
 #searchText{
   border: 1px solid #cbcbcb;
@@ -70,7 +76,6 @@ body {
 }
 .list_items {
   overflow-y: auto;
-  height: calc(100vh - 185px);
   width: inherit;
   margin: 0;
   padding: 0;
@@ -229,7 +234,7 @@ body {
 .modal {
   /* position: absolute; */
   width: 400px;
-  height: 150px;
+  height: 190px;
   background-color: white;
   border-radius: 7px;
   padding: 20px;
@@ -248,15 +253,15 @@ body {
   position: relative;
   /* display: absolute; */
   top: 2.5rem;
-  left: 20rem;
+  left: 18rem;
   /* margin-top: auto; */
 }
 .removeModalButtons {
   margin-left: auto;
   position: relative;
   display: inline;
-  top: 2.5rem;
-  left: 14rem;
+  top: 1.5rem;
+  left: 12rem;
   margin-right: 0.5rem;
 }
 .normalButton {
@@ -305,101 +310,4 @@ body {
   /* border: 2px solid #005aad; */
   box-shadow: 0 0 0 1px #005aad;
   cursor: text;
-}
-.floatDiv{
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: #00000088;
-}
-@media (max-width:700px){
-  .searchArea{
-    width: inherit;
-    margin:0px;
-  }
-  #searchText{
-    border:none;
-    padding: 13px 20px 13px 20px;
-    background-position: 12px 10px;
-    text-indent: 20px;
-  }
-  .todo_list{
-    align-items:stretch;
-    width: inherit;
-  }
-  .list_content{
-    margin-left: 1rem;
-  }
-  .checkbox{
-    margin-right: 14px;
-  }
-  .floatButton{
-    position: fixed;
-    border-radius: 20px;
-    height: 40px;
-    width: 40px;
-    bottom:20px;
-    right:20px;
-    border: 0.5px solid black;
-    box-shadow: 0 3px 3px 0 rgb(139 139 139);
-    background-color: #220083;
-    color:#FFF;
-    text-align:center;
-    box-shadow: 2px 2px 3px #999;
-  }
-  .plus{
-    margin-top: 10px;
-  }
-  .input_area{
-    display:none;
-    bottom: 0px;
-  }
-  #input_notes{
-    margin:0px;
-    border-radius: 0px;
-  }
-  .submission{
-    position: absolute;
-    right: 0px;
-    height: 30px;
-    width: 30px;
-    border-radius: 15px;
-    background-position: 40% 67%;
-    margin-right: 10px;
-    background-size: auto 20px;
-  }
-  .list_items{
-    height: calc(100vh - 105px);
-  }
-
-  .modal{
-    width: 300px;
-    height: 130px;
-  }
-  .emptyModalButton{
-    top: 50px;
-    left: 225px;
-  }
-  .emptyModalContent{
-    padding-left: 5px;
-  }
-  .headingInsideModal{
-    font-size: large;
-    font-weight: 400;
-  }
-  .contentInsideModal{
-    font-size: medium;
-  }
-  .normalButton{
-    min-height: 29px;
-    min-width: 73px;
-    border-radius: 13px;
-  }
-}
-.flexDisplay{
-  display:flex;
 }

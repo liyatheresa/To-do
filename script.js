@@ -42,11 +42,26 @@ function list_additem(listItem) {
 		"<span class='descriptionAndDate'><span id = 'desc-" + list[list.length - 1].id + "' class='description " + (list[list.length - 1].taskCompleted ? "checkboxChecked" : "") + "'>" + list[list.length - 1].description + "</span>" +
 		"<div class='descriptionDate'>" + list[list.length - 1].date + "</div></span>" +
 		"</div>" +
-		"<div class='buttons'>" +
+		"<div class='dropdown'>" +
+		"<a id='menu-" + list[list.length - 1].id + "'>" + "<img class='dotmenu' id='dotmenu-" + list[list.length - 1].id + "' src='./images/dotmenu.svg'>" + "</a>" +
+		"</div>" +
+		"<div class='overlay'>" +
+		"<button id='alter-" + list[list.length - 1].id + "' class='alter_button'>" + "Edit" + "</button>" +
+		"<button id='delete-" + list[list.length - 1].id + "' class='delete_button'>" + "Delete" + "</button>" +
+		"<button id='cancel-" + list[list.length - 1].id + "' class='cancel_button'>" + "Cancel" + "</button>" +
+		"</div>" +
+		"<div class='buttons' id='buttons'>" +
 		"<button id='edit-" + list[list.length - 1].id + "' class='edit_button'><img class='editButtonImage' id='editimage" + list[list.length - 1].id + "' src='./images/edit.png'></button>" +
 		"<button id='remove-" + list[list.length - 1].id + "' class='remove_button'><img id='removeimage" + list[list.length - 1].id + "' src='./images/icons8-trash-can-50.png'></button>" +
 		"</div></li>";
 	_("printing_list").insertAdjacentHTML('afterbegin', newItem);
+
+	let menu = _("menu-" + list[list.length - 1].id);
+	let dotmenu = _("dotmenu-" + list[list.length - 1].id);
+	function displayButtons(e) {
+	}
+	menu.addEventListener("click", displayButtons);
+	dotmenu.addEventListener("click", displayButtons);
 
 	let checkBox = _("check-" + list[list.length - 1].id)
 	let description = _("desc-" + list[list.length - 1].id)
