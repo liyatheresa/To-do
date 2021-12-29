@@ -62,6 +62,7 @@ function list_additem(listItem) {
 		e.stopPropagation();
 		_("overlay").classList.add("flexDisplay");
 		_("floatDiv").classList.add("floatDiv");
+		_("floatButton").classList.add("noshow");
 	}
 	menu.addEventListener("click", displayButtons);
 	dotmenu.addEventListener("click", displayButtons);
@@ -289,12 +290,30 @@ function searchResultPrint(searchResult) {
 			"<span class='descriptionAndDate'><span id = 'desc-" + searchResult[eachObj].id + "' class='description " + (searchResult[eachObj].taskCompleted ? "checkboxChecked" : "") + "'>" + searchResult[eachObj].description + "</span>" +
 			"<div class='descriptionDate'>" + searchResult[eachObj].date + "</div></span>" +
 			"</div>" +
+			"<div class='dropdown'>" +
+			"<a id='menu-" + searchResult[eachObj].id + "'>" + "<img class='dotmenu' id='dotmenu-" + searchResult[eachObj].id + "' src='./images/dotmenu.svg'>" + "</a>" +
+			"</div>" +
+			"<div class='overlay' id='overlay'>" +
+			"<button id='alter-" + searchResult[eachObj].id + "' class='alter_button'>" + "Edit" + "</button>" +
+			"<button id='delete-" + searchResult[eachObj].id + "' class='delete_button'>" + "Delete" + "</button>" +
+			"<button id='cancel-" + searchResult[eachObj].id + "' class='cancel_button'>" + "Cancel" + "</button>" +
+			"</div>" +
 			"<div class='buttons'>" +
 			"<button id='edit-" + searchResult[eachObj].id + "' class='edit_button'><img class='editButtonImage' id='editimage" + searchResult[eachObj].id + "' src='./images/edit.png'></button>" +
 			"<button id='remove-" + searchResult[eachObj].id + "' class='remove_button'><img id='removeimage" + searchResult[eachObj].id + "' src='./images/icons8-trash-can-50.png'></button>" +
 			"</div></li>";
 		_("printing_list").insertAdjacentHTML('afterbegin', result);
 
+		let menu = _("menu-" + searchResult[eachObj].id);
+		let dotmenu = _("dotmenu-" + searchResult[eachObj].id);
+		function displayButtons(e) {
+			e.stopPropagation();
+			_("overlay").classList.add("flexDisplay");
+			_("floatDiv").classList.add("floatDiv");
+			_("floatButton").classList.add("noshow");
+		}
+		menu.addEventListener("click", displayButtons);
+		dotmenu.addEventListener("click", displayButtons);
 		let checkBox = _("check-" + searchResult[eachObj].id)
 		let description = _("desc-" + searchResult[eachObj].id)
 
