@@ -10,8 +10,8 @@
       justify-content: center;
       align-items: center;
       top: 0;
-      height: 100%;
-      width: 100%;
+      height: 100vh;
+      width: 100vw;
       background-color: #00000088;
     }
     .searchBar{
@@ -91,18 +91,19 @@
     .overlay{
         position: fixed;
         bottom:0px;
-        margin-left: auto;
-        margin-right: auto;
-        display:flex;
+        left: 10%;
+        right: 10%;
+        display:none;
         flex-direction: column;
-        width: 100%;
-        border-radius: 7px;
-        padding: 20px;
+        width: 80%;
+        padding-top: 20px;
+        padding-bottom: 20px;
         background-color: #FFF;
-        border-radius: 13px;
+        border-radius: 13px 13px 0px 0px;
+        z-index: 1;
     }
     .overlay button{
-        padding: 5px;
+        padding: 10px;
         font-family: inherit;
         background-color: #FFF;
         border-top: none;

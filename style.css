@@ -311,3 +311,6 @@ body {
   box-shadow: 0 0 0 1px #005aad;
   cursor: text;
 }
+.overlay{
+  display: none;
+}

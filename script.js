@@ -45,7 +45,7 @@ function list_additem(listItem) {
 		"<div class='dropdown'>" +
 		"<a id='menu-" + list[list.length - 1].id + "'>" + "<img class='dotmenu' id='dotmenu-" + list[list.length - 1].id + "' src='./images/dotmenu.svg'>" + "</a>" +
 		"</div>" +
-		"<div class='overlay'>" +
+		"<div class='overlay' id='overlay'>" +
 		"<button id='alter-" + list[list.length - 1].id + "' class='alter_button'>" + "Edit" + "</button>" +
 		"<button id='delete-" + list[list.length - 1].id + "' class='delete_button'>" + "Delete" + "</button>" +
 		"<button id='cancel-" + list[list.length - 1].id + "' class='cancel_button'>" + "Cancel" + "</button>" +
@@ -59,6 +59,9 @@ function list_additem(listItem) {
 	let menu = _("menu-" + list[list.length - 1].id);
 	let dotmenu = _("dotmenu-" + list[list.length - 1].id);
 	function displayButtons(e) {
+		e.stopPropagation();
+		_("overlay").classList.add("flexDisplay");
+		_("floatDiv").classList.add("floatDiv");
 	}
 	menu.addEventListener("click", displayButtons);
 	dotmenu.addEventListener("click", displayButtons);
@@ -427,6 +430,7 @@ function displayInputBar() {
 	_("input_notes").focus();
 }
 function displayFab() {
+	_("overlay").classList.remove("flexDisplay");
 	_("floatDiv").classList.remove("floatDiv");
 	_("floatButton").classList.remove("noshow");
 	_("input_area").classList.remove("flexDisplay");
