@@ -151,7 +151,33 @@
         min-width: 73px;
         border-radius: 13px;
     }
+    .addEmptyImage{
+        margin-top: 40%;
+    }
+    .saveButton{
+      position: relative;
+      left: 236px;
+      border-radius: 15px;
+      height: 30px;
+      width: 30px;
+      background-color: #220083;
+      outline: none;
+      border: 0.5px solid black;
+      margin: 0 1rem;
+      box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
+    }
+    .saveImage{
+      position: relative;
+      right: 0px;
+      max-width: 25px;
+    }
+    .empty {
+      max-height: 8rem;
+      max-width: 8rem;
+      color: #00488a;
+    }
   }
   .flexDisplay{
     display:flex;
   }
+  

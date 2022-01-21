@@ -96,7 +96,7 @@ body {
   color:#00488A;
   padding-top: 10px
 }
-.list_items img {
+.empty {
   max-height: 8rem;
   max-width: 8rem;
   color: #00488a;
@@ -168,7 +168,7 @@ body {
 }
 .saveButtonImage {
   position: relative;
-  right: 3px;
+  right: 0px;
   max-width: 29px;
 }
 .remove_button {

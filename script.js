@@ -42,6 +42,7 @@ function list_additem(listItem) {
 		"<span class='descriptionAndDate'><span id = 'desc-" + list[list.length - 1].id + "' class='description " + (list[list.length - 1].taskCompleted ? "checkboxChecked" : "") + "'>" + list[list.length - 1].description + "</span>" +
 		"<div class='descriptionDate'>" + list[list.length - 1].date + "</div></span>" +
 		"</div>" +
+		"<button class='saveButton noshow' id='save-" + list[list.length - 1].id + "'>" + "<img class='saveImage' id='saveImage-" + list[list.length - 1].id + "' src='./images/save.png'>" + "</button>" +
 		"<div class='dropdown'>" +
 		"<a id='menu-" + list[list.length - 1].id + "'>" + "<img class='dotmenu' id='dotmenu-" + list[list.length - 1].id + "' src='./images/dotmenu.svg'>" + "</a>" +
 		"</div>" +
@@ -66,6 +67,37 @@ function list_additem(listItem) {
 	}
 	menu.addEventListener("click", displayButtons);
 	dotmenu.addEventListener("click", displayButtons);
+
+	let alterButton = _("alter-" + list[list.length - 1].id)
+	alterButton.addEventListener("click", editContent);
+
+	let save = _("save-" + list[list.length - 1].id);
+	let saveImage = _("saveImage-" + list[list.length - 1].id);
+	function saveEditedContent(e) {
+		e.stopPropagation();
+		let targetElem = e.target.id.replace("editimage", "").replace("edit-", "").replace("description", "").replace("desc-", "").replace("alter-", "").replace("save-", "").replace("saveImage-", "");
+		list.find(elem => elem.id.toString() === targetElem).description = _('desc-' + targetElem).innerText;
+		list.find(elem => elem.id.toString() === targetElem).editMode = false;
+		_('check-' + targetElem).removeAttribute("disabled");
+		_('desc-' + targetElem).contentEditable = false;
+		menu.classList.remove("noshow");
+		save.classList.add("noshow");
+		storeLocal();
+		setTimeout(() => { _("input_notes").focus() }, 200)
+	}
+	save.addEventListener("click", saveEditedContent);
+	saveImage.addEventListener("click", saveEditedContent);
+
+	let deletionButton = _("delete-" + list[list.length - 1].id)
+	deletionButton.addEventListener("click", showDeletionModal);
+
+	function cancelAction() {
+		_("overlay").classList.remove("flexDisplay");
+		_("floatDiv").classList.remove("floatDiv");
+		_("floatButton").classList.remove("noshow");
+	}
+	let cancel = _("cancel-" + list[list.length - 1].id)
+	cancel.addEventListener("click", cancelAction);
 
 	let checkBox = _("check-" + list[list.length - 1].id)
 	let description = _("desc-" + list[list.length - 1].id)
@@ -95,7 +127,7 @@ function list_additem(listItem) {
 	let editimage = _("editimage" + list[list.length - 1].id)
 	function editContent(e) {
 		e.stopPropagation();
-		let targetElem = e.target.id.replace("editimage", "").replace("edit-", "").replace("description", "").replace("desc-", "")
+		let targetElem = e.target.id.replace("editimage", "").replace("edit-", "").replace("description", "").replace("desc-", "").replace("alter-", "");
 		if (list.find(elem => elem.id.toString() === targetElem).editMode === false) {
 			if (_('check-' + targetElem).checked === true) {
 				_('desc-' + targetElem).classList.remove("checkboxChecked");
@@ -106,6 +138,8 @@ function list_additem(listItem) {
 			editimage.classList.add("saveButtonImage");
 			editimage.classList.remove("editButtonImage");
 			editimage.setAttribute("src", './images/save.png')
+			menu.classList.add("noshow");
+			save.classList.remove("noshow");
 			_('desc-' + targetElem).focus();
 			let placeOfEdit = _('desc-' + targetElem)
 			function placeCaretAtEnd(el) {
@@ -127,6 +161,9 @@ function list_additem(listItem) {
 			}
 
 			placeCaretAtEnd(placeOfEdit);
+			_("overlay").classList.remove("flexDisplay");
+			_("floatDiv").classList.remove("floatDiv");
+			_("floatButton").classList.remove("noshow");
 		}
 		else {
 			if (_('check-' + targetElem).checked === true) {
@@ -139,6 +176,8 @@ function list_additem(listItem) {
 			editimage.classList.remove("saveButtonImage");
 			editimage.classList.add("editButtonImage");
 			editimage.setAttribute("src", './images/edit.png')
+			menu.classList.remove("noshow");
+			save.classList.add("noshow");
 			storeLocal();
 			setTimeout(() => { _("input_notes").focus() }, 200)
 		}
@@ -158,9 +197,11 @@ function list_additem(listItem) {
 	let removeimage = _("removeimage" + list[list.length - 1].id);
 	function showDeletionModal(e) {
 		e.stopPropagation();
+		_("overlay").classList.remove("flexDisplay");
+		_("floatDiv").classList.remove("floatDiv");
 		_("input_notes").blur();
 		_('removeModal').classList.add("emptyModalParent");
-		let id = e.target.id.replace("removeimage", "").replace("remove-", "");
+		let id = e.target.id.replace("removeimage", "").replace("remove-", "").replace("delete-", "");
 		_('confirm').setAttribute("data-id", id)
 	}
 	removedItem.addEventListener("click", showDeletionModal);
@@ -174,12 +215,13 @@ function list_additem(listItem) {
 
 function deleteItem(e) {
 	_("item" + e.target.dataset.id).remove();
+	_("floatButton").classList.remove("noshow");
 	_('removeModal').classList.remove("emptyModalParent");
 	_("input_notes").focus();
 	list = list.filter(object => object.id !== e.target.dataset.id);
 	storeLocal();
 	if (list.length === 0) {
-		let emptyImage = "<figure id='emptyImage'><img src='./images/clipboard.svg'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
+		let emptyImage = "<figure id='emptyImage'><img src='./images/clipboard.svg' class='empty'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
 		_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
 		_("list_items").classList.add("addEmptyImage");
 		_("searchText").classList.add("noshow");
@@ -272,7 +314,7 @@ function toggleCheckedClass(targetId) {
 function searchResultPrint(searchResult) {
 	let result = "";
 	if (searchResult.length === 0) {
-		let emptyS = "<figure id='emptySearch'><img src='./images/emptySearch.svg'><figcaption>No results found...</figcaption></figure>";
+		let emptyS = "<figure id='emptySearch'><img class='empty' src='./images/emptySearch.svg'><figcaption>No results found...</figcaption></figure>";
 		_("list_items").insertAdjacentHTML('afterbegin', emptyS);
 		_("list_items").classList.add("addEmptyImage");
 	}
@@ -290,6 +332,7 @@ function searchResultPrint(searchResult) {
 			"<span class='descriptionAndDate'><span id = 'desc-" + searchResult[eachObj].id + "' class='description " + (searchResult[eachObj].taskCompleted ? "checkboxChecked" : "") + "'>" + searchResult[eachObj].description + "</span>" +
 			"<div class='descriptionDate'>" + searchResult[eachObj].date + "</div></span>" +
 			"</div>" +
+			"<button class='saveButton noshow' id='save-" + searchResult[eachObj].id + "'>" + "<img class='saveImage' id='saveImage-" + searchResult[eachObj].id + "' src='./images/save.png'>" + "</button>" +
 			"<div class='dropdown'>" +
 			"<a id='menu-" + searchResult[eachObj].id + "'>" + "<img class='dotmenu' id='dotmenu-" + searchResult[eachObj].id + "' src='./images/dotmenu.svg'>" + "</a>" +
 			"</div>" +
@@ -314,6 +357,38 @@ function searchResultPrint(searchResult) {
 		}
 		menu.addEventListener("click", displayButtons);
 		dotmenu.addEventListener("click", displayButtons);
+
+		let alterButton = _("alter-" + searchResult[eachObj].id)
+		alterButton.addEventListener("click", editContent);
+
+		let save = _("save-" + searchResult[eachObj].id);
+		let saveImage = _("saveImage-" + searchResult[eachObj].id);
+		function saveEditedContent(e) {
+			e.stopPropagation();
+			let targetElem = e.target.id.replace("editimage", "").replace("edit-", "").replace("description", "").replace("desc-", "").replace("alter-", "").replace("save-", "").replace("saveImage-", "");
+			list.find(elem => elem.id.toString() === targetElem).description = _('desc-' + targetElem).innerText;
+			list.find(elem => elem.id.toString() === targetElem).editMode = false;
+			_('check-' + targetElem).removeAttribute("disabled");
+			_('desc-' + targetElem).contentEditable = false;
+			menu.classList.remove("noshow");
+			save.classList.add("noshow");
+			storeLocal();
+			setTimeout(() => { _("input_notes").focus() }, 200)
+		}
+		save.addEventListener("click", saveEditedContent);
+		saveImage.addEventListener("click", saveEditedContent);
+
+		let deletionButton = _("delete-" + searchResult[eachObj].id)
+		deletionButton.addEventListener("click", showDeletionModal);
+
+		function cancelAction() {
+			_("overlay").classList.remove("flexDisplay");
+			_("floatDiv").classList.remove("floatDiv");
+			_("floatButton").classList.remove("noshow");
+		}
+		let cancel = _("cancel-" + searchResult[eachObj].id)
+		cancel.addEventListener("click", cancelAction);
+
 		let checkBox = _("check-" + searchResult[eachObj].id)
 		let description = _("desc-" + searchResult[eachObj].id)
 
@@ -342,7 +417,7 @@ function searchResultPrint(searchResult) {
 		let editimage = _("editimage" + searchResult[eachObj].id)
 		function editContent(e) {
 			e.stopPropagation();
-			let targetElem = e.target.id.replace("editimage", "").replace("edit-", "").replace("description", "").replace("desc-", "")
+			let targetElem = e.target.id.replace("editimage", "").replace("edit-", "").replace("description", "").replace("desc-", "").replace("alter-", "");
 			if (list.find(elem => elem.id.toString() === targetElem).editMode === false) {
 				if (_('check-' + targetElem).checked === true) {
 					_('desc-' + targetElem).classList.remove("checkboxChecked");
@@ -353,6 +428,8 @@ function searchResultPrint(searchResult) {
 				editimage.classList.add("saveButtonImage");
 				editimage.classList.remove("editButtonImage");
 				editimage.setAttribute("src", './images/save.png')
+				menu.classList.add("noshow");
+				save.classList.remove("noshow");
 				_('desc-' + targetElem).focus();
 				let placeOfEdit = _('desc-' + targetElem)
 				function placeCaretAtEnd(el) {
@@ -374,6 +451,9 @@ function searchResultPrint(searchResult) {
 				}
 
 				placeCaretAtEnd(placeOfEdit);
+				_("overlay").classList.remove("flexDisplay");
+				_("floatDiv").classList.remove("floatDiv");
+				_("floatButton").classList.remove("noshow");
 			}
 			else {
 				if (_('check-' + targetElem).checked === true) {
@@ -386,6 +466,8 @@ function searchResultPrint(searchResult) {
 				editimage.classList.remove("saveButtonImage");
 				editimage.classList.add("editButtonImage");
 				editimage.setAttribute("src", './images/edit.png')
+				menu.classList.add("noshow");
+				save.classList.remove("noshow");
 				storeLocal();
 				setTimeout(() => { _("input_notes").focus() }, 200)
 			}
@@ -405,9 +487,11 @@ function searchResultPrint(searchResult) {
 		let removeimage = _("removeimage" + searchResult[eachObj].id);
 		function showDeletionModal(e) {
 			e.stopPropagation();
+			_("overlay").classList.remove("flexDisplay");
+			_("floatDiv").classList.remove("floatDiv");
 			_("input_notes").blur();
 			_('removeModal').classList.add("emptyModalParent");
-			let id = e.target.id.replace("removeimage", "").replace("remove-", "");
+			let id = e.target.id.replace("removeimage", "").replace("remove-", "").replace("delete-", "");
 			_('confirm').setAttribute("data-id", id)
 		}
 		removedItem.addEventListener("click", showDeletionModal);
