@@ -1,6 +1,9 @@
 @media (min-width: 700px){
-    .list_items {
+    .list-items {
       height: calc(100vh - 185px);
+    }
+    .hide{
+      display:none;
     }
   }
   @media (max-width:700px){
@@ -34,7 +37,7 @@
       margin-top: 42px;
       width: 100%;
     }
-    .list_content{
+    .list-content{
       margin-left: 1rem;
     }
     .checkbox{
@@ -57,11 +60,11 @@
     .plus{
       margin-top: 10px;
     }
-    .input_area{
+    .input-area{
       display:none;
       bottom: 0px;
     }
-    #input_notes{
+    #new-note-input{
       margin:0px;
       border-radius: 0px;
     }
@@ -151,12 +154,12 @@
         min-width: 73px;
         border-radius: 13px;
     }
-    .addEmptyImage{
+    .add-empty-image{
         margin-top: 40%;
     }
     .saveButton{
-      position: relative;
-      left: 236px;
+      position: absolute;
+      right: 18px;
       border-radius: 15px;
       height: 30px;
       width: 30px;

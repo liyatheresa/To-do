@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="styleResponsive.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-responsive.css">
     <script src="script.js" type="module"></script>
 </head>
 <body>
@@ -17,12 +17,12 @@
     <div class="searchBar" >
         <form id = "searchArea" class="searchArea">
             <input name="searchText" type="text" placeholder="Search.." id="searchText">
-            <img src="./images/x.svg" id="x" >
+            <img src="./images/x.svg" id="clear-search" >
         </form>
     </div>
     <div class="todo_list">
-        <div  class="list_items" id="list_items">
-            <ol id="printing_list"> 
+        <div  class="list-items" id="list-items">
+            <ol id="printing-list"> 
 
             </ol>
         </div>
@@ -31,8 +31,8 @@
         <a class="floatButton" id="floatButton">
             <img class="plus" id="plus" src="./images/plus.svg">
         </a>
-        <form id = "input_area" class="input_area">
-            <input name="input_notes" type="text" placeholder="Enter task.." id="input_notes">
+        <form id = "input-area" class="input-area">
+            <input name="new-note-input" type="text" placeholder="Enter task.." id="new-note-input">
             <input type="submit" class="submission" id="button" value="">
         </form>
     </div>
@@ -42,7 +42,7 @@
                 <div class="headingInsideModal">Nothing Entered</div>
                 <div class='contentInsideModal'>Enter a description to add to the task list</div>
             </div>
-            <button class='emptyModalButton normalButton' onClick="window.close_modal();">Okay</button>
+            <button class='emptyModalButton normalButton' onClick="window.closeModal();">Okay</button>
         </div>
     </div>
     <div class= 'modalClose' id="removeModal">

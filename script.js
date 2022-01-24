@@ -1,23 +1,23 @@
 import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js';
-let list = [];
+let toDoList = [];
 
 //Function to add item to to-do list
-function list_additem(listItem) {
-	if (listItem === undefined) {
-		let input = _("input_notes");
-		let date = new Date(Date.now()).toLocaleDateString();
-		let emptyModalParent = _('emptyModalParent')
+function addToDoItem(toDoItem) {
+	if (toDoItem === undefined) {
+		let input = $("new-note-input");
+		let date = new Date().toLocaleDateString();
+		let emptyModalParent = $('emptyModalParent')
 
 		//modal display on empty input
 		if (input.value.trim() === "") {
 			emptyModalParent.classList.add("emptyModalParent");
-			_("input_notes").blur();
-			_('modal').addEventListener("click", (e) => { e.stopPropagation(); })
-			emptyModalParent.addEventListener("click", close_modal);
+			$("new-note-input").blur();
+			$('modal').addEventListener("click", (e) => { e.stopPropagation(); })
+			emptyModalParent.addEventListener("click", closeModal);
 			return;
 		}
 
-		list.push({
+		toDoList.push({
 			id: nanoid(),
 			description: input.value.trim(),
 			taskCompleted: false,
@@ -27,86 +27,90 @@ function list_additem(listItem) {
 		input.value = "";
 	}
 	else {
-		list.push({ ...listItem, editMode: false });
+		toDoList.push({ ...toDoItem, editMode: false });
 	}
-	if (list.length === 1) {
-		let emptyImage = _("emptyImage");
+	if (toDoList.length === 1) {
+		let emptyImage = $("emptyImage");
 		if (emptyImage) {
 			emptyImage.remove();
-			_("list_items").classList.remove("addEmptyImage");
-			_("searchText").classList.remove("noshow");
+			$("list-items").classList.remove("add-empty-image");
+			$("searchText").classList.remove("hidden");
 		}
 	}
-	let newItem = "<li id='item" + list[list.length - 1].id + "' ><div class='list_content'>" +
-		"<input " + (list[list.length - 1].taskCompleted ? "checked" : "") + " type='checkbox' class='checkbox' id='check-" + list[list.length - 1].id + "'>" +
-		"<span class='descriptionAndDate'><span id = 'desc-" + list[list.length - 1].id + "' class='description " + (list[list.length - 1].taskCompleted ? "checkboxChecked" : "") + "'>" + list[list.length - 1].description + "</span>" +
-		"<div class='descriptionDate'>" + list[list.length - 1].date + "</div></span>" +
+	let newItem = "<li id='item" + toDoList[toDoList.length - 1].id + "' ><div class='list-content'>" +
+		"<input " + (toDoList[toDoList.length - 1].taskCompleted ? "checked" : "") + " type='checkbox' class='checkbox' id='check-" + toDoList[toDoList.length - 1].id + "'>" +
+		"<span class='descriptionAndDate'><span id = 'desc-" + toDoList[toDoList.length - 1].id + "' class='description " + (toDoList[toDoList.length - 1].taskCompleted ? "checkboxChecked" : "") + "'>" + toDoList[toDoList.length - 1].description + "</span>" +
+		"<div class='descriptionDate'>" + toDoList[toDoList.length - 1].date + "</div></span>" +
 		"</div>" +
-		"<button class='saveButton noshow' id='save-" + list[list.length - 1].id + "'>" + "<img class='saveImage' id='saveImage-" + list[list.length - 1].id + "' src='./images/save.png'>" + "</button>" +
+		"<button class='saveButton hidden' id='save-" + toDoList[toDoList.length - 1].id + "'>" + "<img class='saveImage' id='saveImage-" + toDoList[toDoList.length - 1].id + "' src='./images/save.png'>" + "</button>" +
 		"<div class='dropdown'>" +
-		"<a id='menu-" + list[list.length - 1].id + "'>" + "<img class='dotmenu' id='dotmenu-" + list[list.length - 1].id + "' src='./images/dotmenu.svg'>" + "</a>" +
+		"<a id='menu-" + toDoList[toDoList.length - 1].id + "'>" + "<img class='dotmenu' id='dotmenu-" + toDoList[toDoList.length - 1].id + "' src='./images/dotmenu.svg'>" + "</a>" +
 		"</div>" +
 		"<div class='overlay' id='overlay'>" +
-		"<button id='alter-" + list[list.length - 1].id + "' class='alter_button'>" + "Edit" + "</button>" +
-		"<button id='delete-" + list[list.length - 1].id + "' class='delete_button'>" + "Delete" + "</button>" +
-		"<button id='cancel-" + list[list.length - 1].id + "' class='cancel_button'>" + "Cancel" + "</button>" +
+		"<button id='alter-" + toDoList[toDoList.length - 1].id + "' class='alter-button'>" + "Edit" + "</button>" +
+		"<button id='delete-" + toDoList[toDoList.length - 1].id + "' class='delete-button'>" + "Delete" + "</button>" +
+		"<button id='cancel-" + toDoList[toDoList.length - 1].id + "' class='cancel-button'>" + "Cancel" + "</button>" +
 		"</div>" +
 		"<div class='buttons' id='buttons'>" +
-		"<button id='edit-" + list[list.length - 1].id + "' class='edit_button'><img class='editButtonImage' id='editimage" + list[list.length - 1].id + "' src='./images/edit.png'></button>" +
-		"<button id='remove-" + list[list.length - 1].id + "' class='remove_button'><img id='removeimage" + list[list.length - 1].id + "' src='./images/icons8-trash-can-50.png'></button>" +
+		"<button id='edit-" + toDoList[toDoList.length - 1].id + "' class='edit-button'><img class='editButtonImage' id='editimage" + toDoList[toDoList.length - 1].id + "' src='./images/edit.png'></button>" +
+		"<button id='remove-" + toDoList[toDoList.length - 1].id + "' class='remove-button'><img id='removeimage" + toDoList[toDoList.length - 1].id + "' src='./images/icons8-trash-can-50.png'></button>" +
 		"</div></li>";
-	_("printing_list").insertAdjacentHTML('afterbegin', newItem);
+	$("printing-list").insertAdjacentHTML('afterbegin', newItem);
 
-	let menu = _("menu-" + list[list.length - 1].id);
-	let dotmenu = _("dotmenu-" + list[list.length - 1].id);
+	let menu = $("menu-" + toDoList[toDoList.length - 1].id);
+	let dotMenu = $("dotmenu-" + toDoList[toDoList.length - 1].id);
 	function displayButtons(e) {
 		e.stopPropagation();
-		_("overlay").classList.add("flexDisplay");
-		_("floatDiv").classList.add("floatDiv");
-		_("floatButton").classList.add("noshow");
+		$("overlay").classList.add("flexDisplay");
+		$("floatDiv").classList.add("floatDiv");
+		$("floatButton").classList.add("hidden");
 	}
 	menu.addEventListener("click", displayButtons);
-	dotmenu.addEventListener("click", displayButtons);
+	dotMenu.addEventListener("click", displayButtons);
 
-	let alterButton = _("alter-" + list[list.length - 1].id)
+	let alterButton = $("alter-" + toDoList[toDoList.length - 1].id)
 	alterButton.addEventListener("click", editContent);
 
-	let save = _("save-" + list[list.length - 1].id);
-	let saveImage = _("saveImage-" + list[list.length - 1].id);
+	let save = $("save-" + toDoList[toDoList.length - 1].id);
+	let saveImage = $("saveImage-" + toDoList[toDoList.length - 1].id);
 	function saveEditedContent(e) {
 		e.stopPropagation();
 		let targetElem = e.target.id.replace("editimage", "").replace("edit-", "").replace("description", "").replace("desc-", "").replace("alter-", "").replace("save-", "").replace("saveImage-", "");
-		list.find(elem => elem.id.toString() === targetElem).description = _('desc-' + targetElem).innerText;
-		list.find(elem => elem.id.toString() === targetElem).editMode = false;
-		_('check-' + targetElem).removeAttribute("disabled");
-		_('desc-' + targetElem).contentEditable = false;
-		menu.classList.remove("noshow");
-		save.classList.add("noshow");
-		storeLocal();
-		setTimeout(() => { _("input_notes").focus() }, 200)
+		let element = toDoList.find(elem => elem.id.toString() === targetElem)
+		element.description = $('desc-' + targetElem).innerText;
+		element.editMode = false;
+		$('check-' + targetElem).removeAttribute("disabled");
+		$('desc-' + targetElem).contentEditable = false;
+		editimage.classList.remove("saveButtonImage");
+		editimage.classList.add("editButtonImage");
+		editimage.setAttribute("src", './images/edit.png')
+		menu.classList.remove("hidden");
+		save.classList.add("hidden");
+		saveToLocalStorage();
+		setTimeout(() => { $("new-note-input").focus() }, 200)
 	}
 	save.addEventListener("click", saveEditedContent);
 	saveImage.addEventListener("click", saveEditedContent);
 
-	let deletionButton = _("delete-" + list[list.length - 1].id)
+	let deletionButton = $("delete-" + toDoList[toDoList.length - 1].id)
 	deletionButton.addEventListener("click", showDeletionModal);
 
 	function cancelAction() {
-		_("overlay").classList.remove("flexDisplay");
-		_("floatDiv").classList.remove("floatDiv");
-		_("floatButton").classList.remove("noshow");
+		$("overlay").classList.remove("flexDisplay");
+		$("floatDiv").classList.remove("floatDiv");
+		$("floatButton").classList.remove("hidden");
 	}
-	let cancel = _("cancel-" + list[list.length - 1].id)
+	let cancel = $("cancel-" + toDoList[toDoList.length - 1].id)
 	cancel.addEventListener("click", cancelAction);
 
-	let checkBox = _("check-" + list[list.length - 1].id)
-	let description = _("desc-" + list[list.length - 1].id)
+	let checkBox = $("check-" + toDoList[toDoList.length - 1].id)
+	let description = $("desc-" + toDoList[toDoList.length - 1].id)
 
 	//cross-out on clicking description or checkbox
 	checkBox.addEventListener("change", (e) => {
 		let targetId = e.target.id.replace("check-", "")
-		if (list.find(element => {
-			return element.id.toString() === targetId
+		if (toDoList.find(element => {
+			return element.id === targetId
 		}).editMode === false) {
 			toggleCheckedClass(targetId);
 		}
@@ -114,7 +118,7 @@ function list_additem(listItem) {
 
 	description.addEventListener("click", function (e) {
 		let targetId = e.target.id.replace("desc-", "")
-		if (list.find(element => {
+		if (toDoList.find(element => {
 			return element.id.toString() === targetId
 		}).editMode === false) {
 			checkBox.checked = checkBox.checked ? false : true;
@@ -123,36 +127,37 @@ function list_additem(listItem) {
 	})
 
 	//Edit button functionalities
-	let editItem = _("edit-" + list[list.length - 1].id);
-	let editimage = _("editimage" + list[list.length - 1].id)
+	let editItem = $("edit-" + toDoList[toDoList.length - 1].id);
+	let editimage = $("editimage" + toDoList[toDoList.length - 1].id)
 	function editContent(e) {
 		e.stopPropagation();
 		let targetElem = e.target.id.replace("editimage", "").replace("edit-", "").replace("description", "").replace("desc-", "").replace("alter-", "");
-		if (list.find(elem => elem.id.toString() === targetElem).editMode === false) {
-			if (_('check-' + targetElem).checked === true) {
-				_('desc-' + targetElem).classList.remove("checkboxChecked");
+		if (toDoList.find(elem => elem.id.toString() === targetElem).editMode === false) {
+			if ($('check-' + targetElem).checked === true) {
+				$('desc-' + targetElem).classList.remove("checkboxChecked");
 			}
-			list.find(elem => elem.id.toString() === targetElem).editMode = true;
-			_('desc-' + targetElem).contentEditable = true;
-			_('check-' + targetElem).setAttribute("disabled", "disabled");
+			toDoList.find(elem => elem.id.toString() === targetElem).editMode = true;
+			$('desc-' + targetElem).contentEditable = true;
+			$('check-' + targetElem).setAttribute("disabled", "disabled");
 			editimage.classList.add("saveButtonImage");
 			editimage.classList.remove("editButtonImage");
 			editimage.setAttribute("src", './images/save.png')
-			menu.classList.add("noshow");
-			save.classList.remove("noshow");
-			_('desc-' + targetElem).focus();
-			let placeOfEdit = _('desc-' + targetElem)
+			menu.classList.add("hidden");
+			save.classList.remove("hidden");
+			save.classList.add("hide");
+			$('desc-' + targetElem).focus();
+			let placeOfEdit = $('desc-' + targetElem)
 			function placeCaretAtEnd(el) {
 				el.focus();
-				if (typeof window.getSelection != "undefined"
-					&& typeof document.createRange != "undefined") {
+				if (window.getSelection != "undefined"
+					&& document.createRange != "undefined") {
 					var range = document.createRange();
 					range.selectNodeContents(el);
 					range.collapse(false);
 					var sel = window.getSelection();
 					sel.removeAllRanges();
 					sel.addRange(range);
-				} else if (typeof document.body.createTextRange != "undefined") {
+				} else if (document.body.createTextRange != "undefined") {
 					var textRange = document.body.createTextRange();
 					textRange.moveToElementText(el);
 					textRange.collapse(false);
@@ -161,25 +166,26 @@ function list_additem(listItem) {
 			}
 
 			placeCaretAtEnd(placeOfEdit);
-			_("overlay").classList.remove("flexDisplay");
-			_("floatDiv").classList.remove("floatDiv");
-			_("floatButton").classList.remove("noshow");
+			$("overlay").classList.remove("flexDisplay");
+			$("floatDiv").classList.remove("floatDiv");
+			$("floatButton").classList.remove("hidden");
 		}
 		else {
-			if (_('check-' + targetElem).checked === true) {
-				_('desc-' + targetElem).classList.add("checkboxChecked");
+			if ($('check-' + targetElem).checked === true) {
+				$('desc-' + targetElem).classList.add("checkboxChecked");
 			}
-			list.find(elem => elem.id.toString() === targetElem).description = _('desc-' + targetElem).innerText;
-			list.find(elem => elem.id.toString() === targetElem).editMode = false;
-			_('check-' + targetElem).removeAttribute("disabled");
-			_('desc-' + targetElem).contentEditable = false;
+			let element = toDoList.find(elem => elem.id.toString() === targetElem)
+			element.description = $('desc-' + targetElem).innerText;
+			element.editMode = false;
+			$('check-' + targetElem).removeAttribute("disabled");
+			$('desc-' + targetElem).contentEditable = false;
 			editimage.classList.remove("saveButtonImage");
 			editimage.classList.add("editButtonImage");
 			editimage.setAttribute("src", './images/edit.png')
-			menu.classList.remove("noshow");
-			save.classList.add("noshow");
-			storeLocal();
-			setTimeout(() => { _("input_notes").focus() }, 200)
+			menu.classList.remove("hidden");
+			save.classList.add("hidden");
+			saveToLocalStorage();
+			setTimeout(() => { $("new-note-input").focus() }, 200)
 		}
 	}
 	editItem.addEventListener("click", editContent)
@@ -193,104 +199,104 @@ function list_additem(listItem) {
 	})
 
 	//Remove button event
-	let removedItem = _("remove-" + list[list.length - 1].id);
-	let removeimage = _("removeimage" + list[list.length - 1].id);
+	let removedItem = $("remove-" + toDoList[toDoList.length - 1].id);
+	let removeimage = $("removeimage" + toDoList[toDoList.length - 1].id);
 	function showDeletionModal(e) {
 		e.stopPropagation();
-		_("overlay").classList.remove("flexDisplay");
-		_("floatDiv").classList.remove("floatDiv");
-		_("input_notes").blur();
-		_('removeModal').classList.add("emptyModalParent");
+		$("overlay").classList.remove("flexDisplay");
+		$("floatDiv").classList.remove("floatDiv");
+		$("new-note-input").blur();
+		$('removeModal').classList.add("emptyModalParent");
 		let id = e.target.id.replace("removeimage", "").replace("remove-", "").replace("delete-", "");
-		_('confirm').setAttribute("data-id", id)
+		$('confirm').setAttribute("data-id", id)
 	}
 	removedItem.addEventListener("click", showDeletionModal);
 	removeimage.addEventListener("click", showDeletionModal);
 
-	storeLocal();
+	saveToLocalStorage();
 
 } //end of additem function
 
 
 
 function deleteItem(e) {
-	_("item" + e.target.dataset.id).remove();
-	_("floatButton").classList.remove("noshow");
-	_('removeModal').classList.remove("emptyModalParent");
-	_("input_notes").focus();
-	list = list.filter(object => object.id !== e.target.dataset.id);
-	storeLocal();
-	if (list.length === 0) {
+	$("item" + e.target.dataset.id).remove();
+	$("floatButton").classList.remove("hidden");
+	$('removeModal').classList.remove("emptyModalParent");
+	$("new-note-input").focus();
+	toDoList = toDoList.filter(object => object.id !== e.target.dataset.id);
+	saveToLocalStorage();
+	if (toDoList.length === 0) {
 		let emptyImage = "<figure id='emptyImage'><img src='./images/clipboard.svg' class='empty'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
-		_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
-		_("list_items").classList.add("addEmptyImage");
-		_("searchText").classList.add("noshow");
+		$("list-items").insertAdjacentHTML('afterbegin', emptyImage);
+		$("list-items").classList.add("add-empty-image");
+		$("searchText").classList.add("hidden");
 	}
 }
 
 //focus on load and submission of input on enter And adding event to modal button and parent
 window.addEventListener("load", function (e) {
-	_("input_area").addEventListener("submit", e => {
-		_("input_notes").focus();
+	$("input-area").addEventListener("submit", e => {
+		$("new-note-input").focus();
 		e.preventDefault();
-		list_additem();
-		_("floatDiv").classList.remove("floatDiv");
-		_("floatButton").classList.remove("noshow");
-		_("input_area").classList.remove("flexDisplay");
+		addToDoItem();
+		$("floatDiv").classList.remove("floatDiv");
+		$("floatButton").classList.remove("hidden");
+		$("input-area").classList.remove("flexDisplay");
 	});
-	_("input_notes").focus();
+	$("new-note-input").focus();
 
-	let closeButton = _('close');
-	let removeModalParent = _('removeModal')
-	let confirmButton = _('confirm');
-	_('popup').addEventListener("click", (e) => { e.stopPropagation(); })
+	let closeButton = $('close');
+	let removeModalParent = $('removeModal')
+	let confirmButton = $('confirm');
+	$('popup').addEventListener("click", (e) => { e.stopPropagation(); })
 	confirmButton.addEventListener("click", deleteItem);
 
 	closeButton.addEventListener("click", function () {
 		removeModalParent.classList.remove("emptyModalParent");
-		_("input_notes").focus();
+		$("new-note-input").focus();
 	})
 
 	removeModalParent.addEventListener("click", function (e) {
 		removeModalParent.classList.remove("emptyModalParent");
-		_("input_notes").focus();
+		$("new-note-input").focus();
 	});
-	_("searchText").classList.add("noshow");
-	//getting the list from local storage 
+	$("searchText").classList.add("hidden");
+	//getting the toDoList from local storage 
 	let listReceived = JSON.parse(localStorage.getItem("listSaved"));
 	if (!listReceived) {
 		listReceived = [];
 	}
 	if (listReceived.length === 0) {
-		let emptyImage = "<figure id='emptyImage'><img src='./images/clipboard.svg'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
-		_("list_items").insertAdjacentHTML('afterbegin', emptyImage);
-		_("list_items").classList.add("addEmptyImage");
+		let emptyImage = "<figure id='emptyImage'><img src='./images/clipboard.svg' class='empty'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
+		$("list-items").insertAdjacentHTML('afterbegin', emptyImage);
+		$("list-items").classList.add("add-empty-image");
 	}
 	if (listReceived) {
 		for (let i = 0; i < listReceived.length; i++) {
-			_("searchText").classList.remove("noshow");
-			list_additem(listReceived[i]);
+			$("searchText").classList.remove("hidden");
+			addToDoItem(listReceived[i]);
 		}
 	}
 
 	//error message on closing tab while editing
 	window.onbeforeunload = () => {
 		let confirmationMessage = 'Are you sure you want to leave?';
-		if ((_("input_notes").value.trim() !== "") || list.some((el) => { return el.editMode })) {
+		if (($("new-note-input").value.trim() !== "") || toDoList.some((el) => { return el.editMode })) {
 			return confirmationMessage;
 		}
 	}
-	_("x").classList.add("noshow");
+	$("clear-search").classList.add("hidden");
 });//end of event on load
 
 // function to close modal
-function close_modal() {
-	_("emptyModalParent").classList.remove("emptyModalParent");
-	_("input_notes").focus();
+function closeModal() {
+	$("emptyModalParent").classList.remove("emptyModalParent");
+	$("new-note-input").focus();
 }
-window.close_modal = close_modal;
-function storeLocal() {
-	let arrayToSave = list.map(item => {
+window.closeModal = closeModal;
+function saveToLocalStorage() {
+	let arrayToSave = toDoList.map(item => {
 		return { id: item.id, description: item.description, taskCompleted: item.taskCompleted, date: item.date };
 	})
 	let stringToSave = JSON.stringify(arrayToSave);
@@ -299,103 +305,105 @@ function storeLocal() {
 //checkbox functionalities and marking it as complete in list
 
 function toggleCheckedClass(targetId) {
-	let checkBox = _("check-" + targetId)
-	let description = _("desc-" + targetId)
+	let checkBox = $("check-" + targetId)
+	let description = $("desc-" + targetId)
 	if (checkBox.checked)
 		description.classList.add("checkboxChecked");
 	else
 		description.classList.remove("checkboxChecked");
-	list.find(element => {
-		return element.id.toString() === targetId
-	}).taskCompleted = checkBox.checked;
-	storeLocal();
+	toDoList.find(element => element.id === targetId).taskCompleted = checkBox.checked;
+	saveToLocalStorage();
 }
 //Search result printing
 function searchResultPrint(searchResult) {
 	let result = "";
 	if (searchResult.length === 0) {
 		let emptyS = "<figure id='emptySearch'><img class='empty' src='./images/emptySearch.svg'><figcaption>No results found...</figcaption></figure>";
-		_("list_items").insertAdjacentHTML('afterbegin', emptyS);
-		_("list_items").classList.add("addEmptyImage");
+		$("list-items").insertAdjacentHTML('afterbegin', emptyS);
+		$("list-items").classList.add("add-empty-image");
 	}
 	else {
-		let emptySearch = _("emptySearch");
+		let emptySearch = $("emptySearch");
 		if (emptySearch) {
 			emptySearch.remove();
-			_("list_items").classList.remove("addEmptyImage");
-			_("searchText").classList.remove("noshow");
+			$("list-items").classList.remove("add-empty-image");
+			$("searchText").classList.remove("hidden");
 		}
 	}
 	for (let eachObj = 0; eachObj < searchResult.length; eachObj++) {
-		let result = "<li id='item" + searchResult[eachObj].id + "' ><div class='list_content'>" +
+		let result = "<li id='item" + searchResult[eachObj].id + "' ><div class='list-content'>" +
 			"<input " + (searchResult[eachObj].taskCompleted ? "checked" : "") + " type='checkbox' class='checkbox' id='check-" + searchResult[eachObj].id + "'>" +
 			"<span class='descriptionAndDate'><span id = 'desc-" + searchResult[eachObj].id + "' class='description " + (searchResult[eachObj].taskCompleted ? "checkboxChecked" : "") + "'>" + searchResult[eachObj].description + "</span>" +
 			"<div class='descriptionDate'>" + searchResult[eachObj].date + "</div></span>" +
 			"</div>" +
-			"<button class='saveButton noshow' id='save-" + searchResult[eachObj].id + "'>" + "<img class='saveImage' id='saveImage-" + searchResult[eachObj].id + "' src='./images/save.png'>" + "</button>" +
+			"<button class='saveButton hidden' id='save-" + searchResult[eachObj].id + "'>" + "<img class='saveImage' id='saveImage-" + searchResult[eachObj].id + "' src='./images/save.png'>" + "</button>" +
 			"<div class='dropdown'>" +
 			"<a id='menu-" + searchResult[eachObj].id + "'>" + "<img class='dotmenu' id='dotmenu-" + searchResult[eachObj].id + "' src='./images/dotmenu.svg'>" + "</a>" +
 			"</div>" +
 			"<div class='overlay' id='overlay'>" +
-			"<button id='alter-" + searchResult[eachObj].id + "' class='alter_button'>" + "Edit" + "</button>" +
-			"<button id='delete-" + searchResult[eachObj].id + "' class='delete_button'>" + "Delete" + "</button>" +
-			"<button id='cancel-" + searchResult[eachObj].id + "' class='cancel_button'>" + "Cancel" + "</button>" +
+			"<button id='alter-" + searchResult[eachObj].id + "' class='alter-button'>" + "Edit" + "</button>" +
+			"<button id='delete-" + searchResult[eachObj].id + "' class='delete-button'>" + "Delete" + "</button>" +
+			"<button id='cancel-" + searchResult[eachObj].id + "' class='cancel-button'>" + "Cancel" + "</button>" +
 			"</div>" +
 			"<div class='buttons'>" +
-			"<button id='edit-" + searchResult[eachObj].id + "' class='edit_button'><img class='editButtonImage' id='editimage" + searchResult[eachObj].id + "' src='./images/edit.png'></button>" +
-			"<button id='remove-" + searchResult[eachObj].id + "' class='remove_button'><img id='removeimage" + searchResult[eachObj].id + "' src='./images/icons8-trash-can-50.png'></button>" +
+			"<button id='edit-" + searchResult[eachObj].id + "' class='edit-button'><img class='editButtonImage' id='editimage" + searchResult[eachObj].id + "' src='./images/edit.png'></button>" +
+			"<button id='remove-" + searchResult[eachObj].id + "' class='remove-button'><img id='removeimage" + searchResult[eachObj].id + "' src='./images/icons8-trash-can-50.png'></button>" +
 			"</div></li>";
-		_("printing_list").insertAdjacentHTML('afterbegin', result);
+		$("printing-list").insertAdjacentHTML('afterbegin', result);
 
-		let menu = _("menu-" + searchResult[eachObj].id);
-		let dotmenu = _("dotmenu-" + searchResult[eachObj].id);
+		let menu = $("menu-" + searchResult[eachObj].id);
+		let dotMenu = $("dotmenu-" + searchResult[eachObj].id);
 		function displayButtons(e) {
 			e.stopPropagation();
-			_("overlay").classList.add("flexDisplay");
-			_("floatDiv").classList.add("floatDiv");
-			_("floatButton").classList.add("noshow");
+			$("overlay").classList.add("flexDisplay");
+			$("floatDiv").classList.add("floatDiv");
+			$("floatButton").classList.add("hidden");
 		}
 		menu.addEventListener("click", displayButtons);
-		dotmenu.addEventListener("click", displayButtons);
+		dotMenu.addEventListener("click", displayButtons);
 
-		let alterButton = _("alter-" + searchResult[eachObj].id)
+		let alterButton = $("alter-" + searchResult[eachObj].id)
 		alterButton.addEventListener("click", editContent);
 
-		let save = _("save-" + searchResult[eachObj].id);
-		let saveImage = _("saveImage-" + searchResult[eachObj].id);
+		let save = $("save-" + searchResult[eachObj].id);
+		let saveImage = $("saveImage-" + searchResult[eachObj].id);
 		function saveEditedContent(e) {
 			e.stopPropagation();
 			let targetElem = e.target.id.replace("editimage", "").replace("edit-", "").replace("description", "").replace("desc-", "").replace("alter-", "").replace("save-", "").replace("saveImage-", "");
-			list.find(elem => elem.id.toString() === targetElem).description = _('desc-' + targetElem).innerText;
-			list.find(elem => elem.id.toString() === targetElem).editMode = false;
-			_('check-' + targetElem).removeAttribute("disabled");
-			_('desc-' + targetElem).contentEditable = false;
-			menu.classList.remove("noshow");
-			save.classList.add("noshow");
-			storeLocal();
-			setTimeout(() => { _("input_notes").focus() }, 200)
+			let element = toDoList.find(elem => elem.id.toString() === targetElem)
+			element.description = $('desc-' + targetElem).innerText;
+			element.editMode = false;
+			$('check-' + targetElem).removeAttribute("disabled");
+			$('desc-' + targetElem).contentEditable = false;
+			editimage.classList.remove("saveButtonImage");
+			editimage.classList.add("editButtonImage");
+			editimage.setAttribute("src", './images/edit.png')
+			menu.classList.remove("hidden");
+			save.classList.add("hidden");
+			saveToLocalStorage();
+			setTimeout(() => { $("new-note-input").focus() }, 200)
 		}
 		save.addEventListener("click", saveEditedContent);
 		saveImage.addEventListener("click", saveEditedContent);
 
-		let deletionButton = _("delete-" + searchResult[eachObj].id)
+		let deletionButton = $("delete-" + searchResult[eachObj].id)
 		deletionButton.addEventListener("click", showDeletionModal);
 
 		function cancelAction() {
-			_("overlay").classList.remove("flexDisplay");
-			_("floatDiv").classList.remove("floatDiv");
-			_("floatButton").classList.remove("noshow");
+			$("overlay").classList.remove("flexDisplay");
+			$("floatDiv").classList.remove("floatDiv");
+			$("floatButton").classList.remove("hidden");
 		}
-		let cancel = _("cancel-" + searchResult[eachObj].id)
+		let cancel = $("cancel-" + searchResult[eachObj].id)
 		cancel.addEventListener("click", cancelAction);
 
-		let checkBox = _("check-" + searchResult[eachObj].id)
-		let description = _("desc-" + searchResult[eachObj].id)
+		let checkBox = $("check-" + searchResult[eachObj].id)
+		let description = $("desc-" + searchResult[eachObj].id)
 
 		//cross-out on clicking description or checkbox
 		checkBox.addEventListener("change", (e) => {
 			let targetId = e.target.id.replace("check-", "")
-			if (list.find(element => {
+			if (toDoList.find(element => {
 				return element.id.toString() === targetId
 			}).editMode === false) {
 				toggleCheckedClass(targetId);
@@ -404,7 +412,7 @@ function searchResultPrint(searchResult) {
 
 		description.addEventListener("click", function (e) {
 			let targetId = e.target.id.replace("desc-", "")
-			if (list.find(element => {
+			if (toDoList.find(element => {
 				return element.id.toString() === targetId
 			}).editMode === false) {
 				checkBox.checked = checkBox.checked ? false : true;
@@ -413,36 +421,37 @@ function searchResultPrint(searchResult) {
 		})
 
 		//Edit button functionalities
-		let editItem = _("edit-" + searchResult[eachObj].id);
-		let editimage = _("editimage" + searchResult[eachObj].id)
+		let editItem = $("edit-" + searchResult[eachObj].id);
+		let editimage = $("editimage" + searchResult[eachObj].id)
 		function editContent(e) {
 			e.stopPropagation();
 			let targetElem = e.target.id.replace("editimage", "").replace("edit-", "").replace("description", "").replace("desc-", "").replace("alter-", "");
-			if (list.find(elem => elem.id.toString() === targetElem).editMode === false) {
-				if (_('check-' + targetElem).checked === true) {
-					_('desc-' + targetElem).classList.remove("checkboxChecked");
+			if (toDoList.find(elem => elem.id.toString() === targetElem).editMode === false) {
+				if ($('check-' + targetElem).checked === true) {
+					$('desc-' + targetElem).classList.remove("checkboxChecked");
 				}
-				list.find(elem => elem.id.toString() === targetElem).editMode = true;
-				_('desc-' + targetElem).contentEditable = true;
-				_('check-' + targetElem).setAttribute("disabled", "disabled");
+				toDoList.find(elem => elem.id.toString() === targetElem).editMode = true;
+				$('desc-' + targetElem).contentEditable = true;
+				$('check-' + targetElem).setAttribute("disabled", "disabled");
 				editimage.classList.add("saveButtonImage");
 				editimage.classList.remove("editButtonImage");
 				editimage.setAttribute("src", './images/save.png')
-				menu.classList.add("noshow");
-				save.classList.remove("noshow");
-				_('desc-' + targetElem).focus();
-				let placeOfEdit = _('desc-' + targetElem)
+				menu.classList.add("hidden");
+				save.classList.remove("hidden");
+				save.classList.add("hide");
+				$('desc-' + targetElem).focus();
+				let placeOfEdit = $('desc-' + targetElem)
 				function placeCaretAtEnd(el) {
 					el.focus();
-					if (typeof window.getSelection != "undefined"
-						&& typeof document.createRange != "undefined") {
+					if (window.getSelection != "undefined"
+						&& document.createRange != "undefined") {
 						var range = document.createRange();
 						range.selectNodeContents(el);
 						range.collapse(false);
 						var sel = window.getSelection();
 						sel.removeAllRanges();
 						sel.addRange(range);
-					} else if (typeof document.body.createTextRange != "undefined") {
+					} else if (document.body.createTextRange != "undefined") {
 						var textRange = document.body.createTextRange();
 						textRange.moveToElementText(el);
 						textRange.collapse(false);
@@ -451,25 +460,26 @@ function searchResultPrint(searchResult) {
 				}
 
 				placeCaretAtEnd(placeOfEdit);
-				_("overlay").classList.remove("flexDisplay");
-				_("floatDiv").classList.remove("floatDiv");
-				_("floatButton").classList.remove("noshow");
+				$("overlay").classList.remove("flexDisplay");
+				$("floatDiv").classList.remove("floatDiv");
+				$("floatButton").classList.remove("hidden");
 			}
 			else {
-				if (_('check-' + targetElem).checked === true) {
-					_('desc-' + targetElem).classList.add("checkboxChecked");
+				if ($('check-' + targetElem).checked === true) {
+					$('desc-' + targetElem).classList.add("checkboxChecked");
 				}
-				list.find(elem => elem.id.toString() === targetElem).description = _('desc-' + targetElem).innerText;
-				list.find(elem => elem.id.toString() === targetElem).editMode = false;
-				_('check-' + targetElem).removeAttribute("disabled");
-				_('desc-' + targetElem).contentEditable = false;
+				let element = toDoList.find(elem => elem.id.toString() === targetElem)
+				element.description = $('desc-' + targetElem).innerText;
+				element.editMode = false;
+				$('check-' + targetElem).removeAttribute("disabled");
+				$('desc-' + targetElem).contentEditable = false;
 				editimage.classList.remove("saveButtonImage");
 				editimage.classList.add("editButtonImage");
 				editimage.setAttribute("src", './images/edit.png')
-				menu.classList.add("noshow");
-				save.classList.remove("noshow");
-				storeLocal();
-				setTimeout(() => { _("input_notes").focus() }, 200)
+				menu.classList.add("hidden");
+				save.classList.remove("hidden");
+				saveToLocalStorage();
+				setTimeout(() => { $("new-note-input").focus() }, 200)
 			}
 		}
 		editItem.addEventListener("click", editContent)
@@ -483,64 +493,64 @@ function searchResultPrint(searchResult) {
 		})
 
 		//Remove button event
-		let removedItem = _("remove-" + searchResult[eachObj].id);
-		let removeimage = _("removeimage" + searchResult[eachObj].id);
+		let removedItem = $("remove-" + searchResult[eachObj].id);
+		let removeimage = $("removeimage" + searchResult[eachObj].id);
 		function showDeletionModal(e) {
 			e.stopPropagation();
-			_("overlay").classList.remove("flexDisplay");
-			_("floatDiv").classList.remove("floatDiv");
-			_("input_notes").blur();
-			_('removeModal').classList.add("emptyModalParent");
+			$("overlay").classList.remove("flexDisplay");
+			$("floatDiv").classList.remove("floatDiv");
+			$("new-note-input").blur();
+			$('removeModal').classList.add("emptyModalParent");
 			let id = e.target.id.replace("removeimage", "").replace("remove-", "").replace("delete-", "");
-			_('confirm').setAttribute("data-id", id)
+			$('confirm').setAttribute("data-id", id)
 		}
 		removedItem.addEventListener("click", showDeletionModal);
 		removeimage.addEventListener("click", showDeletionModal);
 	}
 }
 //search event
-let search = _("searchText");
+let search = $("searchText");
 function listSearch() {
-	_("printing_list").innerHTML = "";
-	let emptySearch = _("emptySearch");
+	$("printing-list").innerHTML = "";
+	let emptySearch = $("emptySearch");
 	if (emptySearch) {
 		emptySearch.remove();
-		_("list_items").classList.remove("addEmptyImage");
-		_("searchText").classList.remove("noshow");
+		$("list-items").classList.remove("add-empty-image");
+		$("searchText").classList.remove("hidden");
 	}
 	let searchItem = search.value.trim();
 	if (searchItem)
-		_("x").classList.remove("noshow");
+		$("clear-search").classList.remove("hidden");
 	else
-		_("x").classList.add("noshow");
+		$("clear-search").classList.add("hidden");
 	let searchItemLowercase = searchItem.toLowerCase();
-	let searchResult = list.filter(item => {
+	let searchResult = toDoList.filter(item => {
 		return item.description.toLowerCase().indexOf(searchItemLowercase) > -1;
 	})
 	searchResultPrint(searchResult);
 }
-_("searchText").addEventListener("keyup", listSearch);
-_("x").addEventListener("click", () => {
-	_("searchText").value = "";
+$("searchText").addEventListener("keyup", listSearch);
+$("clear-search").addEventListener("click", () => {
+	$("searchText").value = "";
 	listSearch();
 	search.focus();
-	_("x").classList.add("noshow");
+	$("clear-search").classList.add("hidden");
 });
 function displayInputBar() {
-	_("floatDiv").classList.add("floatDiv");
-	_("floatButton").classList.add("noshow");
-	_("input_area").classList.add("flexDisplay");
-	_("input_notes").focus();
+	$("floatDiv").classList.add("floatDiv");
+	$("floatButton").classList.add("hidden");
+	$("input-area").classList.add("flexDisplay");
+	$("new-note-input").focus();
 }
 function displayFab() {
-	_("overlay").classList.remove("flexDisplay");
-	_("floatDiv").classList.remove("floatDiv");
-	_("floatButton").classList.remove("noshow");
-	_("input_area").classList.remove("flexDisplay");
+	$("overlay").classList.remove("flexDisplay");
+	$("floatDiv").classList.remove("floatDiv");
+	$("floatButton").classList.remove("hidden");
+	$("input-area").classList.remove("flexDisplay");
 }
-_("plus").addEventListener("click", displayInputBar)
-_("floatButton").addEventListener("click", displayInputBar)
-_("floatDiv").addEventListener("click", displayFab);
-function _(id) {
+$("plus").addEventListener("click", displayInputBar)
+$("floatButton").addEventListener("click", displayInputBar)
+$("floatDiv").addEventListener("click", displayFab);
+function $(id) {
 	return document.getElementById(id);
 }
