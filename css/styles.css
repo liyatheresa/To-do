@@ -49,7 +49,7 @@ body {
   font-family: inherit;
   outline: none;
   flex-grow: 1;
-  background: url(./images/search.svg);
+  background: url(../images/search.svg);
   background-repeat: no-repeat;
   background-position: 8px 8px;
   background-size: 17px 18px;
@@ -128,7 +128,7 @@ body {
   width: 40px;
   border: 0.5px solid black;
   box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
-  background-image: url(./images/send.svg);
+  background-image: url(../images/send.svg);
   background-size: auto 27px;
   background-position: 40% 60%;
   background-repeat: no-repeat;
@@ -151,7 +151,10 @@ body {
   display: flex;
   align-items: center;
 }
+
+.mobile-save-button,
 .edit-button {
+  cursor: pointer;
   border-radius: 17px;
   height: 35px;
   width: 35px;
@@ -161,17 +164,8 @@ body {
   margin: 0 1rem;
   box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
 }
-.editButtonImage {
-  position: relative;
-  right: 2px;
-  top: 2px;
-}
-.saveButtonImage {
-  position: relative;
-  right: 0px;
-  max-width: 29px;
-}
 .remove-button {
+  cursor: pointer;
   margin-right: 7px;
   border-radius: 17px;
   height: 35px;
@@ -217,11 +211,7 @@ body {
 .description{
   cursor: pointer;
 }
-.modalClose,
-.hidden {
-  display: none;
-}
-.emptyModalParent {
+.modal-backdrop {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -256,7 +246,7 @@ body {
   left: 18rem;
   /* margin-top: auto; */
 }
-.removeModalButtons {
+.deletionModalButtons {
   margin-left: auto;
   position: relative;
   display: inline;
@@ -293,7 +283,7 @@ body {
 .headingInsideModal {
   font-size: x-large;
 }
-.checkboxChecked,
+.strike-through,
 .description:not([contentEditable="true"]):hover {
   color: #989898;
   text-decoration-line: line-through;
@@ -313,4 +303,35 @@ body {
 }
 .overlay{
   display: none;
+}
+.fa-light {
+  color: #fff;
+  font-size: 1.05rem;
+}
+.fa-dark {
+  color: #555;
+  font-size: 1.05rem;
+}
+.menu-button{
+  cursor: pointer;
+  margin-right: 1rem;
+  border-radius: 50%;
+ text-align: center;
+ padding-top: 0.42rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: none;
+}
+.menu-button:hover{
+  background-color: #eee;
+}
+.menu-button:active{
+  background-color: #ddd;
+}
+.mobile-save-button{
+  display: none;
+}
+
+.hidden {
+  display: none !important;
 }
