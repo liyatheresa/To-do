@@ -12,7 +12,7 @@ window.addEventListener("load", () => {
 
     let confirmDeletionButton = $('confirm-deletion-button');
     confirmDeletionButton.addEventListener("click", (e) => {
-        $("floatButton").classList.remove("hidden");
+        $("float-button").classList.remove("hidden");
         deleteItem(e);
         closeDeletionModal();
     });
@@ -49,7 +49,7 @@ window.addEventListener("load", () => {
 
 const showDeletionModal = (e) => {
     $("overlay").classList.remove("flex");
-    $("floatDiv").classList.remove("floatDiv");
+    $("float-div").classList.remove("float-div");
     newItemInput.blur();
     $('deletion-modal').classList.remove("hidden");
     let id = e.target.id.replace("remove-", "");
@@ -63,17 +63,20 @@ const closeDeletionModal = () => {
 const showEmptyInputModal = () => {
     let emptyModalParent = $('empty-input-modal')
     emptyModalParent.classList.add("modal-backdrop");
+    emptyModalParent.classList.remove("hidden");
     newItemInput.blur();
 }
 const closeEmptyInputModal = () => {
-    $("empty-input-modal").classList.remove("modal-backdrop");
+    let emptyModalParent = $('empty-input-modal')
+    emptyModalParent.classList.remove("modal-backdrop");
+    emptyModalParent.classList.add("hidden");
     newItemInput.focus();
 }
 
 const showBottomDrawer = (e) => {
     $("overlay").classList.add("flex");
-    $("floatDiv").classList.add("floatDiv");
-    $("floatButton").classList.add("hidden");
+    $("float-div").classList.add("float-div");
+    $("float-button").classList.add("hidden");
 
     let id = e.target.id.replace("dotmenu-", "").replace("menu-", "");
     $('mobile-edit-button').setAttribute("data-identifier", id)
@@ -82,8 +85,8 @@ const showBottomDrawer = (e) => {
 }
 const closeBottomDrawer = () => {
     $("overlay").classList.remove("flex");
-    $("floatDiv").classList.remove("floatDiv");
-    $("floatButton").classList.remove("hidden");
+    $("float-div").classList.remove("float-div");
+    $("float-button").classList.remove("hidden");
 }
 
 export { closeBottomDrawer, showDeletionModal, showEmptyInputModal, showBottomDrawer };

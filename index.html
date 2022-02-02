@@ -13,27 +13,27 @@
     <script src="./javascript/modal-operations.js" type="module"></script>
   </head>
   <body>
-    <div class="title_div">
+    <div class="title-div">
       <a href="#"><img src="./images/icons8-notepad-64.png" /></a>
       <a href="#" class="titlelink"><h1 class="heading">To Do</h1></a>
     </div>
-    <div class="searchBar">
-      <form id="searchArea" class="searchArea">
+    <div class="search-bar">
+      <form id="search-area" class="search-area">
         <input
-          name="searchText"
+          name="search-text"
           type="text"
           placeholder="Search.."
-          id="searchText"
+          id="search-text"
         />
         <img src="./images/x.svg" id="clear-search" />
       </form>
     </div>
-    <div class="todo_list">
+    <div class="todo-list">
       <div class="list-items" id="list-items">
         <ol id="printing-list"></ol>
       </div>
-      <div id="floatDiv" class=""></div>
-      <a class="floatButton" id="floatButton">
+      <div id="float-div" class=""></div>
+      <a class="float-button" id="float-button">
         <img class="plus" id="plus" src="./images/plus.svg" />
       </a>
       <form id="input-area" class="input-area">
@@ -43,7 +43,7 @@
           placeholder="Enter task.."
           id="new-note-input"
         />
-        <input type="submit" class="submission" id="button" value="" />
+        <button type="submit" class="fa-light fa fa-paper-plane submit-button" id="button" value=""></button>
       </form>
     </div>
 
@@ -62,29 +62,29 @@
 
     <div class="hidden" id="empty-input-modal">
       <div class="modal" id="empty-input-modal-content">
-        <div class="emptyModalContent">
-          <div class="headingInsideModal">Nothing Entered</div>
-          <div class="contentInsideModal">
+        <div class="empty-modal-content">
+          <div class="heading-inside-modal">Nothing Entered</div>
+          <div class="content-inside-modal">
             Enter a description to add to the task list
           </div>
         </div>
-        <button class="emptyModalButton normalButton" id="close-empty-input-modal-button">Okay</button>
+        <button class="emptyModalButton normal-button" id="close-empty-input-modal-button">Okay</button>
       </div>
     </div>
 
     <div class="hidden modal-backdrop" id="deletion-modal">
       <div class="modal" id="deletion-modal-content">
         <div>
-          <div class="headingInsideModal">Confirm Deletion?</div>
-          <div class="contentInsideModal">
+          <div class="heading-inside-modal">Confirm Deletion?</div>
+          <div class="content-inside-modal">
             Are you sure to permenently remove the selected item?
           </div>
         </div>
-        <div class="deletionModalButtons">
-          <button class="normalButton" id="close-deletion-modal-button">
+        <div class="deletion-modal-buttons">
+          <button class="normal-button" id="close-deletion-modal-button">
             Cancel
           </button>
-          <button class="dangerButton" id="confirm-deletion-button">
+          <button class="danger-button" id="confirm-deletion-button">
             Delete
           </button>
         </div>

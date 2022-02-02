@@ -10,7 +10,7 @@ const deleteItem = (e) => {
         let emptyImage = "<figure id='emptyImage'><img src='./images/clipboard.svg' class='empty'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
         $("list-items").insertAdjacentHTML('afterbegin', emptyImage);
         $("list-items").classList.add("add-empty-image");
-        $("searchText").classList.add("hidden");
+        $("search-text").classList.add("hidden");
     }
 }
 
@@ -44,9 +44,9 @@ const setEditMode = (targetId, isEditModeOn) => {
     }
 }
 
-const toggleSaveEditIcon = (button) => {
-    button.classList.toggle("fa-pencil");
-    button.classList.toggle("fa-floppy-o");
+const toggleSaveEditIcon = (targetId) => {
+    $('edit-or-save-' + targetId).classList.toggle("fa-pencil");
+    $('edit-or-save-' + targetId).classList.toggle("fa-floppy-o");
 }
 
 const saveItemsToLocalStorage = () => {

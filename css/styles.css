@@ -8,7 +8,7 @@ body {
   display: flex;
   flex-direction: column
 }
-.title_div {
+.title-div {
   position: sticky;
   top: 0;
   box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
@@ -18,7 +18,7 @@ body {
   align-items: center;
   z-index: 1;
 }
-.title_div img {
+.title-div img {
   height: 35px;
   margin-right: 0.25rem;
 }
@@ -31,7 +31,7 @@ body {
 .titlelink{
   text-decoration: none;
 }
-.searchArea {
+.search-area {
   position: relative;
   display: flex;
   justify-content: center;
@@ -42,7 +42,7 @@ body {
   width: 50vw; 
   background-color: #FFF;
 }
-#searchText{
+#search-text{
   border: 1px solid #cbcbcb;
   border-radius: 0.5rem;
   padding: 10px 20px 10px 20px;
@@ -56,15 +56,15 @@ body {
   text-indent: 15px;
   box-shadow: 0px 0px 23px 10px rgba(0, 0, 0, 0.04);
 }
-#searchText::placeholder{
+#search-text::placeholder{
   color:#C3C3C3
 }
 #clear-search{
   position: absolute;
-  right: 30px;
+  right: 7px;
   cursor: pointer;
 }
-.todo_list {
+.todo-list {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,7 +106,6 @@ body {
   align-items: center;
   width: inherit;
   padding: 0;
-  /* margin-top: 20px; */
   position: fixed;
   bottom: 10px;
 }
@@ -120,7 +119,7 @@ body {
   outline: none;
   box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
 }
-.submission {
+.submit-button {
   margin-left: 0.7rem;
   background-color: #220083;
   border-radius: 20px;
@@ -128,10 +127,6 @@ body {
   width: 40px;
   border: 0.5px solid black;
   box-shadow: 0 3px 3px 0 rgb(139, 139, 139);
-  background-image: url(../images/send.svg);
-  background-size: auto 27px;
-  background-position: 40% 60%;
-  background-repeat: no-repeat;
 }
 #printing-list {
   margin: 0;
@@ -222,17 +217,13 @@ body {
   background-color: #00000088;
 }
 .modal {
-  /* position: absolute; */
   width: 400px;
   height: 190px;
   background-color: white;
   border-radius: 7px;
   padding: 20px;
-  /* display: flex; */
-  /* flex-direction: column; */
 }
-.emptyModalContent {
-  /* position: absolute; */
+.empty-modal-content {
   display: flex;
   flex-direction: column;
   padding-left: 1rem;
@@ -241,12 +232,10 @@ body {
 .emptyModalButton {
   margin-left: auto;
   position: relative;
-  /* display: absolute; */
   top: 2.5rem;
   left: 18rem;
-  /* margin-top: auto; */
 }
-.deletionModalButtons {
+.deletion-modal-buttons {
   margin-left: auto;
   position: relative;
   display: inline;
@@ -254,7 +243,7 @@ body {
   left: 12rem;
   margin-right: 0.5rem;
 }
-.normalButton {
+.normal-button {
   background-color: white;
   color: black;
   border-radius: 7px;
@@ -266,7 +255,7 @@ body {
   border: 1px solid #c3c3c3;
   margin-right: 1rem;
 }
-.dangerButton {
+.danger-button {
   background-color: red;
   color: white;
   border-radius: 7px;
@@ -276,11 +265,11 @@ body {
   min-height: 35px;
   min-width: 70px;
 }
-.contentInsideModal {
+.content-inside-modal {
   padding-top: 1rem;
   font-size: large;
 }
-.headingInsideModal {
+.heading-inside-modal {
   font-size: x-large;
 }
 .strike-through,
@@ -292,12 +281,9 @@ body {
 .description[contentEditable="true"] {
   display: flex;
   min-width: 20px;
-  /* max-height: 1.5rem; */
-  /* overflow-x: scroll; */
   outline: none;
   padding-left: 5px;
   padding-right: 5px;
-  /* border: 2px solid #005aad; */
   box-shadow: 0 0 0 1px #005aad;
   cursor: text;
 }
@@ -307,10 +293,12 @@ body {
 .fa-light {
   color: #fff;
   font-size: 1.05rem;
+  cursor: pointer;
 }
 .fa-dark {
   color: #555;
   font-size: 1.05rem;
+  cursor: pointer;
 }
 .menu-button{
   cursor: pointer;
