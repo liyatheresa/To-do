@@ -1,6 +1,5 @@
 import { $, newItemInput, toDoList } from './script.js';
-import { deleteItem } from './list-item-operations.js';
-import { setEditMode } from './list-item-operations.js';
+import { deleteItem, setEditMode } from './list-item-operations.js';
 
 window.addEventListener("load", () => {
     //Deletion Modal
@@ -49,7 +48,7 @@ window.addEventListener("load", () => {
 
 const showDeletionModal = (e) => {
     $("overlay").classList.remove("flex");
-    $("float-div").classList.remove("float-div");
+    $("floating-button-overlay").classList.remove("modal-backdrop");
     newItemInput.blur();
     $('deletion-modal').classList.remove("hidden");
     let id = e.target.id.replace("remove-", "");
@@ -75,7 +74,7 @@ const closeEmptyInputModal = () => {
 
 const showBottomDrawer = (e) => {
     $("overlay").classList.add("flex");
-    $("float-div").classList.add("float-div");
+    $("floating-button-overlay").classList.add("modal-backdrop");
     $("float-button").classList.add("hidden");
 
     let id = e.target.id.replace("dotmenu-", "").replace("menu-", "");
@@ -85,7 +84,7 @@ const showBottomDrawer = (e) => {
 }
 const closeBottomDrawer = () => {
     $("overlay").classList.remove("flex");
-    $("float-div").classList.remove("float-div");
+    $("floating-button-overlay").classList.remove("modal-backdrop");
     $("float-button").classList.remove("hidden");
 }
 

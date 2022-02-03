@@ -5,8 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To Do</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" type="text/css" href="./css/styles.css" />
     <link rel="stylesheet" type="text/css" href="./css/styles-responsive.css" />
     <script src="./javascript/script.js" type="module"></script>
@@ -25,14 +28,14 @@
           placeholder="Search.."
           id="search-text"
         />
-        <img src="./images/x.svg" id="clear-search" />
+        <img src="./images/x.svg" id="clear-search" class="hidden" />
       </form>
     </div>
     <div class="todo-list">
       <div class="list-items" id="list-items">
         <ol id="printing-list"></ol>
       </div>
-      <div id="float-div" class=""></div>
+      <div id="floating-button-overlay" class=""></div>
       <a class="float-button" id="float-button">
         <img class="plus" id="plus" src="./images/plus.svg" />
       </a>
@@ -43,7 +46,11 @@
           placeholder="Enter task.."
           id="new-note-input"
         />
-        <button type="submit" class="fa-light fa fa-paper-plane submit-button" id="button" value=""></button>
+        <button
+          type="submit"
+          class="fa-light fa fa-paper-plane submit-button"
+          id="button"
+        ></button>
       </form>
     </div>
 
@@ -68,7 +75,12 @@
             Enter a description to add to the task list
           </div>
         </div>
-        <button class="emptyModalButton normal-button" id="close-empty-input-modal-button">Okay</button>
+        <button
+          class="empty-modal-button normal-button"
+          id="close-empty-input-modal-button"
+        >
+          Okay
+        </button>
       </div>
     </div>
 

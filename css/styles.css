@@ -1,4 +1,4 @@
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -6,7 +6,7 @@
 body {
   position: relative;
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 .title-div {
   position: sticky;
@@ -28,7 +28,7 @@ body {
   padding: 0.5rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-.titlelink{
+.titlelink {
   text-decoration: none;
 }
 .search-area {
@@ -39,10 +39,10 @@ body {
   width: inherit;
   padding: 0;
   margin: 20px auto 12px auto;
-  width: 50vw; 
-  background-color: #FFF;
+  width: 50vw;
+  background-color: #fff;
 }
-#search-text{
+#search-text {
   border: 1px solid #cbcbcb;
   border-radius: 0.5rem;
   padding: 10px 20px 10px 20px;
@@ -56,10 +56,10 @@ body {
   text-indent: 15px;
   box-shadow: 0px 0px 23px 10px rgba(0, 0, 0, 0.04);
 }
-#search-text::placeholder{
-  color:#C3C3C3
+#search-text::placeholder {
+  color: #c3c3c3;
 }
-#clear-search{
+#clear-search {
   position: absolute;
   right: 7px;
   cursor: pointer;
@@ -80,21 +80,22 @@ body {
   margin: 0;
   padding: 0;
 }
-.add-empty-image{
+.add-empty-image {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-#emptyImage{
+#empty-image {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-#emptyImage figcaption,#emptySearch figcaption{
-  color:#00488A;
-  padding-top: 10px
+#empty-image figcaption,
+#noResultsFoundImage figcaption {
+  color: #00488a;
+  padding-top: 10px;
 }
 .empty {
   max-height: 8rem;
@@ -197,13 +198,13 @@ body {
   color: #989898;
   font-size: 13px;
   margin-top: 0.25rem;
-  cursor:default;
+  cursor: default;
 }
 .submission,
 .edit-button,
 .remove-button,
 .checkbox,
-.description{
+.description {
   cursor: pointer;
 }
 .modal-backdrop {
@@ -229,7 +230,7 @@ body {
   padding-left: 1rem;
   padding-top: 0.25rem;
 }
-.emptyModalButton {
+.empty-modal-button {
   margin-left: auto;
   position: relative;
   top: 2.5rem;
@@ -267,10 +268,10 @@ body {
 }
 .content-inside-modal {
   padding-top: 1rem;
-  font-size: large;
+  font-size: 1.2rem;
 }
 .heading-inside-modal {
-  font-size: x-large;
+  font-size: 1.5rem;
 }
 .strike-through,
 .description:not([contentEditable="true"]):hover {
@@ -287,7 +288,7 @@ body {
   box-shadow: 0 0 0 1px #005aad;
   cursor: text;
 }
-.overlay{
+.overlay {
   display: none;
 }
 .fa-light {
@@ -300,23 +301,23 @@ body {
   font-size: 1.05rem;
   cursor: pointer;
 }
-.menu-button{
+.menu-button {
   cursor: pointer;
   margin-right: 1rem;
   border-radius: 50%;
- text-align: center;
- padding-top: 0.42rem;
+  text-align: center;
+  padding-top: 0.42rem;
   width: 1.75rem;
   height: 1.75rem;
   display: none;
 }
-.menu-button:hover{
+.menu-button:hover {
   background-color: #eee;
 }
-.menu-button:active{
+.menu-button:active {
   background-color: #ddd;
 }
-.mobile-save-button{
+.mobile-save-button {
   display: none;
 }
 

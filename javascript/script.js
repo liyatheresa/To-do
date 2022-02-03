@@ -8,17 +8,18 @@ let newItemInput;
 
 const $ = id => document.getElementById(id);
 const setToDoList = list => toDoList = list;
-
+let searchInput = $("search-text");
+const validate = () => {
+	//modal display on empty input
+	if (newItemInput.value.trim() === "") {
+		showEmptyInputModal();
+		return true;
+	}
+}
 //Function to add item to to-do list
 function addToDoItem(toDoItem) {
 	if (!toDoItem) {
 		let date = new Date().toLocaleDateString();
-
-		//modal display on empty input
-		if (newItemInput.value.trim() === "") {
-			showEmptyInputModal();
-			return;
-		}
 
 		toDoList.push({
 			id: nanoid(),
@@ -33,7 +34,7 @@ function addToDoItem(toDoItem) {
 		toDoList.push({ ...toDoItem, editMode: false });
 	}
 	if (toDoList.length === 1) {
-		let emptyImage = $("emptyImage");
+		let emptyImage = $("empty-image");
 		if (emptyImage) {
 			emptyImage.remove();
 			$("list-items").classList.remove("add-empty-image");
@@ -127,8 +128,8 @@ function addToDoItem(toDoItem) {
 	})
 
 	//Remove button event
-	let removedItem = $("remove-" + toDoList[toDoList.length - 1].id);
-	removedItem.addEventListener("click", showDeletionModal);
+	let deletionButton = $("remove-" + toDoList[toDoList.length - 1].id);
+	deletionButton.addEventListener("click", showDeletionModal);
 	saveItemsToLocalStorage();
 } //end of additem function
 
@@ -138,10 +139,10 @@ window.addEventListener("load", () => {
 	$("input-area").addEventListener("submit", e => {
 		newItemInput.focus();
 		e.preventDefault();
+		displayFab();
+		let validationResult = validate();
+		if (validationResult) { return; }
 		addToDoItem();
-		$("float-div").classList.remove("float-div");
-		$("float-button").classList.remove("hidden");
-		$("input-area").classList.remove("flex");
 	});
 	newItemInput.focus();
 
@@ -153,7 +154,7 @@ window.addEventListener("load", () => {
 		listReceived = [];
 	}
 	if (listReceived.length === 0) {
-		let emptyImage = "<figure id='emptyImage'><img src='./images/clipboard.svg' class='empty'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
+		let emptyImage = "<figure id='empty-image'><img src='./images/clipboard.svg' class='empty'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
 		$("list-items").insertAdjacentHTML('afterbegin', emptyImage);
 		$("list-items").classList.add("add-empty-image");
 	}
@@ -171,35 +172,29 @@ window.addEventListener("load", () => {
 			return confirmationMessage;
 		}
 	}
-	$("clear-search").classList.add("hidden");
+
+	$("plus").addEventListener("click", displayInputBar)
+	$("float-button").addEventListener("click", displayInputBar)
+	$("floating-button-overlay").addEventListener("click", displayFab);
 });//end of event on load
 
 //checkbox functionalities and marking it as complete in list
 function toggleCheckedClass(targetId) {
 	let checkBox = $("check-" + targetId)
 	let description = $("desc-" + targetId)
-	if (checkBox.checked)
-		description.classList.add("strike-through");
-	else
-		description.classList.remove("strike-through");
+	description.classList.toggle("strike-through", checkBox.checked);
 	toDoList.find(element => element.id === targetId).taskCompleted = checkBox.checked;
 	saveItemsToLocalStorage();
 }
 
-let searchInput = $("search-text");
 $("clear-search").addEventListener("click", () => {
 	searchInput.value = ""
-	let event = new Event('input', {
-		bubbles: false,
-		cancelable: true,
-	});
-	searchInput.dispatchEvent(event);
+	searchInput.dispatchEvent(new Event('input'));
 	$("clear-search").classList.add("hidden");
 });
 
-let count;
 searchInput.addEventListener("input", e => {
-	count = 0;
+	let count = 0;
 	let textToBeSearched = e.target.value.trim().toLowerCase();
 	$("clear-search").classList.toggle("hidden", !textToBeSearched);
 
@@ -222,21 +217,17 @@ searchInput.addEventListener("input", e => {
 		$("list-items").classList.remove("add-empty-image");
 	}
 });
-function displayInputBar() {
-	$("float-div").classList.add("float-div");
+const displayInputBar = () => {
+	$("floating-button-overlay").classList.add("modal-backdrop");
 	$("float-button").classList.add("hidden");
 	$("input-area").classList.add("flex");
 	newItemInput.focus();
 }
-function displayFab() {
+const displayFab = () => {
 	$("overlay").classList.remove("flex");
-	$("float-div").classList.remove("float-div");
+	$("floating-button-overlay").classList.remove("modal-backdrop");
 	$("float-button").classList.remove("hidden");
 	$("input-area").classList.remove("flex");
 }
-$("plus").addEventListener("click", displayInputBar)
-$("float-button").addEventListener("click", displayInputBar)
-$("float-div").addEventListener("click", displayFab);
-
 
 export { $, newItemInput, toDoList, setToDoList, saveItemsToLocalStorage };
