@@ -149,10 +149,11 @@ window.addEventListener("load", () => {
 
 	$("search-text").classList.add("hidden");
 	//getting the toDoList from local storage 
-	let listReceived = JSON.parse(localStorage.getItem("listSaved"));
-	if (!listReceived) {
-		listReceived = [];
-	}
+	// let listReceived = JSON.parse(localStorage.getItem("listSaved"));
+	// if (!listReceived) {
+	// 	listReceived = [];
+	// }
+	let listReceived = JSON.parse(localStorage.getItem("listSaved")) ?? [];
 	if (listReceived.length === 0) {
 		let emptyImage = "<figure id='empty-image'><img src='./images/clipboard.svg' class='empty'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
 		$("list-items").insertAdjacentHTML('afterbegin', emptyImage);

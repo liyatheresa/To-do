@@ -50,9 +50,7 @@ const toggleSaveEditIcon = (targetId) => {
 }
 
 const saveItemsToLocalStorage = () => {
-    let arrayToSave = toDoList.map(item => {
-        return { id: item.id, description: item.description, taskCompleted: item.taskCompleted, date: item.date };
-    })
+    let arrayToSave = toDoList.map(item => ({ id: item.id, description: item.description, taskCompleted: item.taskCompleted, date: item.date }));
     let stringToSave = JSON.stringify(arrayToSave);
     localStorage.setItem("listSaved", stringToSave);
 }
