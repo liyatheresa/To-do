@@ -9,15 +9,18 @@ let newItemInput;
 const $ = id => document.getElementById(id);
 const setToDoList = list => toDoList = list;
 let searchInput = $("search-text");
-const validate = () => {
+const validateInput = () => {
 	//modal display on empty input
 	if (newItemInput.value.trim() === "") {
 		showEmptyInputModal();
+		return false;
+	}
+	else {
 		return true;
 	}
 }
 //Function to add item to to-do list
-function addToDoItem(toDoItem) {
+const addToDoItem = (toDoItem) => {
 	if (!toDoItem) {
 		let date = new Date().toLocaleDateString();
 
@@ -71,7 +74,7 @@ function addToDoItem(toDoItem) {
 		}
 	})
 
-	description.addEventListener("click", function (e) {
+	description.addEventListener("click", (e) => {
 		let targetId = e.target.id.replace("desc-", "")
 		if (toDoList.find(element => element.id.toString() === targetId).editMode === false) {
 			checkBox.checked = checkBox.checked ? false : true;
@@ -140,9 +143,7 @@ window.addEventListener("load", () => {
 		newItemInput.focus();
 		e.preventDefault();
 		displayFab();
-		let validationResult = validate();
-		if (validationResult) { return; }
-		addToDoItem();
+		if (validateInput()) addToDoItem();
 	});
 	newItemInput.focus();
 
@@ -180,7 +181,7 @@ window.addEventListener("load", () => {
 });//end of event on load
 
 //checkbox functionalities and marking it as complete in list
-function toggleCheckedClass(targetId) {
+const toggleCheckedClass = (targetId) => {
 	let checkBox = $("check-" + targetId)
 	let description = $("desc-" + targetId)
 	description.classList.toggle("strike-through", checkBox.checked);
