@@ -49,20 +49,22 @@ body {
   font-family: inherit;
   outline: none;
   flex-grow: 1;
-  background: url(../images/search.svg);
-  background-repeat: no-repeat;
-  background-position: 8px 8px;
-  background-size: 17px 18px;
-  text-indent: 15px;
+  text-indent: 13px;
   box-shadow: 0px 0px 23px 10px rgba(0, 0, 0, 0.04);
+}
+#image-inside-searchbar {
+  position: absolute;
+  left: 11px;
 }
 #search-text::placeholder {
   color: #c3c3c3;
 }
 #clear-search {
   position: absolute;
-  right: 7px;
+  right: 11px;
   cursor: pointer;
+  background-color: #fff;
+  border: none;
 }
 .todo-list {
   display: flex;
@@ -162,7 +164,6 @@ body {
 }
 .remove-button {
   cursor: pointer;
-  margin-right: 7px;
   border-radius: 17px;
   height: 35px;
   width: 35px;
@@ -300,6 +301,9 @@ body {
   color: #555;
   font-size: 1.05rem;
   cursor: pointer;
+}
+.fa-grey {
+  color: #ddd;
 }
 .menu-button {
   cursor: pointer;

@@ -175,7 +175,6 @@ window.addEventListener("load", () => {
 		}
 	}
 
-	$("plus").addEventListener("click", displayInputBar)
 	$("float-button").addEventListener("click", displayInputBar)
 	$("floating-button-overlay").addEventListener("click", displayFab);
 });//end of event on load
@@ -189,13 +188,15 @@ const toggleCheckedClass = (targetId) => {
 	saveItemsToLocalStorage();
 }
 
-$("clear-search").addEventListener("click", () => {
+$("clear-search").addEventListener("click", (e) => {
+	e.preventDefault();
 	searchInput.value = ""
 	searchInput.dispatchEvent(new Event('input'));
 	$("clear-search").classList.add("hidden");
 });
 
 searchInput.addEventListener("input", e => {
+	e.preventDefault();
 	let count = 0;
 	let textToBeSearched = e.target.value.trim().toLowerCase();
 	$("clear-search").classList.toggle("hidden", !textToBeSearched);
