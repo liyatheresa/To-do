@@ -56,6 +56,7 @@ const showDeletionModal = (e) => {
 }
 const closeDeletionModal = () => {
     $('deletion-modal').classList.add("hidden");
+    $("float-button").classList.remove("hidden");
     newItemInput.focus();
 }
 
