@@ -77,7 +77,7 @@ const showBottomDrawer = (e) => {
     $("floating-button-overlay").classList.add("modal-backdrop");
     $("float-button").classList.add("hidden");
 
-    let id = e.target.id.replace("dotmenu-", "").replace("menu-", "");
+    let id = e.target.id.replace("menu-", "");
     $('mobile-edit-button').setAttribute("data-identifier", id)
     $('mobile-delete-button').setAttribute("data-identifier", id)
     $('bottom-drawer-cancel-button').setAttribute("data-identifier", id)
