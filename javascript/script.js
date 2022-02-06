@@ -188,7 +188,8 @@ const toggleCheckedClass = (targetId) => {
 	saveItemsToLocalStorage();
 }
 
-$("clear-search").addEventListener("click", () => {
+$("clear-search").addEventListener("click", (e) => {
+	e.preventDefault();
 	searchInput.value = ""
 	searchInput.dispatchEvent(new Event('input'));
 	$("clear-search").classList.add("hidden");
