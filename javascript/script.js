@@ -175,7 +175,6 @@ window.addEventListener("load", () => {
 		}
 	}
 
-	$("plus").addEventListener("click", displayInputBar)
 	$("float-button").addEventListener("click", displayInputBar)
 	$("floating-button-overlay").addEventListener("click", displayFab);
 });//end of event on load

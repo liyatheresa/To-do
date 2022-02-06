@@ -61,8 +61,10 @@ body {
 }
 #clear-search {
   position: absolute;
-  right: 7px;
+  right: 11px;
   cursor: pointer;
+  background-color: #fff;
+  border: none;
 }
 .todo-list {
   display: flex;
@@ -300,6 +302,9 @@ body {
   color: #555;
   font-size: 1.05rem;
   cursor: pointer;
+}
+.fa-grey {
+  color: #aaa;
 }
 .menu-button {
   cursor: pointer;
