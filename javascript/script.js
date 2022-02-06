@@ -195,6 +195,7 @@ $("clear-search").addEventListener("click", () => {
 });
 
 searchInput.addEventListener("input", e => {
+	e.preventDefault();
 	let count = 0;
 	let textToBeSearched = e.target.value.trim().toLowerCase();
 	$("clear-search").classList.toggle("hidden", !textToBeSearched);
