@@ -42,23 +42,43 @@ const addToDoItem = (toDoItem) => {
 			emptyImage.remove();
 			$("list-items").classList.remove("add-empty-image");
 			$("search-text").classList.remove("hidden");
+			$("image-inside-searchbar").classList.remove("hidden");
 		}
 	}
-	let newItem = "<li id='item-" + toDoList[toDoList.length - 1].id + "' ><div class='list-content'>" +
-		"<input " + (toDoList[toDoList.length - 1].taskCompleted ? "checked" : "") + " type='checkbox' class='checkbox' id='check-" + toDoList[toDoList.length - 1].id + "'>" +
-		"<span class='descriptionAndDate'><span id = 'desc-" + toDoList[toDoList.length - 1].id + "' class='description " + (toDoList[toDoList.length - 1].taskCompleted ? "strike-through" : "") + "'>" + toDoList[toDoList.length - 1].description + "</span>" +
-		"<div class='descriptionDate'>" + toDoList[toDoList.length - 1].date + "</div></span>" +
-		"</div>" +
-		"<div class='flex'>" +
-		"<button id='mobile-save-" + toDoList[toDoList.length - 1].id + "' class='fa-light fa fa-floppy-o mobile-save-button hidden'></button>" +
-		"<a id='menu-" + toDoList[toDoList.length - 1].id + "' class='fa-dark fa fa-ellipsis-v menu-button'></a>" +
-		"</div>" +
-		"<div class='buttons' id='buttons'>" +
-		"<button id='edit-or-save-" + toDoList[toDoList.length - 1].id + "' class='edit-button fa-light fa fa-pencil'></button>" +
-		"<button id='remove-" + toDoList[toDoList.length - 1].id + "' class='remove-button fa-light fa fa-trash-o'></button>" +
-		"</div></li>";
+	let newItem = $('new-item-template').content.cloneNode(true)
+	let item = newItem.getElementById("item");
+	item.id = 'item-' + toDoList[toDoList.length - 1].id;
 
-	$("printing-list").insertAdjacentHTML('afterbegin', newItem);
+	let check = newItem.getElementById("check");
+	if (toDoList[toDoList.length - 1].taskCompleted) {
+		check.setAttribute('checked', 'true');
+	}
+	check.id = 'check-' + toDoList[toDoList.length - 1].id;
+
+	let desc = newItem.getElementById("desc");
+	desc.innerHTML = toDoList[toDoList.length - 1].description;
+	if (toDoList[toDoList.length - 1].taskCompleted) {
+		desc.classList.add('strike-through');
+	}
+	desc.id = 'desc-' + toDoList[toDoList.length - 1].id;
+
+	let date = newItem.getElementById("date");
+	date.innerHTML = toDoList[toDoList.length - 1].date;
+
+	let mobile_save = newItem.getElementById("mobile-save");
+	mobile_save.id = 'mobile-save-' + toDoList[toDoList.length - 1].id;
+
+	let menu = newItem.getElementById("menu");
+	menu.id = 'menu-' + toDoList[toDoList.length - 1].id;
+
+	let edit_or_save = newItem.getElementById("edit-or-save");
+	edit_or_save.id = 'edit-or-save-' + toDoList[toDoList.length - 1].id;
+
+	let remove = newItem.getElementById("remove");
+	remove.id = 'remove-' + toDoList[toDoList.length - 1].id;
+
+	let printList = $("printing-list")
+	printList.insertBefore(newItem, printList.firstElementChild);
 
 	let menuButton = $("menu-" + toDoList[toDoList.length - 1].id);
 	menuButton.addEventListener("click", showBottomDrawer);
@@ -156,13 +176,15 @@ window.addEventListener("load", () => {
 	// }
 	let listReceived = JSON.parse(localStorage.getItem("listSaved")) ?? [];
 	if (listReceived.length === 0) {
-		let emptyImage = "<figure id='empty-image'><img src='./images/clipboard.svg' class='empty'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
-		$("list-items").insertAdjacentHTML('afterbegin', emptyImage);
+		let emptyImage = $('empty-image-template').content.cloneNode(true)
+		$("list-items").append(emptyImage);
 		$("list-items").classList.add("add-empty-image");
+		$("image-inside-searchbar").classList.add("hidden");
 	}
 	if (listReceived) {
 		for (let i = 0; i < listReceived.length; i++) {
 			$("search-text").classList.remove("hidden");
+			$("image-inside-searchbar").classList.remove("hidden");
 			addToDoItem(listReceived[i]);
 		}
 	}
@@ -211,8 +233,9 @@ searchInput.addEventListener("input", e => {
 
 	let noResultsFoundImage = $("noResultsFoundImage");
 	if (count === 0 && !noResultsFoundImage) {
-		let noResultsFoundImageHtml = "<figure id='noResultsFoundImage'><img class='empty' src='./images/emptySearch.svg'><figcaption>No results found...</figcaption></figure>";
-		$("list-items").insertAdjacentHTML('afterbegin', noResultsFoundImageHtml);
+		//let noResultsFoundImageHtml = "<figure id='noResultsFoundImage'><img class='empty' src='./images/emptySearch.svg'><figcaption>No results found...</figcaption></figure>";
+		let noResultsFoundImageHtml = $('no-results-found-image-template').content.cloneNode(true)
+		$("list-items").append(noResultsFoundImageHtml);
 		$("list-items").classList.add("add-empty-image");
 	}
 	else if (count > 0 && noResultsFoundImage) {

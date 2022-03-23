@@ -7,10 +7,11 @@ const deleteItem = (e) => {
     setToDoList(toDoList.filter(object => object.id !== e.target.dataset.id));
     saveItemsToLocalStorage();
     if (toDoList.length === 0) {
-        let emptyImage = "<figure id='empty-image'><img src='./images/clipboard.svg' class='empty'><figcaption>Nothing here. Add tasks to view here.</figcaption></figure>";
-        $("list-items").insertAdjacentHTML('afterbegin', emptyImage);
+        let emptyImage = $('empty-image-template').content.cloneNode(true)
+        $("list-items").append(emptyImage);
         $("list-items").classList.add("add-empty-image");
         $("search-text").classList.add("hidden");
+        $("image-inside-searchbar").classList.add("hidden");
     }
 }
 

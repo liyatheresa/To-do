@@ -101,5 +101,46 @@
         </div>
       </div>
     </div>
+
+    <template id="empty-image-template">
+      <figure id="empty-image">
+        <img src="./images/clipboard.svg" class="empty" />
+        <figcaption>Nothing here. Add tasks to view here.</figcaption>
+      </figure>
+    </template>
+    <template id="no-results-found-image-template">
+      <figure id="noResultsFoundImage">
+        <img class="empty" src="./images/emptySearch.svg" />
+        <figcaption>No results found...</figcaption>
+      </figure>
+    </template>
+    <template id="new-item-template">
+      <li id="item">
+        <div class="list-content">
+          <input type="checkbox" class="checkbox" id="check" />
+          <span class="descriptionAndDate">
+            <span id="desc" class="description"></span>
+            <div class="descriptionDate" id="date"></div>
+          </span>
+        </div>
+        <div class="flex">
+          <button
+            id="mobile-save"
+            class="fa-light fa fa-floppy-o mobile-save-button hidden"
+          ></button>
+          <a id="menu" class="fa-dark fa fa-ellipsis-v menu-button"></a>
+        </div>
+        <div class="buttons" id="buttons">
+          <button
+            id="edit-or-save"
+            class="edit-button fa-light fa fa-pencil"
+          ></button>
+          <button
+            id="remove"
+            class="remove-button fa-light fa fa-trash-o"
+          ></button>
+        </div>
+      </li>
+    </template>
   </body>
 </html>
