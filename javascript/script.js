@@ -123,7 +123,7 @@ const addToDoItem = (toDoItem) => {
 	})
 	description.addEventListener("keydown", (e) => {
 		let targetId = e.target.id.replace("desc-", "");
-		if (e.code === "Enter") {
+		if (e.key === "Enter") {
 			toggleSaveEditIcon(targetId);
 			editOrSave(targetId)
 			$("mobile-save-" + targetId).classList.add("hidden");
