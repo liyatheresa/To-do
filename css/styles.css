@@ -95,11 +95,11 @@ body {
   align-items: center;
 }
 #empty-image figcaption,
-#noResultsFoundImage figcaption {
+#no-results-found-image figcaption {
   color: #00488a;
   padding-top: 10px;
 }
-.empty {
+.size-of-image {
   max-height: 8rem;
   max-width: 8rem;
   color: #00488a;
@@ -145,7 +145,7 @@ body {
   /* white-space:pre-wrap; */
   word-break: break-word;
 }
-.buttons {
+.edit-and-delete-buttons {
   display: flex;
   align-items: center;
 }
@@ -195,7 +195,7 @@ body {
   margin: 0;
   align-items: center;
 }
-.descriptionDate {
+.description-date {
   color: #989898;
   font-size: 13px;
   margin-top: 0.25rem;

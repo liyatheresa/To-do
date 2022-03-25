@@ -1,4 +1,4 @@
-import { $, newItemInput, toDoList, setToDoList } from './script.js';
+import { $, newItemInput, toDoList, setToDoList, listItems } from './script.js';
 import { placeCaretAtEnd } from "./util.js";
 
 const deleteItem = (e) => {
@@ -8,8 +8,8 @@ const deleteItem = (e) => {
     saveItemsToLocalStorage();
     if (toDoList.length === 0) {
         let emptyImage = $('empty-image-template').content.cloneNode(true)
-        $("list-items").append(emptyImage);
-        $("list-items").classList.add("add-empty-image");
+        listItems.append(emptyImage);
+        listItems.classList.add("add-empty-image");
         $("search-text").classList.add("hidden");
         $("image-inside-searchbar").classList.add("hidden");
     }

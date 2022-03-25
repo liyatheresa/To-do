@@ -104,13 +104,13 @@
 
     <template id="empty-image-template">
       <figure id="empty-image">
-        <img src="./images/clipboard.svg" class="empty" />
+        <img src="./images/clipboard.svg" class="size-of-image" />
         <figcaption>Nothing here. Add tasks to view here.</figcaption>
       </figure>
     </template>
     <template id="no-results-found-image-template">
-      <figure id="noResultsFoundImage">
-        <img class="empty" src="./images/emptySearch.svg" />
+      <figure id="no-results-found-image">
+        <img class="size-of-image" src="./images/emptySearch.svg" />
         <figcaption>No results found...</figcaption>
       </figure>
     </template>
@@ -118,19 +118,19 @@
       <li id="item">
         <div class="list-content">
           <input type="checkbox" class="checkbox" id="check" />
-          <span class="descriptionAndDate">
+          <span class="description-and-date">
             <span id="desc" class="description"></span>
-            <div class="descriptionDate" id="date"></div>
+            <div class="description-date" id="date"></div>
           </span>
         </div>
         <div class="flex">
           <button
-            id="mobile-save"
+            id="mobile-save-button"
             class="fa-light fa fa-floppy-o mobile-save-button hidden"
           ></button>
           <a id="menu" class="fa-dark fa fa-ellipsis-v menu-button"></a>
         </div>
-        <div class="buttons" id="buttons">
+        <div class="edit-and-delete-buttons" id="edit-and-delete-buttons">
           <button
             id="edit-or-save"
             class="edit-button fa-light fa fa-pencil"
