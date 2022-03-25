@@ -75,7 +75,7 @@
     margin-right: 10px;
     background-size: auto 20px;
   }
-  .buttons {
+  .edit-and-delete-buttons {
     display: none;
   }
   .overlay {
@@ -144,7 +144,7 @@
   .add-empty-image {
     margin-top: 40%;
   }
-  .empty {
+  .size-of-image {
     max-height: 8rem;
     max-width: 8rem;
     color: #00488a;

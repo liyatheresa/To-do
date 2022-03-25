@@ -32,7 +32,7 @@ window.addEventListener("load", () => {
         if (!toDoList.find(elem => elem.id === targetId).editMode) {
             //Switch to edit mode
             $("menu-" + targetId).classList.add("hidden");
-            $("mobile-save-" + targetId).classList.remove("hidden");
+            $("mobile-save-button-" + targetId).classList.remove("hidden");
 
             setEditMode(targetId, true);
             closeBottomDrawer();
