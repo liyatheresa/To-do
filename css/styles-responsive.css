@@ -5,6 +5,32 @@
 }
 
 @media (max-width: 700px) {
+  .overlay {
+    animation: bottom-to-top 0.1s linear;
+  }
+  @keyframes bottom-to-top {
+    100% {
+      transform: translateY(0%);
+    }
+    75% {
+      transform: translateY(25%);
+    }
+    66% {
+      transform: translateY(33%);
+    }
+    50% {
+      transform: translateY(50%);
+    }
+    33% {
+      transform: translateY(66%);
+    }
+    25% {
+      transform: translateY(75%);
+    }
+    0% {
+      transform: translateY(100%);
+    }
+  }
   .menu-button {
     display: block;
   }
