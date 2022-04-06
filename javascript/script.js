@@ -256,7 +256,7 @@ const displayFab = () => {
 	$("overlay").classList.remove("flex");
 	$("overlay").classList.remove("overlay-show");
 	setTimeout(() => $("floating-button-overlay").classList.remove("modal-backdrop"), 300);
-	$("float-button").classList.remove("hidden");
+	setTimeout(() => $("float-button").classList.remove("hidden"), 300);
 	$("input-area").classList.remove("flex");
 }
 

@@ -218,6 +218,9 @@ body {
   width: 100vw;
   background-color: #00000088;
 }
+.overlay {
+  display: none;
+}
 .modal {
   width: 400px;
   height: 190px;
