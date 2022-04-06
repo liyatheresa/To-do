@@ -289,9 +289,6 @@ body {
   box-shadow: 0 0 0 1px #005aad;
   cursor: text;
 }
-.overlay {
-  display: none;
-}
 .fa-light {
   color: #fff;
   font-size: 1.05rem;
