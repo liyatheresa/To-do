@@ -91,7 +91,7 @@
     background-color: #fff;
     border-radius: 13px 13px 0px 0px;
     z-index: 1;
-    transition: transform 500ms linear;
+    transition: transform 300ms ease-in-out;
   }
   .overlay button {
     padding: 10px;
