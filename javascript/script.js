@@ -254,8 +254,9 @@ const displayInputBar = () => {
 }
 const displayFab = () => {
 	$("overlay").classList.remove("flex");
-	$("floating-button-overlay").classList.remove("modal-backdrop");
-	$("float-button").classList.remove("hidden");
+	$("overlay").classList.remove("overlay-show");
+	setTimeout(() => $("floating-button-overlay").classList.remove("modal-backdrop"), 300);
+	setTimeout(() => $("float-button").classList.remove("hidden"), 200);
 	$("input-area").classList.remove("flex");
 }
 

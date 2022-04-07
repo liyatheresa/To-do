@@ -55,7 +55,7 @@
     box-shadow: 2px 2px 3px #999;
   }
   .fa-plus {
-    padding-top: 10px;
+    padding-top: 11px;
   }
   .input-area {
     display: none;
@@ -64,13 +64,14 @@
   #new-note-input {
     margin: 0px;
     border-radius: 0px;
+    padding: 15px 20px 15px 20px;
   }
   .submit-button {
     position: absolute;
     right: 0px;
-    height: 30px;
-    width: 30px;
-    border-radius: 15px;
+    height: 36px;
+    width: 36px;
+    border-radius: 18px;
     background-position: 40% 67%;
     margin-right: 10px;
     background-size: auto 20px;
@@ -80,17 +81,18 @@
   }
   .overlay {
     position: fixed;
-    bottom: 0px;
+    top: 100%;
     left: 10%;
     right: 10%;
-    display: none;
     flex-direction: column;
+    display: flex;
     width: 80%;
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: #fff;
     border-radius: 13px 13px 0px 0px;
     z-index: 1;
+    transition: transform 300ms ease-in-out;
   }
   .overlay button {
     padding: 10px;
@@ -148,6 +150,9 @@
     max-height: 8rem;
     max-width: 8rem;
     color: #00488a;
+  }
+  .overlay-show {
+    transform: translateY(-100%);
   }
 }
 

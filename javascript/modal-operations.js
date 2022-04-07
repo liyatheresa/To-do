@@ -48,6 +48,7 @@ window.addEventListener("load", () => {
 
 const showDeletionModal = (e) => {
     $("overlay").classList.remove("flex");
+    $("overlay").classList.remove("overlay-show");
     $("floating-button-overlay").classList.remove("modal-backdrop");
     newItemInput.blur();
     $('deletion-modal').classList.remove("hidden");
@@ -75,6 +76,7 @@ const closeEmptyInputModal = () => {
 
 const showBottomDrawer = (e) => {
     $("overlay").classList.add("flex");
+    $("overlay").classList.add("overlay-show");
     $("floating-button-overlay").classList.add("modal-backdrop");
     $("float-button").classList.add("hidden");
 
@@ -85,7 +87,8 @@ const showBottomDrawer = (e) => {
 }
 const closeBottomDrawer = () => {
     $("overlay").classList.remove("flex");
-    $("floating-button-overlay").classList.remove("modal-backdrop");
+    $("overlay").classList.remove("overlay-show");
+    setTimeout(() => $("floating-button-overlay").classList.remove("modal-backdrop"), 300);
     $("float-button").classList.remove("hidden");
 }
 
