@@ -15,4 +15,4 @@ Don't worry about losing the data if you accidentally close the browser tab or w
 
 This projectly was developed completely using HTML, CSS and JavaScript.
 
-##Dependency
+## Dependency
