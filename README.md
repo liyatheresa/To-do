@@ -20,3 +20,5 @@ This project was developed completely using HTML, CSS and JavaScript.
 
 ## Contribute
 Contributions are always welcome. Feel free to fork and improve this project.
+
+View the hosted site [here](https://liyatheresa.github.io/To-do/)
