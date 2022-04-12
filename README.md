@@ -15,10 +15,11 @@ Don't worry about losing the data if you accidentally closed the browser tab or 
 
 This project was developed completely using HTML, CSS and JavaScript.
 
+## Demo
+View the hosted site [here](https://liyatheresa.github.io/To-do/).
+
 ## Dependency
 - [nanoid](https://github.com/ai/nanoid) to generate unique id for each list item.
 
 ## Contribute
 Contributions are always welcome. Feel free to fork and improve this project.
-
-View the hosted site [here](https://liyatheresa.github.io/To-do/).
