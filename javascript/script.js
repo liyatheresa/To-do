@@ -1,7 +1,6 @@
 import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js';
-import { closeBottomDrawer, showDeletionModal, showEmptyInputModal, showBottomDrawer } from './modal-operations.js';
+import { showDeletionModal, showEmptyInputModal, showBottomDrawer } from './modal-operations.js';
 import { toggleSaveEditIcon, setEditMode, saveItemsToLocalStorage } from './list-item-operations.js';
-import { placeCaretAtEnd } from './util.js';
 
 let toDoList = [];
 let newItemInput;
@@ -16,9 +15,7 @@ const validateInput = () => {
 		showEmptyInputModal();
 		return false;
 	}
-	else {
-		return true;
-	}
+	return true;
 }
 //Function to add item to to-do list
 const addToDoItem = (toDoItem) => {
