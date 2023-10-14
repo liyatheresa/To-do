@@ -167,13 +167,8 @@ window.addEventListener("load", () => {
 	});
 	newItemInput.focus();
 
-
 	$("search-text").classList.add("hidden");
-	//getting the toDoList from local storage 
-	// let listReceived = JSON.parse(localStorage.getItem("listSaved"));
-	// if (!listReceived) {
-	// 	listReceived = [];
-	// }
+
 	let listReceived = JSON.parse(localStorage.getItem("listSaved")) ?? [];
 	if (listReceived.length === 0) {
 		let emptyImage = $('empty-image-template').content.cloneNode(true)
@@ -233,7 +228,6 @@ searchInput.addEventListener("input", e => {
 
 	let noResultsFoundImage = $("no-results-found-image");
 	if (count === 0 && !noResultsFoundImage) {
-		//let noResultsFoundImageHtml = "<figure id='noResultsFoundImage'><img class='empty' src='./images/emptySearch.svg'><figcaption>No results found...</figcaption></figure>";
 		let noResultsFoundImageHtml = $('no-results-found-image-template').content.cloneNode(true)
 		listItems.append(noResultsFoundImageHtml);
 		listItems.classList.add("add-empty-image");
