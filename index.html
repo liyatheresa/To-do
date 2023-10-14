@@ -1,146 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To Do</title>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" type="text/css" href="./css/styles.css" />
-    <link rel="stylesheet" type="text/css" href="./css/styles-responsive.css" />
-    <script src="./javascript/script.js" type="module"></script>
-    <script src="./javascript/modal-operations.js" type="module"></script>
-  </head>
-  <body>
-    <div class="title-div">
-      <a href="#"><img src="./images/icons8-notepad-64.png" /></a>
-      <a href="#" class="titlelink"><h1 class="heading">To Do</h1></a>
-    </div>
-    <div class="search-bar">
-      <form id="search-area" class="search-area">
-        <span class="fa fa-search fa-grey" id="image-inside-searchbar"></span>
-        <input
-          name="search-text"
-          type="text"
-          placeholder="Search.."
-          id="search-text"
-        />
-        <button id="clear-search" class="hidden fa fa-times fa-grey"></button>
-      </form>
-    </div>
-    <div class="todo-list">
-      <div class="list-items" id="list-items">
-        <ol id="printing-list"></ol>
-      </div>
-      <div id="floating-button-overlay" class=""></div>
-      <a class="float-button fa fa-plus fa-light" id="float-button"> </a>
-      <form id="input-area" class="input-area">
-        <input
-          name="new-note-input"
-          type="text"
-          placeholder="Enter task.."
-          id="new-note-input"
-        />
-        <button
-          type="submit"
-          class="fa-light fa fa-paper-plane submit-button"
-          id="button"
-        ></button>
-      </form>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <div class="overlay" id="overlay">
-      <button id="mobile-edit-button" class="mobile-edit-button">Edit</button>
-      <button id="mobile-delete-button" class="mobile-delete-button">
-        Delete
-      </button>
-      <button
-        id="bottom-drawer-cancel-button"
-        class="bottom-drawer-cancel-button"
-      >
-        Cancel
-      </button>
-    </div>
+  <!-- Primary Meta Tags -->
+  <title>To-do | The complete to-do app</title>
+  <meta name="title" content="To-do | The complete to-do app" />
+  <meta name="description"
+    content="Keep track of all your chores at one convenient place.. Try the all new and delightful To-do now!" />
 
-    <div class="hidden" id="empty-input-modal">
-      <div class="modal" id="empty-input-modal-content">
-        <div class="empty-modal-content">
-          <div class="heading-inside-modal">Nothing Entered</div>
-          <div class="content-inside-modal">
-            Enter a description to add to the task list
-          </div>
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://liyatheresa.github.io/To-do/" />
+  <meta property="og:title" content="To-do | The complete to-do app" />
+  <meta property="og:description"
+    content="Keep track of all your chores at one convenient place.. Try the all new and delightful To-do now!" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://liyatheresa.github.io/To-do/" />
+  <meta property="twitter:title" content="To-do | The complete to-do app" />
+  <meta property="twitter:description"
+    content="Keep track of all your chores at one convenient place.. Try the all new and delightful To-do now!" />
+
+  <title>To Do</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="./css/styles-responsive.css" />
+  <script src="./javascript/script.js" type="module"></script>
+  <script src="./javascript/modal-operations.js" type="module"></script>
+</head>
+
+<body>
+  <div class="title-div">
+    <a href="#"><img src="./images/icons8-notepad-64.png" /></a>
+    <a href="#" class="titlelink">
+      <h1 class="heading">To Do</h1>
+    </a>
+  </div>
+  <div class="search-bar">
+    <form id="search-area" class="search-area">
+      <span class="fa fa-search fa-grey" id="image-inside-searchbar"></span>
+      <input name="search-text" type="text" placeholder="Search.." id="search-text" />
+      <button id="clear-search" class="hidden fa fa-times fa-grey"></button>
+    </form>
+  </div>
+  <div class="todo-list">
+    <div class="list-items" id="list-items">
+      <ol id="printing-list"></ol>
+    </div>
+    <div id="floating-button-overlay" class=""></div>
+    <a class="float-button fa fa-plus fa-light" id="float-button"> </a>
+    <form id="input-area" class="input-area">
+      <input name="new-note-input" type="text" placeholder="Enter task.." id="new-note-input" />
+      <button type="submit" class="fa-light fa fa-paper-plane submit-button" id="button"></button>
+    </form>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <button id="mobile-edit-button" class="mobile-edit-button">Edit</button>
+    <button id="mobile-delete-button" class="mobile-delete-button">
+      Delete
+    </button>
+    <button id="bottom-drawer-cancel-button" class="bottom-drawer-cancel-button">
+      Cancel
+    </button>
+  </div>
+
+  <div class="hidden" id="empty-input-modal">
+    <div class="modal" id="empty-input-modal-content">
+      <div class="empty-modal-content">
+        <div class="heading-inside-modal">Nothing Entered</div>
+        <div class="content-inside-modal">
+          Enter a description to add to the task list
         </div>
-        <button
-          class="empty-modal-button normal-button"
-          id="close-empty-input-modal-button"
-        >
-          Okay
+      </div>
+      <button class="empty-modal-button normal-button" id="close-empty-input-modal-button">
+        Okay
+      </button>
+    </div>
+  </div>
+
+  <div class="hidden modal-backdrop" id="deletion-modal">
+    <div class="modal" id="deletion-modal-content">
+      <div>
+        <div class="heading-inside-modal">Confirm Deletion?</div>
+        <div class="content-inside-modal">
+          Are you sure to permenently remove the selected item?
+        </div>
+      </div>
+      <div class="deletion-modal-buttons">
+        <button class="normal-button" id="close-deletion-modal-button">
+          Cancel
+        </button>
+        <button class="danger-button" id="confirm-deletion-button">
+          Delete
         </button>
       </div>
     </div>
+  </div>
 
-    <div class="hidden modal-backdrop" id="deletion-modal">
-      <div class="modal" id="deletion-modal-content">
-        <div>
-          <div class="heading-inside-modal">Confirm Deletion?</div>
-          <div class="content-inside-modal">
-            Are you sure to permenently remove the selected item?
-          </div>
-        </div>
-        <div class="deletion-modal-buttons">
-          <button class="normal-button" id="close-deletion-modal-button">
-            Cancel
-          </button>
-          <button class="danger-button" id="confirm-deletion-button">
-            Delete
-          </button>
-        </div>
+  <template id="empty-image-template">
+    <figure id="empty-image">
+      <img src="./images/clipboard.svg" class="size-of-image" />
+      <figcaption>Nothing here. Add tasks to view here.</figcaption>
+    </figure>
+  </template>
+  <template id="no-results-found-image-template">
+    <figure id="no-results-found-image">
+      <img class="size-of-image" src="./images/emptySearch.svg" />
+      <figcaption>No results found...</figcaption>
+    </figure>
+  </template>
+  <template id="new-item-template">
+    <li id="item">
+      <div class="list-content">
+        <input type="checkbox" class="checkbox" id="check" />
+        <span class="description-and-date">
+          <span id="desc" class="description"></span>
+          <div class="description-date" id="date"></div>
+        </span>
       </div>
-    </div>
+      <div class="flex">
+        <button id="mobile-save-button" class="fa-light fa fa-floppy-o mobile-save-button hidden"></button>
+        <a id="menu" class="fa-dark fa fa-ellipsis-v menu-button"></a>
+      </div>
+      <div class="edit-and-delete-buttons" id="edit-and-delete-buttons">
+        <button id="edit-or-save" class="edit-button fa-light fa fa-pencil"></button>
+        <button id="remove" class="remove-button fa-light fa fa-trash-o"></button>
+      </div>
+    </li>
+  </template>
+</body>
 
-    <template id="empty-image-template">
-      <figure id="empty-image">
-        <img src="./images/clipboard.svg" class="size-of-image" />
-        <figcaption>Nothing here. Add tasks to view here.</figcaption>
-      </figure>
-    </template>
-    <template id="no-results-found-image-template">
-      <figure id="no-results-found-image">
-        <img class="size-of-image" src="./images/emptySearch.svg" />
-        <figcaption>No results found...</figcaption>
-      </figure>
-    </template>
-    <template id="new-item-template">
-      <li id="item">
-        <div class="list-content">
-          <input type="checkbox" class="checkbox" id="check" />
-          <span class="description-and-date">
-            <span id="desc" class="description"></span>
-            <div class="description-date" id="date"></div>
-          </span>
-        </div>
-        <div class="flex">
-          <button
-            id="mobile-save-button"
-            class="fa-light fa fa-floppy-o mobile-save-button hidden"
-          ></button>
-          <a id="menu" class="fa-dark fa fa-ellipsis-v menu-button"></a>
-        </div>
-        <div class="edit-and-delete-buttons" id="edit-and-delete-buttons">
-          <button
-            id="edit-or-save"
-            class="edit-button fa-light fa fa-pencil"
-          ></button>
-          <button
-            id="remove"
-            class="remove-button fa-light fa fa-trash-o"
-          ></button>
-        </div>
-      </li>
-    </template>
-  </body>
 </html>
